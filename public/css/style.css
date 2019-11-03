@@ -1,0 +1,130 @@
+table,
+th,
+td {
+  /* border: 1px solid rgb(211, 211, 211); */
+  color: rgb(211, 211, 211);
+  background-color: rgba(98, 98, 98, 0.1);
+}
+/* 
+input[type="text"],
+input[type="password"] {
+  width: 200px;
+} */
+
+.disabled-link {
+  cursor: not-allowed;
+}
+
+/* .test {
+  color: #ff6557;
+  color: #ff8a46;
+} */
+
+body {
+  margin: 0;
+  font: normal 75% Arial, Helvetica, sans-serif;
+}
+canvas {
+  display: block;
+  vertical-align: bottom;
+}
+
+#particles-js, #particles-js2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+body {
+  background-image: url(../Halloween-BG.jpg);
+  background-size: cover !important;
+	background-repeat: no-repeat !important;
+  background-position: center !important;
+	background-color: black!important;
+	background-position: center;
+  background-size: all;
+  background-attachment: fixed;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+#main-card-container {
+  background-color: rgba(31, 31, 31, 0.7);
+}
+
+.text-halloween {
+  color: rgb(179, 179, 179);
+}
+
+.signup-status-card {
+  background-color: rgba(88, 88, 88, 0.28) !important;
+}
+
+.instruction-card {
+  background-color: rgba(228, 228, 228, 0.767) !important;
+}
+
+.data-card {
+  background-color: rgba(116, 82, 69, 0.582) !important;
+}
+
+.md-progress .progress-bar {
+  background-color: #ff7b00 !important;
+}
+
+.pt-2-half {
+  padding-top: 0.7rem !important;
+}
+
+.pl-2-half {
+  padding-left: 0.9rem !important;
+}
+
+.mb-half {
+  margin-bottom: 0.3rem !important;
+}
+
+.form-check-input[type="checkbox"].filled-in:checked + label:after,
+label.btn input[type="checkbox"].filled-in:checked + label:after {
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d47036 !important;
+  background-color: #d47036 !important;
+  z-index: 0;
+  }
+
+  .mdb-select, .select-dropdown {
+    color: rgb(211, 211, 211) !important;
+  }
+
+  .form-control {
+    color: rgb(211, 211, 211) !important;
+  }
+
+  .md-form input[type=text]:focus:not([readonly]), .md-form input[type=password]:focus:not([readonly]), .md-form input[type=email]:focus:not([readonly]), .md-form input[type=url]:focus:not([readonly]), .md-form input[type=time]:focus:not([readonly]), .md-form input[type=date]:focus:not([readonly]), .md-form input[type=datetime-local]:focus:not([readonly]), .md-form input[type=tel]:focus:not([readonly]), .md-form input[type=number]:focus:not([readonly]), .md-form input[type=search-md]:focus:not([readonly]), .md-form input[type=search]:focus:not([readonly]), .md-form textarea.md-textarea:focus:not([readonly]) {
+    -webkit-box-shadow: 0 1px 0 0 #f48942 !important;
+    box-shadow: 0 1px 0 0 #f48942 !important;
+    border-bottom: 1px solid #f48942 !important;
+}
+
+.md-form input[type=text]:focus:not([readonly]) + label, .md-form input[type=password]:focus:not([readonly]) + label, .md-form input[type=email]:focus:not([readonly]) + label, .md-form input[type=url]:focus:not([readonly]) + label, .md-form input[type=time]:focus:not([readonly]) + label, .md-form input[type=date]:focus:not([readonly]) + label, .md-form input[type=datetime-local]:focus:not([readonly]) + label, .md-form input[type=tel]:focus:not([readonly]) + label, .md-form input[type=number]:focus:not([readonly]) + label, .md-form input[type=search-md]:focus:not([readonly]) + label, .md-form input[type=search]:focus:not([readonly]) + label, .md-form textarea.md-textarea:focus:not([readonly]) + label {
+  color: #f48942 !important;
+}
+
+.select-wrapper input.active {
+  -webkit-box-shadow: 0 1px 0 0 #f48942 !important;
+  box-shadow: 0 1px 0 0 #f48942 !important;
+  border-bottom: 1px solid #f48942 !important;
+}
+
+.select-wrapper span.caret {
+  color: rgb(211, 211, 211) !important;
+}
