@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const assert = require("assert");
 const crypto = require("crypto");
+const fs = require("fs");
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -22,10 +23,13 @@ app.use((req, res, next) => {
 //=================
 const port = 1770;
 const url = "mongodb://localhost:27017";
-const dbName = "Stugo_Halloween_Signup";
+const dbName = "PractiseRoomSignup";
 
 const operationPasswordHash = "ac1082fe70f1a1ec37cb54a3038e8b45dd5f242800eb8415eeaa06e85869d3a6";
 const maxPopulation = 20
+
+var SERVERKEY = fs.readFileSync("SERVERKEY.txt", "utf8");
+console.log(SERVERKEY);
 
 
 //=================
@@ -365,3 +369,12 @@ app.listen(port, function(){
 // dbRemove("2220067");
 // console.log(dbCheck("124543"))
 // dbRemoveAll()
+
+//*Read data from file*
+//1
+// fs.readFile("SERVERKEY", "utf8", function(error, data) {
+//   console.log(data);
+// });
+//2
+// var SERVERKEY = fs.readFileSync("SERVERKEY.txt", "utf8");
+// console.log(data);
