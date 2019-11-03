@@ -28,7 +28,7 @@ const dbName = "PractiseRoomSignup";
 const operationPasswordHash = "ac1082fe70f1a1ec37cb54a3038e8b45dd5f242800eb8415eeaa06e85869d3a6";
 const maxPopulation = 20
 
-var SERVERKEY = fs.readFileSync("SERVERKEY.txt", "utf8");
+var SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex');
 console.log(SERVERKEY);
 
 

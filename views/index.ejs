@@ -4,361 +4,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Halloween Signup</title>
-  <link rel="icon" href="/favicons/favicon.ico">
+  <title>Practise Room Signup</title>
+  <link rel="icon" href="/favicons/Image002.png">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/mdb.css">
-  <link rel="stylesheet" href="/fontawesome/css/all.css">
 </head>
 <body>
 
-  <div id="particles-js"></div>
+  <div class="container">
+    <small class="text-muted">from index.ejs</small>
+    <h1 class="mt-4">Practise Room Signup <sup>beta</sup></h1>
+    <p><a href="/cancel">link cancel request</a></p>
+    <p><a href="/admin">link admin</a></p>
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2">Room</th>
+          <th colspan="3">19:00-19:30</th>
+          <th colspan="3">19:30-20:00</th>
+          <th colspan="3">20:00-20:30</th>
+          <th colspan="3">20:30-21:00</th>
+        </tr>
+        <tr>
+          <td>Full Name</td>
+          <td>Student ID</td>
+          <td>Grade</td>
+          <td>Full Name</td>
+          <td>Student ID</td>
+          <td>Grade</td>
+          <td>Full Name</td>
+          <td>Student ID</td>
+          <td>Grade</td>
+          <td>Full Name</td>
+          <td>Student ID</td>
+          <td>Grade</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>MH102</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>MH103</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>MH104</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>etc</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
 
 
-  <div id="particles-js2"></div>
-
-
-  <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <!--Contact div-->
-    <div class="row py-5">
-      <!--Entire content colomn-->
-      <div class="col-md-12">
-        <!--Main card-->
-        <div class="card z-depth-5 text-halloween" id="main-card-container">
-          <div class="card-body pb-2">
-            <!-- Content -->
-            <section class="my-3 mx-3">
-              <!-- Heading -->
-              <h1 class="h1-responsive font-weight-bold text-center mt-2 mb-3 text-light">HAUNTED HOUSE SIGN-UP</h1>
-              <!-- Everything else -->
-              <div class="row">
-  
-               <!-- Mobil Description -->
-                <div class="col-12 text-left d-md-none">
-                    <h2 class="h2-responsive">Instructions</h2>
-
-                    <div class="card instruction-card mb-2 black-text">
-                  
-                      <!-- Card content -->
-                      <div class="card-body pl-0 pr-1">
-                        <ol>
-                          <li>To sign-up, choose your desired time period and click the arrow next to it, you can't sign-up for a time period that is full.</li>
-                          <li>Fill in all the information in the sign-up form and hit submit.</li>
-                          <li>You will be able to see your name in the data panel once signed up.</li>
-                          <li>If you have any trouble signing up, email stugo@ncpachina.org.</li>
-                        </ol>
-                        <h6 class="font-weight-bold ml-3 pl-1 mb-1">Credits:</h6>
-                        <p class="ml-3 pl-1 mb-0 small text-black-50">Background artwork: Stephanie Sun</p>
-                        <p class="ml-3 pl-1 mb-0 small text-black-50">Server-side programming: Leon Lu</p>
-                        <p class="ml-3 pl-1 mb-0 small text-black-50">Interface design: Leon Lu</p>
-                        <p class="ml-3 pl-1 mb-0 small text-black-50">Frontend programming: Leon Lu, Coco Gao</p>
-                        <p class="ml-3 pl-1 mb-0 small text-black-50">© 2019 StuGo  © 2019 TST</p>
-                      </div>
-                    </div>
-                </div>
-
-                <!-- Status -->
-                <div class="col-md-6 col-lg-7 mb-md-0 mb-5">
-
-                  <h2 class="h2-responsive">Sign-up Status</h2>
-
-                  <div class="card signup-status-card mb-3">
-                  
-                    <!-- Card content -->
-                    <div class="card-body pt-2-half pb-0 px-3">
-
-                      <div class="row">
-                        <!-- LHS -->
-                        <div class="col-11">
-                          <!-- Text -->
-                          <div class="row">
-                            <div class="col-7">
-                              <h5 class="card-title text-left mb-half">19:00-19:10</h5>
-                            </div>
-                            <div class="col-5">
-                              <h5 class="card-title text-right mb-half"><%= T1Count %>/<%= maxPopulation %></h5>
-                            </div>
-                          </div>
-                          <!-- Progress -->
-                          <div class="progress md-progress pb-1 pt-0" style="height: 12px">
-                            <div style="height: 12px; width: <%= ( T1Count * 100 ) / maxPopulation %>%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<%= T1Count / maxPopulation %>" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                        <!-- RHS -->
-                        <div class="col-1 pl-0 pr-2 pb-2 d-flex align-items-center justify-content-center">
-                          <a class="<% if (T1Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T1Count < maxPopulation) { %>/signup/1 <%} else {%> # <%}%>"><i class="far fa-chevron-right text-light fa-2x"></i></a></li>
-                        </div>
-                      </div>
-                  
-
-                  
-                    </div>
-                  
-                  </div>
-                  <div class="card signup-status-card mb-3">
-                  
-                    <!-- Card content -->
-                    <div class="card-body pt-2-half pb-0 px-3">
-
-                      <div class="row">
-                        <!-- LHS -->
-                        <div class="col-11">
-                          <!-- Text -->
-                          <div class="row">
-                            <div class="col-7">
-                              <h5 class="card-title text-left mb-half">19:10-19:20</h5>
-                            </div>
-                            <div class="col-5">
-                              <h5 class="card-title text-right mb-half"><%= T2Count %>/<%= maxPopulation %></h5>
-                            </div>
-                          </div>
-                          <!-- Progress -->
-                          <div class="progress md-progress pb-1 pt-0" style="height: 12px">
-                            <div style="height: 12px; width: <%= ( T2Count * 100 ) / maxPopulation %>%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<%= T2Count / maxPopulation %>" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                        <!-- RHS -->
-                        <div class="col-1 pl-0 pr-2 pb-2 d-flex align-items-center justify-content-center">
-                          <a class="<% if (T2Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T2Count < maxPopulation) { %>/signup/2 <%} else {%> # <%}%>"><i class="far fa-chevron-right text-light fa-2x"></i></a></li>
-                        </div>
-                      </div>
-                  
-
-                  
-                    </div>
-                  
-                  </div>
-                  <div class="card signup-status-card mb-3">
-                  
-                    <!-- Card content -->
-                    <div class="card-body pt-2-half pb-0 px-3">
-
-                      <div class="row">
-                        <!-- LHS -->
-                        <div class="col-11">
-                          <!-- Text -->
-                          <div class="row">
-                            <div class="col-7">
-                              <h5 class="card-title text-left mb-half">19:20-19:30</h5>
-                            </div>
-                            <div class="col-5">
-                              <h5 class="card-title text-right mb-half"><%= T3Count %>/<%= maxPopulation %></h5>
-                            </div>
-                          </div>
-                          <!-- Progress -->
-                          <div class="progress md-progress pb-1 pt-0" style="height: 12px">
-                            <div style="height: 12px; width: <%= ( T3Count * 100 ) / maxPopulation %>%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<%= T3Count / maxPopulation %>" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                        <!-- RHS -->
-                        <div class="col-1 pl-0 pr-2 pb-2 d-flex align-items-center justify-content-center">
-                          <a class="<% if (T3Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T3Count < maxPopulation) { %>/signup/3 <%} else {%> # <%}%>"><i class="far fa-chevron-right text-light fa-2x"></i></a></li>
-                        </div>
-                      </div>
-                  
-
-                  
-                    </div>
-                  
-                  </div>
-                  <div class="card signup-status-card mb-3">
-                  
-                    <!-- Card content -->
-                    <div class="card-body pt-2-half pb-0 px-3">
-
-                      <div class="row">
-                        <!-- LHS -->
-                        <div class="col-11">
-                          <!-- Text -->
-                          <div class="row">
-                            <div class="col-7">
-                              <h5 class="card-title text-left mb-half">19:35-19:45</h5>
-                            </div>
-                            <div class="col-5">
-                              <h5 class="card-title text-right mb-half"><%= T4Count %>/<%= maxPopulation %></h5>
-                            </div>
-                          </div>
-                          <!-- Progress -->
-                          <div class="progress md-progress pb-1 pt-0" style="height: 12px">
-                            <div style="height: 12px; width: <%= ( T4Count * 100 ) / maxPopulation %>%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<%= T4Count / maxPopulation %>" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                        <!-- RHS -->
-                        <div class="col-1 pl-0 pr-2 pb-2 d-flex align-items-center justify-content-center">
-                          <a class="<% if (T4Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T4Count < maxPopulation) { %>/signup/4 <%} else {%> # <%}%>"><i class="far fa-chevron-right text-light fa-2x"></i></a></li>
-                        </div>
-                      </div>
-                  
-
-                  
-                    </div>
-                  
-                  </div>
-                  <div class="card signup-status-card mb-3">
-                  
-                    <!-- Card content -->
-                    <div class="card-body pt-2-half pb-0 px-3">
-
-                      <div class="row">
-                        <!-- LHS -->
-                        <div class="col-11">
-                          <!-- Text -->
-                          <div class="row">
-                            <div class="col-7">
-                              <h5 class="card-title text-left mb-half">19:45-19:55</h5>
-                            </div>
-                            <div class="col-5">
-                              <h5 class="card-title text-right mb-half"><%= T5Count %>/<%= maxPopulation %></h5>
-                            </div>
-                          </div>
-                          <!-- Progress -->
-                          <div class="progress md-progress pb-1 pt-0" style="height: 12px">
-                            <div style="height: 12px; width: <%= ( T5Count * 100 ) / maxPopulation %>%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<%= T5Count / maxPopulation %>" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                        <!-- RHS -->
-                        <div class="col-1 pl-0 pr-2 pb-2 d-flex align-items-center justify-content-center">
-                          <a class="<% if (T5Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T5Count < maxPopulation) { %>/signup/5 <%} else {%> # <%}%>"><i class="far fa-chevron-right text-light fa-2x"></i></a></li>
-                        </div>
-                      </div>
-                  
-
-                  
-                    </div>
-                  
-                  </div>
-                  <div class="card signup-status-card mb-3">
-                  
-                    <!-- Card content -->
-                    <div class="card-body pt-2-half pb-0 px-3">
-
-                      <div class="row">
-                        <!-- LHS -->
-                        <div class="col-11">
-                          <!-- Text -->
-                          <div class="row">
-                            <div class="col-7">
-                              <h5 class="card-title text-left mb-half">19:55-20:05</h5>
-                            </div>
-                            <div class="col-5">
-                              <h5 class="card-title text-right mb-half"><%= T6Count %>/<%= maxPopulation %></h5>
-                            </div>
-                          </div>
-                          <!-- Progress -->
-                          <div class="progress md-progress pb-1 pt-0" style="height: 12px">
-                            <div style="height: 12px; width: <%= ( T6Count * 100 ) / maxPopulation %>%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<%= T6Count / maxPopulation %>" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                        <!-- RHS -->
-                        <div class="col-1 pl-0 pr-2 pb-2 d-flex align-items-center justify-content-center">
-                          <a class="<% if (T6Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T6Count < maxPopulation) { %>/signup/6 <%} else {%> # <%}%>"><i class="far fa-chevron-right text-light fa-2x"></i></a></li>
-                        </div>
-                      </div>
-                  
-
-                  
-                    </div>
-                  
-                  </div>
-
-                  <!-- Data Pabel Link -->
-                  <h2 class="h2-responsive d-md-none">For Event Organisers</h2>
-
-                  <div class="card data-card mb-2 d-md-none">
-                  
-                    <!-- Card content -->
-                    <div class="card-body pt-2-half pb-0 px-3">
-
-                      <div class="row">
-                        <!-- LHS -->
-                        <div class="col-11 d-flex align-items-center">
-                          <h4>Data Panel</h4>
-                        </div>
-                        <!-- RHS -->
-                        <div class="col-1 pl-0 pr-2 pb-2 d-flex align-items-center justify-content-center">
-                          <a href="/data"><i class="far fa-chevron-right text-light fa-2x"></i></a></li>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-
-  
-                </div>
-  
-                <!-- Description -->
-                <div class="col-md-6 col-lg-5 text-left d-none d-md-block">
-                  <h2 class="h2-responsive">Instructions</h2>
-
-                  <div class="card instruction-card mb-2 black-text">
-                
-                    <!-- Card content -->
-                    <div class="card-body pl-0 pr-1">
-                      <ol>
-                        <li>To sign-up, choose your desired time period and click the arrow next to it, you can't sign-up for a time period that is full.</li>
-                        <li>Fill in all the information in the sign-up form and hit submit.</li>
-                        <li>You will be able to see your name in the data panel once signed up.</li>
-                        <li>If you have any trouble signing up, email stugo@ncpachina.org.</li>
-                      </ol>
-                      <h6 class="font-weight-bold ml-3 pl-1 mb-1">Credits:</h6>
-                      <p class="ml-3 pl-1 mb-0 small text-black-50">Background artwork: Stephanie Sun</p>
-                      <p class="ml-3 pl-1 mb-0 small text-black-50">Server-side programming: Leon Lu</p>
-                      <p class="ml-3 pl-1 mb-0 small text-black-50">Interface design: Leon Lu</p>
-                      <p class="ml-3 pl-1 mb-0 small text-black-50">Frontend programming: Leon Lu, Coco Gao</p>
-                      <p class="ml-3 pl-1 mb-0 small text-black-50">© 2019 StuGo  © 2019 TST</p>
-                    </div>
-                  
-                  </div>
-
-                  <!-- Data Pabel Link -->
-                  <h2 class="h2-responsive">For Event Organizers</h2>
-
-                  <div class="card data-card mb-2">
-                  
-                    <!-- Card content -->
-                    <div class="card-body pt-2-half pb-0 px-3">
-
-                      <div class="row">
-                        <!-- LHS -->
-                        <div class="col-11 d-flex align-items-center">
-                          <h4>Data Panel</h4>
-                        </div>
-                        <!-- RHS -->
-                        <div class="col-1 pl-0 pr-2 pb-2 d-flex align-items-center justify-content-center">
-                          <a href="/data"><i class="far fa-chevron-right text-light fa-2x"></i></a></li>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-  
-              </div>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-
-
-
-
-
-
-  <!-- <h1>Signup Instructions</h1>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ipsum, similique quos obcaecati dignissimos incidunt debitis commodi quaerat dicta quod, culpa odio unde eveniet minima quam quidem explicabo asperiores ullam nam provident nesciunt harum cupiditate fugit. Temporibus facere laboriosam quibusdam odio non recusandae possimus eligendi illo pariatur quas veniam in debitis nemo labore, error soluta inventore voluptatem?</p>
-  <h1>Signup Status</h1>
-  <ol>
-    <li>19:00-19:10 <%= T1Count %>/<%= maxPopulation %> <a class="<% if (T1Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T1Count < maxPopulation) { %>/signup/1 <%} else {%> # <%}%>">link</a></li>
-    <li>19:10-19:20 <%= T2Count %>/<%= maxPopulation %> <a class="<% if (T2Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T2Count < maxPopulation) { %>/signup/2 <%} else {%> # <%}%>">link</a></li>
-    <li>19:20-19:30 <%= T3Count %>/<%= maxPopulation %> <a class="<% if (T3Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T3Count < maxPopulation) { %>/signup/3 <%} else {%> # <%}%>">link</a></li>
-    <li>19:35-19:45 <%= T4Count %>/<%= maxPopulation %> <a class="<% if (T4Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T4Count < maxPopulation) { %>/signup/4 <%} else {%> # <%}%>">link</a></li>
-    <li>19:45-19:55 <%= T5Count %>/<%= maxPopulation %> <a class="<% if (T5Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T5Count < maxPopulation) { %>/signup/5 <%} else {%> # <%}%>">link</a></li>
-    <li>19:55-20:05 <%= T6Count %>/<%= maxPopulation %> <a class="<% if (T6Count >= maxPopulation) { %> disabled-link <%}%>" href="<% if (T6Count < maxPopulation) { %>/signup/6 <%} else {%> # <%}%>">link</a></li>
-  </ol>
-  <a href="/data">Data Panel</a> -->
-
 
 
   <!-- JQuery -->
@@ -367,9 +114,6 @@
   <script type="text/javascript" src="/js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="/js/mdb.min.js"></script>
-  <script src="/js/particles.js"></script>
   <script src="/js/main.js"></script>
 </body>
 </html>
