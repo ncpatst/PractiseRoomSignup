@@ -146,7 +146,7 @@ function dbRemove(fullName, studentID) {
 	});
 };
 
-//Remove entry function
+//remove entry by room and time function
 function dbForceRemove(room, time) {
   MongoClient.connect(url, function(err, db) {
     if (err) console.log(err);
@@ -176,6 +176,19 @@ function dbRemoveAll() {
 	});
 };
 
+//Check if a student exists
+function dbCheckStudent(fullName, studentID, callBack) {
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err
+		var dbo = db.db(dbName)
+		dbo.collection(mainCollectionName).find({fullName: fullName, studentID: studentID}).toArray(function(err, result) {
+			if (err) throw err
+				callBack((result.length > 0)? true : false)
+			db.close()
+		})
+	})
+}
+
 //Listen
 app.listen(port, function(){
   console.log("app started on port" + port);
@@ -191,6 +204,15 @@ app.listen(port, function(){
 // dbInsert("19:00-19:30", "MH103", "Leon Lu", "10", "2220056", true, "Some other names");
 // dbRemove("Leon Lu", "2220056");
 // dbRemoveAll();
+// dbCheck("Leon Lu", "29134");
+// dbCheckStudent("Leon Lu", "222006", function(callBackResult){
+//   if (callBackResult == true){
+//     console.log("the student exist");
+//   }
+//   else {
+//     console.log("the student does not exist")
+//   }
+// })
 
 //// *Read data from file*
 //// 1
