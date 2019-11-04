@@ -38,7 +38,7 @@ function SHALL24(string) {
   function convertBase(str, fromBase, toBase) {
 
     const DIGITS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/";
-  
+
     const add = (x, y, base) => {
         let z = [];
         const n = Math.max(x.length, y.length);
@@ -108,18 +108,18 @@ function checkStatus() {
 }
 
 //!!Check time room availability
-function checkAvailability(time, room) {
+function checkAvailability(room, time) {
   return true;
 }
 
 //insert entry function
-function dbInsert(time, room, fullName, grade, studentID, ensemble, remark) {
+function dbInsert(room, time, fullName, grade, studentID, ensemble, remark) {
   //connect to mongo client
   MongoClient.connect(url, function(err, db) {
     if (err) console.log(err);
     var dbo = db.db(dbName);
     //create object
-    var myobj = {time: time, room: room, fullName: fullName, grade: grade, studentID: studentID, ensemble: ensemble, remark: remark}
+    var myobj = {room: room, time: time, fullName: fullName, grade: grade, studentID: studentID, ensemble: ensemble, remark: remark}
 
     //insert document
 		dbo.collection(mainCollectionName).insertOne(myobj, function(err, res) {
@@ -139,6 +139,21 @@ function dbRemove(fullName, studentID) {
     
     //remove document
 		dbo.collection(mainCollectionName).deleteOne({fullName: fullName, studentID: studentID}, function(err, obj) {
+			if (err) console.log(err);
+			console.log("[DB] One occurance of " + obj + " removed");
+			db.close();
+		});
+	});
+};
+
+//Remove entry function
+function dbForceRemove(room, time) {
+  MongoClient.connect(url, function(err, db) {
+    if (err) console.log(err);
+    var dbo = db.db(dbName);
+    
+    //remove document
+		dbo.collection(mainCollectionName).deleteOne({room: room, time: time}, function(err, obj) {
 			if (err) console.log(err);
 			console.log("[DB] One occurance of " + obj + " removed");
 			db.close();
