@@ -10,6 +10,7 @@ A manual-management free signup system utilising crytography
 - [ ] Check open status function
 - [ ] requests
 - [ ] ejs
+- [ ] announcement system
 
 
 ![Flow](/PractiseRoomSignupAlphaFlow.png)
