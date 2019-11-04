@@ -24,8 +24,9 @@ app.use((req, res, next) => {
 const port = 1770;
 const url = "mongodb://localhost:27017";
 const dbName = "PractiseRoomSignup";
+const mainCollectionName = "StudentRecords"
 
-const operationPasswordHash = "ac1082fe70f1a1ec37cb54a3038e8b45dd5f242800eb8415eeaa06e85869d3a6";
+const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9";
 
 var SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex');
 
@@ -100,35 +101,46 @@ function SHALL24(string) {
   return convertBase(crypto.createHmac('sha256', crypto.createHmac('sha256', string + SERVERKEY).digest('hex') + SERVERKEY).digest('hex'), 16, 32).substr(0, 6);
 }
 
+//!!Check open status
+function checkStatus() {
+  return "open";
+  //closed, readOnly etc.
+}
+
+//!!Check time room availability
+function checkAvailability(time, room) {
+  return true;
+}
+
 //insert entry function
-function dbInsert(time, firstName, lastName, year, studentID) {
+function dbInsert(time, room, fullName, grade, studentID, ensemble, remark) {
   //connect to mongo client
   MongoClient.connect(url, function(err, db) {
     if (err) console.log(err);
     var dbo = db.db(dbName);
     //create object
-    var myobj = {Time: time, FirstName: firstName, LastName: lastName, Year: year, StudentID: studentID};
+    var myobj = {time: time, room: room, fullName: fullName, grade: grade, studentID: studentID, ensemble: ensemble, remark: remark}
 
     //insert document
-		dbo.collection("studentRecords").insertOne(myobj, function(err, res) {
+		dbo.collection(mainCollectionName).insertOne(myobj, function(err, res) {
       if (err) console.log(err);
-      console.log("Entry added");
-			db.close();
-		});
+      db.close();
+      console.log("[DB] Entry " + myobj + " added");
+    });
   });
   return
 };
 
 //Remove entry function
-function dbRemove(studentID) {
+function dbRemove(fullName, studentID) {
   MongoClient.connect(url, function(err, db) {
     if (err) console.log(err);
     var dbo = db.db(dbName);
     
     //remove document
-		dbo.collection("studentRecords").deleteOne({StudentID: studentID}, function(err, obj) {
+		dbo.collection(mainCollectionName).deleteOne({fullName: fullName, studentID: studentID}, function(err, obj) {
 			if (err) console.log(err);
-			console.log("Entry removed");
+			console.log("[DB] One occurance of " + obj + " removed");
 			db.close();
 		});
 	});
@@ -141,9 +153,9 @@ function dbRemoveAll() {
     var dbo = db.db(dbName);
     
     //remove document
-		dbo.collection("studentRecords").remove({}, function(err, result) {
+		dbo.collection(mainCollectionName).remove({}, function(err, result) {
 			if (err) console.log(err);
-			console.log("Removed all");
+			console.log("[DB] Removed all entry");
 			db.close();
 		});
 	});
@@ -158,11 +170,12 @@ app.listen(port, function(){
 //=================
 //====Test Zone====
 //=================
-// console.log(crypto.createHmac('sha256', "string").digest('hex'));
-// dbInsert("07:00-08:00", "Leon", "Lu", "10", "2220067");
-// dbRemove("2220067");
+// console.log("password hash: " + crypto.createHmac('sha256', "string").digest('hex'));
 // console.log(dbCheck("124543"))
-// dbRemoveAll()
+
+// dbInsert("19:00-19:30", "MH103", "Leon Lu", "10", "2220056", true, "Some other names");
+// dbRemove("Leon Lu", "2220056");
+// dbRemoveAll();
 
 //// *Read data from file*
 //// 1
@@ -176,4 +189,16 @@ app.listen(port, function(){
 //// *Cryto*
 // console.log(crypto.createHmac('sha256', "string").digest('hex'));
 
-console.log(SHALL24("Leon Lu" + "2220056"))
+// console.log(SHALL24("Leon Lu" + "82234"))
+// console.log(SHALL24("oisudf" + "38789123"))
+// console.log(SHALL24("NDIdadsf" + "22200123"))
+// console.log(SHALL24("OIejw" + "2346213"))
+
+
+
+//=================
+//====Temporary====
+//=================
+app.get("/", function(req, res){
+  res.render('index');
+});
