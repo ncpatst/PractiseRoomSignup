@@ -147,9 +147,30 @@ function checkOpenStatus() {
   }
 }
 
-//!!Check time room availability
-function checkAvailability(room, time) {
-  return true;
+//Check if a student exists
+function dbCheckStudent(fullName, studentID, callBack) {
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err
+		var dbo = db.db(dbName)
+		dbo.collection(mainCollectionName).find({fullName: fullName, studentID: studentID}).toArray(function(err, result) {
+			if (err) throw err
+				callBack((result.length > 0)? true : false)
+			db.close()
+		})
+	})
+}
+
+//Check if time room occupied
+function dbCheckOccupation(room, time, callBack) {
+  MongoClient.connect(url, function(err, db) {
+		if (err) throw err
+		var dbo = db.db(dbName)
+		dbo.collection(mainCollectionName).find({room: room, time: time}).toArray(function(err, result) {
+			if (err) throw err
+				callBack((result.length > 0)? true : false)
+			db.close()
+		})
+	})
 }
 
 //insert entry function
@@ -216,20 +237,6 @@ function dbRemoveAll() {
 	});
 };
 
-//Check if a student exists
-function dbCheckStudent(fullName, studentID, callBack) {
-	MongoClient.connect(url, function(err, db) {
-		if (err) throw err
-		var dbo = db.db(dbName)
-		dbo.collection(mainCollectionName).find({fullName: fullName, studentID: studentID}).toArray(function(err, result) {
-			if (err) throw err
-				callBack((result.length > 0)? true : false)
-			db.close()
-		})
-	})
-}
-
-
 //========================
 //====Request Handling====
 //========================
@@ -257,6 +264,14 @@ app.listen(port, function(){
 //     console.log("the student does not exist")
 //   }
 // })
+// dbCheckOccupation("19:00-19:30", "MH103", function(callBackResult){
+//   if (callBackResult == true){
+//     console.log("the room is occupied");
+//   }
+//   else {
+//     console.log("the room is not occupied")
+//   }
+// })
 
 //// *Read data from file*
 //// 1
@@ -277,7 +292,7 @@ app.listen(port, function(){
 
 // console.log(getDateTime())
 // console.log(getDateTime().year)
-console.log(checkOpenStatus())
+// console.log(checkOpenStatus())
 
 
 
