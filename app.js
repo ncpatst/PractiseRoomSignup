@@ -21,14 +21,18 @@ app.use((req, res, next) => {
 //=================
 //====Variables====
 //=================
-const port = 1770;
-const url = "mongodb://localhost:27017";
-const dbName = "PractiseRoomSignup";
-const mainCollectionName = "StudentRecords"
+const port = 1770; //port that the app listen on
+const url = "mongodb://localhost:27017"; //url to MongoDB
+const dbName = "PractiseRoomSignup"; //database name to use
+const mainCollectionName = "StudentRecords" //collection name to use for student signups
 
-const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9";
+const openHour = 6 //the hour when signup opens; 0 <= openHour <= 23
+const openMin = 30 //the minute when signup opens; 0 <= openMin <= 59
+const closeHour = 15 //the hour when signup closes; 0 <= closeHour <= 23
+const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
 
-var SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex');
+const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
+const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share the file to anywhere
 
 //=================
 //====Functions====
@@ -101,10 +105,46 @@ function SHALL24(string) {
   return convertBase(crypto.createHmac('sha256', crypto.createHmac('sha256', string + SERVERKEY).digest('hex') + SERVERKEY).digest('hex'), 16, 32).substr(0, 6);
 }
 
-//!!Check open status
-function checkStatus() {
-  return "open";
-  //closed, readOnly etc.
+//Get time
+function getDateTime() {
+  var date = new Date();
+  
+	var hour = date.getHours();
+	hour = (hour < 10 ? "0" : "") + hour;
+	var min  = date.getMinutes();
+	min = (min < 10 ? "0" : "") + min;
+	var sec  = date.getSeconds();
+	sec = (sec < 10 ? "0" : "") + sec;
+	var milisec = date.getMilliseconds();
+	milisec = ((milisec < 100) ? ((milisec < 10) ? "00" : "0") : "") + milisec;
+
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+	month = (month < 10 ? "0" : "") + month;
+	var day  = date.getDate();
+  day = (day < 10 ? "0" : "") + day;
+
+  var timeArray = {year: year, month: month, day: day, hour: hour, min: min, sec: sec, milisec: milisec}
+	return timeArray;
+}
+
+//Check open status
+function checkOpenStatus() {
+  var date = new Date();
+	var hour = date.getHours();
+	hour = (hour < 10 ? "0" : "") + hour;
+	var min  = date.getMinutes();
+	min = (min < 10 ? "0" : "") + min;
+  var sec  = date.getSeconds();
+  sec = (sec < 10 ? "0" : "") + sec;
+  console.log("check open time: " + hour + ":" + min + ":" + sec)
+
+  if ((hour > openHour || hour == openHour && min >= openMin) && (hour < closeHour || hour == closeHour && min < closeMin)) {
+    return true
+  }
+  else {
+    return false
+  }
 }
 
 //!!Check time room availability
@@ -189,6 +229,10 @@ function dbCheckStudent(fullName, studentID, callBack) {
 	})
 }
 
+
+//========================
+//====Request Handling====
+//========================
 //Listen
 app.listen(port, function(){
   console.log("app started on port" + port);
@@ -230,6 +274,10 @@ app.listen(port, function(){
 // console.log(SHALL24("oisudf" + "38789123"))
 // console.log(SHALL24("NDIdadsf" + "22200123"))
 // console.log(SHALL24("OIejw" + "2346213"))
+
+// console.log(getDateTime())
+// console.log(getDateTime().year)
+console.log(checkOpenStatus())
 
 
 
