@@ -17,7 +17,6 @@ app.use((req, res, next) => {
   next()
 })
 
-
 //=================
 //====Variables====
 //=================
@@ -30,6 +29,8 @@ const openHour = 6 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 30 //the minute when signup opens; 0 <= openMin <= 59
 const closeHour = 15 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
+const readOnlyHour = 21 //the hour when signup read closes; 0 <= closeHour <= 23
+const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
 
 const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
 const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share the file to anywhere
@@ -147,14 +148,39 @@ function checkOpenStatus() {
   }
 }
 
+//Check read-only status
+function checkReadStatus() {
+  var date = new Date();
+	var hour = date.getHours();
+	hour = (hour < 10 ? "0" : "") + hour;
+	var min  = date.getMinutes();
+	min = (min < 10 ? "0" : "") + min;
+  var sec  = date.getSeconds();
+  sec = (sec < 10 ? "0" : "") + sec;
+  console.log("check read-only time: " + hour + ":" + min + ":" + sec)
+
+  if ((hour > openHour || hour == openHour && min >= openMin) && (hour < readOnlyHour || hour == readOnlyHour && min < readOnlyMin)) {
+    return true
+  }
+  else {
+    return false
+  }
+}
+
 //Check if a student exists
 function dbCheckStudent(fullName, studentID, callBack) {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err
 		var dbo = db.db(dbName)
 		dbo.collection(mainCollectionName).find({fullName: fullName, studentID: studentID}).toArray(function(err, result) {
-			if (err) throw err
-				callBack((result.length > 0)? true : false)
+      if (err) throw err
+      if (result.length > 0) {
+        console.log("[DB]Student " + fullName + " with ID " + studentID + " exists")
+      } 
+      else {
+        console.log("[DB]Student " + fullName + " with ID " + studentID + " does not exist")
+      }
+      callBack((result.length > 0)? true : false)
 			db.close()
 		})
 	})
@@ -166,8 +192,14 @@ function dbCheckOccupation(room, time, callBack) {
 		if (err) throw err
 		var dbo = db.db(dbName)
 		dbo.collection(mainCollectionName).find({room: room, time: time}).toArray(function(err, result) {
-			if (err) throw err
-				callBack((result.length > 0)? true : false)
+      if (err) throw err
+      if (result.length > 0) {
+        console.log("[DB]Room " + room + " at " + time + " is occupied")
+      } 
+      else {
+        console.log("[DB]Room " + room + " at " + time + " is not occupied")
+      }
+      callBack((result.length > 0)? true : false)
 			db.close()
 		})
 	})
@@ -245,18 +277,17 @@ app.listen(port, function(){
   console.log("app started on port" + port);
 });
 
-
 //=================
 //====Test Zone====
 //=================
 // console.log("password hash: " + crypto.createHmac('sha256', "string").digest('hex'));
 // console.log(dbCheck("124543"))
 
-// dbInsert("19:00-19:30", "MH103", "Leon Lu", "10", "2220056", true, "Some other names");
+// dbInsert("MH103", "19:00-19:30", "Leon Lu", "10", "2220056", true, "Some other names");
 // dbRemove("Leon Lu", "2220056");
 // dbRemoveAll();
 // dbCheck("Leon Lu", "29134");
-// dbCheckStudent("Leon Lu", "222006", function(callBackResult){
+// dbCheckStudent("Leon Lu", "2220056", function(callBackResult){
 //   if (callBackResult == true){
 //     console.log("the student exist");
 //   }
@@ -264,7 +295,7 @@ app.listen(port, function(){
 //     console.log("the student does not exist")
 //   }
 // })
-// dbCheckOccupation("19:00-19:30", "MH103", function(callBackResult){
+// dbCheckOccupation("MH103", "19:00-19:30", function(callBackResult){
 //   if (callBackResult == true){
 //     console.log("the room is occupied");
 //   }
@@ -293,6 +324,7 @@ app.listen(port, function(){
 // console.log(getDateTime())
 // console.log(getDateTime().year)
 // console.log(checkOpenStatus())
+// console.log(checkReadStatus())
 
 
 
