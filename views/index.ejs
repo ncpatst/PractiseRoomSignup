@@ -12,10 +12,7 @@
 <body>
 
   <div class="container">
-    <small class="text-muted">from index.ejs</small>
     <h1 class="mt-4">Practise Room Signup <sup>beta</sup></h1>
-    <p><a href="/cancel">link cancel request</a></p>
-    <p><a href="/admin">link admin</a></p>
     <table>
       <thead>
         <tr>
@@ -27,82 +24,60 @@
         </tr>
         <tr>
           <td>Full Name</td>
-          <td>Student ID</td>
           <td>Grade</td>
+          <td>Remark</td>
           <td>Full Name</td>
-          <td>Student ID</td>
           <td>Grade</td>
+          <td>Remark</td>
           <td>Full Name</td>
-          <td>Student ID</td>
           <td>Grade</td>
+          <td>Remark</td>
           <td>Full Name</td>
-          <td>Student ID</td>
           <td>Grade</td>
+          <td>Remark</td>
         </tr>
       </thead>
       <tbody>
+
+        <% for (var i = 0; i < dataList.length; i++) { %>
+          <% if (dataList[i].Time == "19:00-19:10") { %>
+            <tr>
+              <td><%= dataList[i].FirstName + " " + dataList[i].LastName %></td>
+              <td><%= dataList[i].StudentID %></td>
+              <td><%= dataList[i].Year %></td>
+            </tr>
+          <% } %>
+        <% } %>
+
+
         <tr>
           <th>MH102</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+
+          <td onclick="window.location.replace('/MH102/T19001930')"><%= organisedData.MH102.T19001930.fullName %></td>
+          <td onclick="window.location.replace('/MH102/T19001930')"><%= organisedData.MH102.T19001930.grade %></td>
+          <td onclick="window.location.replace('/MH102/T19001930')"><%= organisedData.MH102.T19001930.remarkStatus %></td>
+
+          
+          <td onclick="window.location.replace('/MH102/T19302000')"><%= organisedData.MH102.T19302000.fullName %></td>
+          <td onclick="window.location.replace('/MH102/T19302000')"><%= organisedData.MH102.T19302000.grade %></td>
+          <td onclick="window.location.replace('/MH102/T19302000')"><%= organisedData.MH102.T19302000.remarkStatus %></td>
+          <td onclick="window.location.replace('/MH102/T20002030')"><%= organisedData.MH102.T20002030.fullName %></td>
+          <td onclick="window.location.replace('/MH102/T20002030')"><%= organisedData.MH102.T20002030.grade %></td>
+          <td onclick="window.location.replace('/MH102/T20002030')"><%= organisedData.MH102.T20002030.remarkStatus %></td>
+          <td onclick="window.location.replace('/MH102/T20302100')"><%= organisedData.MH102.T20302100.fullName %></td>
+          <td onclick="window.location.replace('/MH102/T20302100')"><%= organisedData.MH102.T20302100.grade %></td>
+          <td onclick="window.location.replace('/MH102/T20302100')"><%= organisedData.MH102.T20302100.remarkStatus %></td>
         </tr>
-        <tr>
-          <th>MH103</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>MH104</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>etc</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+
       </tbody>
     </table>
+
+    <p class="mt-4"><a href="/cancel">link cancel request</a></p>
+    <p><a href="/admin">link admin</a></p>
+
+    <h3 class="mt-5">Debug info:</h3>
+    <p><small class="text-muted">from index.ejs</small></p>
+    <p><small>Data: <%= JSON.stringify(organisedData) %></small></p>
 
 
   </div>

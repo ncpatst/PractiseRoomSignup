@@ -17,9 +17,9 @@ app.use((req, res, next) => {
   next()
 })
 
-//=================
-//====Variables====
-//=================
+//============================
+//====Programme Parameters====
+//============================
 const port = 1770; //port that the app listen on
 const url = "mongodb://localhost:27017"; //url to MongoDB
 const dbName = "PractiseRoomSignup"; //database name to use
@@ -29,11 +29,32 @@ const openHour = 6 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 30 //the minute when signup opens; 0 <= openMin <= 59
 const closeHour = 15 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
-const readOnlyHour = 21 //the hour when signup read closes; 0 <= closeHour <= 23
+const readOnlyHour = 23 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
 
 const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
 const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share the file to anywhere
+
+const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH107", "MH108", "MH110", "MH117", "MH118", "MH119", "MH113", "MH115", "MH111"] //Used for rendering, changing rooms requires changing html and app.js!
+
+const roomTimeDataStructure = 
+{
+  MH102: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH103: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH104: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH105: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH106: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH107: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH109: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH110: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH117: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH118: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH119: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH113: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH115: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+  MH111: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
+}
+
 
 //=================
 //====Functions====
@@ -206,13 +227,13 @@ function dbCheckOccupation(room, time, callBack) {
 }
 
 //insert entry function
-function dbInsert(room, time, fullName, grade, studentID, ensemble, remark) {
+function dbInsert(room, time, fullName, grade, studentID, remarkStatus, remark) {
   //connect to mongo client
   MongoClient.connect(url, function(err, db) {
     if (err) console.log(err);
     var dbo = db.db(dbName);
     //create object
-    var myobj = {room: room, time: time, fullName: fullName, grade: grade, studentID: studentID, ensemble: ensemble, remark: remark}
+    var myobj = {room: room, time: time, fullName: fullName, grade: grade, studentID: studentID, remarkStatus: remarkStatus, remark: remark}
 
     //insert document
 		dbo.collection(mainCollectionName).insertOne(myobj, function(err, res) {
@@ -269,6 +290,19 @@ function dbRemoveAll() {
 	});
 };
 
+//Organise data from database
+function organiseData(list) {
+  var result = roomTimeDataStructure
+  for (var i = 0; i < list.length; i++) {
+    result[list[i].room][list[i].time].fullName = list[i].fullName
+    result[list[i].room][list[i].time].grade = list[i].grade
+    result[list[i].room][list[i].time].studentID = list[i].studentID
+    result[list[i].room][list[i].time].remarkStatus = list[i].remarkStatus
+    result[list[i].room][list[i].time].remark = list[i].remark
+  }
+  return result;
+}
+
 //========================
 //====Request Handling====
 //========================
@@ -277,13 +311,42 @@ app.listen(port, function(){
   console.log("app started on port" + port);
 });
 
+//Home page
+app.get("/", function(req, res){
+
+  if (checkReadStatus() == false) {
+    res.send("error: signup closed")
+  }
+  else {
+    MongoClient.connect(url, function (err, db) {
+      if (err) throw err
+      var dbo = db.db(dbName)
+      dbo.collection(mainCollectionName).find({}).toArray(function (err, result) {
+        if (err) throw err
+
+        var organisedData = organiseData(result);
+        console.log(organisedData);
+
+        res.render("index", {organisedData: organisedData, roomList: roomList});
+
+        db.close()
+      })
+    })
+  }
+
+});
+
 //=================
 //====Test Zone====
 //=================
 // console.log("password hash: " + crypto.createHmac('sha256', "string").digest('hex'));
 // console.log(dbCheck("124543"))
 
-// dbInsert("MH103", "19:00-19:30", "Leon Lu", "10", "2220056", true, "Some other names");
+// dbInsert("MH103", "T19001930", "Leon Loo", "7", "2220056", true, "Some other names");
+// dbInsert("MH104", "T19001930", "Leon Lou", "8", "2220066", true, "Some other names");
+// dbInsert("MH105", "T19001930", "Leon L", "9", "2220076", true, "Some other names");
+// dbInsert("MH106", "T19302000", "Leon Lu", "10", "2220086", true, "Some other names");
+
 // dbRemove("Leon Lu", "2220056");
 // dbRemoveAll();
 // dbCheck("Leon Lu", "29134");
@@ -325,12 +388,3 @@ app.listen(port, function(){
 // console.log(getDateTime().year)
 // console.log(checkOpenStatus())
 // console.log(checkReadStatus())
-
-
-
-//=================
-//====Temporary====
-//=================
-app.get("/", function(req, res){
-  res.render('index');
-});
