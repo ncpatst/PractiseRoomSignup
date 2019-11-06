@@ -19,6 +19,10 @@ td, th {
   cursor: not-allowed;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 /* .test {
   color: #ff6557;
   color: #ff8a46;

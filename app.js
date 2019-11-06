@@ -29,7 +29,7 @@ const openHour = 6 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 30 //the minute when signup opens; 0 <= openMin <= 59
 const closeHour = 15 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
-const readOnlyHour = 23 //the hour when signup read closes; 0 <= closeHour <= 23
+const readOnlyHour = 21 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
 
 const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
@@ -325,8 +325,6 @@ app.get("/", function(req, res){
         if (err) throw err
 
         var organisedData = organiseData(result);
-        console.log(organisedData);
-
         res.render("index", {organisedData: organisedData, roomList: roomList});
 
         db.close()
