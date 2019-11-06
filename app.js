@@ -315,7 +315,7 @@ app.listen(port, function(){
 app.get("/", function(req, res){
 
   if (checkReadStatus() == false) {
-    res.send("error: signup closed")
+    res.send("signup closed page")
   }
   else {
     MongoClient.connect(url, function (err, db) {
@@ -333,6 +333,35 @@ app.get("/", function(req, res){
   }
 
 });
+
+//Signup/Info Bridge
+app.get("/:room/:time", function(req, res){
+  var room = req.params.room;
+  var time = req.params.time;
+  console.log("clicked room and time is " + room + " and " + time)
+
+  dbCheckOccupation(room, time, function(callBackResult){
+    if (callBackResult == true){
+      if (checkReadStatus() == true) {
+        res.render("info", {room: room, time: time})
+      }
+      else {
+        res.redirect("/")
+      }
+    }
+    else {
+      if (checkOpenStatus() == true) {
+        res.render("signup", {room: room, time: time})
+      } 
+      else if (checkReadStatus() == true) {
+        res.render("info", {room: room, time: time})
+      }
+      else {
+        res.redirect("/")
+      }
+    }
+  })
+})
 
 //=================
 //====Test Zone====
