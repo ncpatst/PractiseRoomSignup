@@ -330,11 +330,13 @@
       </tbody>
     </table>
 
-    <p class="mt-4"><a href="/cancel">link cancel request</a></p>
-    <p><a href="/admin">link admin</a></p>
+    <a class="btn btn-primary mt-5" href="/cancel">Cancel request</a>
+    <a class="btn btn-primary mt-5" href="/help">Help</a>
+    <a class="btn btn-primary mt-5" href="/admin">Admin</a>
 
     <h3 class="mt-5">Debug info:</h3>
     <p><small class="text-muted">from index.ejs</small></p>
+    <p><small>Data: <%= JSON.stringify(roomList) %></small></p>
     <p><small>Data: <%= JSON.stringify(organisedData) %></small></p>
 
 

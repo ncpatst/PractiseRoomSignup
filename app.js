@@ -341,27 +341,59 @@ app.get("/:room/:time", function(req, res){
   console.log("clicked room and time is " + room + " and " + time)
 
   dbCheckOccupation(room, time, function(callBackResult){
-    if (callBackResult == true){
-      if (checkReadStatus() == true) {
-        res.render("info", {room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year})
-      }
-      else {
-        res.redirect("/")
-      }
-    }
-    else {
-      if (checkOpenStatus() == true) {
-        res.render("signup", {room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year})
-      } 
-      else if (checkReadStatus() == true) {
-        res.render("info", {room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year})
-      }
-      else {
-        res.redirect("/")
-      }
-    }
+
+    MongoClient.connect(url, function (err, db) {
+      if (err) throw err
+      var dbo = db.db(dbName)
+      dbo.collection(mainCollectionName).find({}).toArray(function (err, result) {
+        if (err) throw err
+
+        var organisedData = organiseData(result);
+
+        if (callBackResult == true) {
+          if (checkReadStatus() == true) {
+            res.render("info", { room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year })
+          }
+          else {
+            res.redirect("/")
+          }
+        }
+        else {
+          if (checkOpenStatus() == true) {
+            res.render("signup", { room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year })
+          }
+          else if (checkReadStatus() == true) {
+            res.render("info", { room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year })
+          }
+          else {
+            res.redirect("/")
+          }
+        }
+
+        db.close()
+      })
+    })
+
+
+
   })
 })
+
+//Signup POST
+app.post("/signup-req", function(req, res){
+  console.log("[signup-req]sugnup post request recieved")
+  //get post info
+  var room = req.body.room
+  var time = req.body.time
+  var fullName = req.body.fullName
+  var grade = req.body.grade
+  var studentID = req.body.studentID
+  var password = req.body.password
+  var ensembleCheckbox = req.body.ensembleCheckbox
+  var remark = req.body.remark
+  console.log("[signup-req]request info: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleCheckbox + "|" + remark + "|");
+
+});
 
 //=================
 //====Test Zone====
