@@ -6,23 +6,102 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Practise Room Signup</title>
   <link rel="icon" href="/favicons/Image002.png">
-  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- <link rel="stylesheet" href="/css/materialise.css"> -->
+  <style>
+    /* input:placeholder-shown{ border-color: green; box-shadow: 0 0 8px green;} */
+    .form-group input:placeholder-shown ~ .control-label {
+      font-size: 0.8rem !important;
+      top: -1rem !important;
+      left: 0 !important;
+    }
+
+  </style>
 </head>
 <body>
 
   <div class="container">
     <h1 class="mt-4">Practise Room Signup <sup>beta</sup></h1>
 
+    <form method="POST" action="/signup-req">
+      <h5>Signup form</h5>
+
+      <div class="form-group">
+        <input type="text" required="required" id="date" name="date" placeholder="<%= date %>" readonly/>
+        <label for="input" class="control-label">Date</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" id="room" name="room" placeholder="<%= room %>" readonly/>
+        <label for="input" class="control-label">Room</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" id="time" name="time" placeholder="<%= time.substr(1, 2) + ":" + time.substr(3, 2) + "-" + time.substr(5, 2) + ":" + time.substr(7, 2) %>" readonly/>
+        <label for="input" class="control-label">Time</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" id="fullName" name="fullName"/>
+        <label for="input" class="control-label">Full Name</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <span class="mr-3">Grade: </span>
+        <label class="pure-material-radio mr-3">
+          <input type="radio" name="grade" required="required" value="9">
+          <span>9</span>
+        </label>
+        <label class="pure-material-radio mr-3">
+          <input type="radio" name="grade" required="required" value="10">
+          <span>10</span>
+        </label>
+        <label class="pure-material-radio mr-3">
+          <input type="radio" name="grade" required="required" value="11">
+          <span>11</span>
+        </label>
+        <label class="pure-material-radio mr-3">
+          <input type="radio" name="grade" required="required" value="12">
+          <span>12</span>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" id="studentID" name="studentID"/>
+        <label for="input" class="control-label">Student ID</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="password" required="required" id="Password" name="Password"/>
+        <label for="input" class="control-label">Password</label><i class="bar"></i>
+      </div>
+
+      <div class="checkbox">
+        <label class="pure-material-checkbox">
+          <input type="checkbox" name="ensembleCheckbox">
+          <span>Small Ensemble (If checked, please type the names of all the people comming to this practise session in the remark text area)</span>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <input type="text" id="remark" name="remark"/>
+        <label for="input" class="control-label">Remark</label><i class="bar"></i>
+      </div>
+
+      <a class="btn btn-primary" href="/">Back</a>
+      <input class="btn btn-primary" type="submit"></input>
+
+    </form>
 
     <h3 class="mt-5">Debug info:</h3>
     <p><small class="text-muted">from signup.ejs</small></p>
     <p><small>Data: <%= time %></small></p>
     <p><small>Data: <%= room %></small></p>
+    <p><small>Data: <%= date %></small></p>
 
 
   </div>
-
 
   <!-- JQuery -->
   <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
@@ -30,6 +109,7 @@
   <script type="text/javascript" src="/js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
   <script src="/js/main.js"></script>
 </body>
 </html>

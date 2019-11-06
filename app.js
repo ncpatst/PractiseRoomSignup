@@ -27,9 +27,9 @@ const mainCollectionName = "StudentRecords" //collection name to use for student
 
 const openHour = 6 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 30 //the minute when signup opens; 0 <= openMin <= 59
-const closeHour = 15 //the hour when signup closes; 0 <= closeHour <= 23
+const closeHour = 23 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
-const readOnlyHour = 21 //the hour when signup read closes; 0 <= closeHour <= 23
+const readOnlyHour = 23 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
 
 const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
@@ -343,7 +343,7 @@ app.get("/:room/:time", function(req, res){
   dbCheckOccupation(room, time, function(callBackResult){
     if (callBackResult == true){
       if (checkReadStatus() == true) {
-        res.render("info", {room: room, time: time})
+        res.render("info", {room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year})
       }
       else {
         res.redirect("/")
@@ -351,10 +351,10 @@ app.get("/:room/:time", function(req, res){
     }
     else {
       if (checkOpenStatus() == true) {
-        res.render("signup", {room: room, time: time})
+        res.render("signup", {room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year})
       } 
       else if (checkReadStatus() == true) {
-        res.render("info", {room: room, time: time})
+        res.render("info", {room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year})
       }
       else {
         res.redirect("/")
