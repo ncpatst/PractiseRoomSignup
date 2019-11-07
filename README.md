@@ -5,11 +5,16 @@ A manual-management free signup system utilising crytography
 - [ ] Programmer art UI
 - [x] Server-key
 - [x] Custom hash function
-- [ ] Database insert and remove function
+- [x] Database insert and remove function
 - [ ] Scheduled tasks
-- [ ] Check open status function
+- [x] Check open status function
 - [ ] requests
-- [ ] ejs
+- [ ] index.ejs
+- [ ] signup.ejs
+- [ ] info.ejs
+- [ ] admin.ejs
+- [ ] cancel.ejs
+- [ ] help.ejs
 - [ ] announcement system
 
 
