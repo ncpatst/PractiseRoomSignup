@@ -13,6 +13,8 @@
 
   <div class="container">
     <h1 class="mt-4">Practise Room Sign-up <sup>beta</sup></h1>
+    <p>This form opens from <%= openHour %>:<%= openMin %> to <%= closeHour %>:<%= closeMin %>, click on an empty slot to sign-up.</p>
+    <p>If you spot a bug, please report to <a href="https://github.com/leonluleonlu/PractiseRoomSignup/issues">github.com/leonluleonlu/PractiseRoomSignup/issues</a></p>
     <table class="mt-4">
       <thead>
         <tr>
@@ -338,6 +340,10 @@
     <p><small class="text-muted">from index.ejs</small></p>
     <p><small>Data = <%= JSON.stringify(roomList) %></small></p>
     <p><small>Data = <%= JSON.stringify(organisedData) %></small></p>
+    <p><small>Data = <%= openHour %></small></p>
+    <p><small>Data = <%= openMin %></small></p>
+    <p><small>Data = <%= closeHour %></small></p>
+    <p><small>Data = <%= closeMin %></small></p>
 
 
   </div>

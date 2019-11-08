@@ -25,7 +25,7 @@ const url = "mongodb://localhost:27017"; //url to MongoDB
 const dbName = "PractiseRoomSignup"; //database name to use
 const mainCollectionName = "StudentRecords" //collection name to use for student signups
 
-const openHour = 7 //the hour when signup opens; 0 <= openHour <= 23
+const openHour = 07 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 00 //the minute when signup opens; 0 <= openMin <= 59
 const closeHour = 23 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
@@ -322,19 +322,12 @@ app.get("/", function(req, res){
         if (err) throw err
 
         var organisedData = organiseData(result);
-        res.render("index", {organisedData: organisedData, roomList: roomList});
+        res.render("index", {organisedData: organisedData, roomList: roomList, openHour: (openHour < 10 ? "0" : "") + openHour, openMin: (openMin < 10 ? "0" : "") + openMin, closeHour: (closeHour < 10 ? "0" : "") + closeHour, closeMin: (closeMin < 10 ? "0" : "") + closeMin});
 
         db.close()
       })
     })
   }
-
-});
-
-//Help page
-app.get("/help", function(req, res){
-
-  res.render("help")
 
 });
 
@@ -516,6 +509,37 @@ app.post("/cancel-req", function(req, res){
     })
 
   }
+});
+
+//Help page
+app.get("/help", function(req, res){
+
+  res.render("help")
+
+});
+
+//Admin page
+app.get("/admin", function(req, res){
+
+  res.render("admin")
+
+});
+
+//Password lookup POST
+app.post("/password-req", function(req, res){
+  console.log("[password-req]lookup post request recieved")
+  //get post info
+  var fullName = req.body.fullName
+  var studentID = req.body.studentID
+  var password = req.body.password
+
+  if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+    res.send("Wrong admin password, don't even try to break the system")
+  } else {
+    var lookupPassword = SHALL24(fullName + studentID);
+    res.send("The student's password is " + lookupPassword + ", please stop using forgetting password as an excuse to not practise!")
+  }
+
 });
 
 //=================
