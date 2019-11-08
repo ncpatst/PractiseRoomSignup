@@ -27,9 +27,9 @@ const mainCollectionName = "StudentRecords" //collection name to use for student
 
 const openHour = 7 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 00 //the minute when signup opens; 0 <= openMin <= 59
-const closeHour = 16 //the hour when signup closes; 0 <= closeHour <= 23
+const closeHour = 23 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
-const readOnlyHour = 21 //the hour when signup read closes; 0 <= closeHour <= 23
+const readOnlyHour = 23 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
 
 const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
@@ -325,7 +325,9 @@ app.get("/", function(req, res){
       dbo.collection(mainCollectionName).find({}).toArray(function (err, result) {
         if (err) throw err
 
+        console.log(result)
         var organisedData = organiseData(result);
+        console.log(organisedData)
         res.render("index", {organisedData: organisedData, roomList: roomList});
 
         db.close()
@@ -355,7 +357,7 @@ app.get("/:room/:time", function(req, res){
           // If occupied
           if (checkReadStatus() == true) {
             // If occupied and readable
-            res.render("info", {roomOccupationStatus: "Room Occupied", room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, fullName: organisedData[room][time].fullName, grade: organisedData[room][time].grade, studentID: organisedData[room][time].studentID, ensembleStatus: organisedData[room][time].ensembleStatus, remark: organisedData[room][time].remark})
+            res.render("info", {roomOccupationStatus: "Room Occupied", room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, fullName: organisedData[room][time].fullName, grade: organisedData[room][time].grade, studentID: organisedData[room][time].studentID, ensembleStatus: organisedData[room][time].ensembleStatus, remark: organisedData[room][time].remark, organisedData: organisedData})
           }
           else {
             // If occupied and closed
@@ -366,11 +368,11 @@ app.get("/:room/:time", function(req, res){
           // If not occupied
           if (checkOpenStatus() == true) {
             // If not occupied and open
-            res.render("signup", { room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year })
+            res.render("signup", { room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, organisedData: organisedData})
           }
           else if (checkReadStatus() == true) {
             // If not occupied and read-only
-            res.render("info", {roomOccupationStatus: "Signup Closed", room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, fullName: organisedData[room][time].fullName, grade: organisedData[room][time].grade, studentID: organisedData[room][time].studentID, ensembleStatus: organisedData[room][time].ensembleStatus, remark: organisedData[room][time].remark})
+            res.render("info", {roomOccupationStatus: "Signup Closed", room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, fullName: organisedData[room][time].fullName, grade: organisedData[room][time].grade, studentID: organisedData[room][time].studentID, ensembleStatus: organisedData[room][time].ensembleStatus, remark: organisedData[room][time].remark, organisedData: organisedData})
           }
           else {
             // If not occupied and closed
@@ -419,7 +421,7 @@ app.post("/signup-req", function(req, res){
           }
           else {
             // If room available, check password
-            if (SHALL24(fullName + studentID) !== password.toLowerCase()) {
+            if (SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
               // Wrong password
               res.send("wrong name or password, please double check and try again")
             } else {
@@ -446,22 +448,73 @@ app.post("/signup-req", function(req, res){
 
 });
 
-//Cancel POST
+//Cancel direct GET
+app.get("/cancel", function(req, res){
+  //check if open
+  if (checkOpenStatus() == true) {
+    //respond with a unfilled form
+    res.render("cancel", {fullName: "", studentID: ""});
+  } else {
+    //respond with error
+    res.send("you can only submit cancel requests when signup is open")
+  }
+
+});
+
+//Cancel page POST
 app.post("/cancel", function(req, res){
   console.log("[signup-req]sugnup post request recieved")
   //get post info
   var fullName = req.body.fullName
   var studentID = req.body.studentID
   
-  res.render("cancel", {fullName: fullName, studentID: studentID});
+  //check if open
+  if (checkOpenStatus() == true) {
+    //respond with a unfilled form
+    res.render("cancel", {fullName: fullName, studentID: studentID});
+  } else {
+    //respond with error
+    res.send("you can only submit cancel requests when signup is open")
+  }
 
 });
 
-//Cancel GET
-app.get("/cancel", function(req, res){
-  //respond with a unfilled form
-  res.render("cancel", {fullName: "", studentID: ""});
+//Cancel POST
+app.post("/cancel-req", function(req, res){
+  console.log("[cancel-req]sugnup post request recieved")
+  //get post info
+  var fullName = req.body.fullName
+  var studentID = req.body.studentID
+  var password = req.body.password
 
+  if (checkOpenStatus() == false) {
+    // if signup is closed
+    res.send("you can only submit cancel requests when signup is open")
+  }
+  else {
+    dbCheckStudent(fullName, studentID, function (callBackResult) {
+      if (callBackResult == true) {
+        // If student exists, check password
+        if (SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+          // Wrong password
+          res.send("wrong name, student ID or password, please double check and try again")
+        } else {
+          // Correct password, remove entry
+
+          console.log("[cancel-req]removing from database: " + "|" + fullName + "|" + studentID + "|" + password + "|");
+
+          dbRemove(fullName, studentID);
+
+          res.send("Cancel successful!")
+        }
+      }
+      else {
+        // If student does not exists
+        res.send("this student have not signed up, check the name and password you entered")
+      }
+    })
+
+  }
 });
 
 //=================
@@ -475,7 +528,7 @@ app.get("/cancel", function(req, res){
 // dbInsert("MH105", "T20002030", "Leon L", "9", "2220076", true, true, "Some other names");
 // dbInsert("MH106", "T19302000", "Leon Lu", "10", "2220086", true, true, "Some other names");
 
-// dbRemove("Leon Lu", "2220056");
+// dbRemove("Leon Looo", "182937");
 // dbRemoveAll();
 // dbCheck("Leon Lu", "29134");
 // dbCheckStudent("Leon Lu", "2220056", function(callBackResult){
