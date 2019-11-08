@@ -14,7 +14,7 @@ A manual-management free signup system utilising crytography
 - [x] info.ejs
 - [ ] admin.ejs
 - [x] cancel.ejs
-- [ ] help.ejs
+- [x] help.ejs
 - [ ] announcement system
 
 

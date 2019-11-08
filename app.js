@@ -331,6 +331,13 @@ app.get("/", function(req, res){
 
 });
 
+//Help page
+app.get("/help", function(req, res){
+
+  res.render("help")
+
+});
+
 //Signup/Info Bridge
 app.get("/:room/:time", function(req, res){
   var room = req.params.room;
