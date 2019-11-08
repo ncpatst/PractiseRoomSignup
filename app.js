@@ -399,7 +399,50 @@ app.post("/signup-req", function(req, res){
   var password = req.body.password
   var ensembleStatus = req.body.ensembleStatus
   var remark = req.body.remark
-  console.log("[signup-req]request info: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remark + "|");
+
+  if (checkOpenStatus() == false) {
+    // if signup is open
+    res.send("sorry, signup closed")
+  }
+  else {
+    dbCheckStudent(fullName, studentID, function(callBackResult){
+      if (callBackResult == true){
+        // If student exists
+        res.send("you already signed up")
+      }
+      else {
+        // If student does not exist, check occupation
+        dbCheckOccupation(room, time, function (callBackResult) {
+          if (callBackResult == true) {
+            // If room occupied
+            res.send("Ooooops, someone signed up for this very room at this very time when you were filling in the form")
+          }
+          else {
+            // If room available, check password
+            if (SHALL24(fullName + studentID) !== password.toLowerCase()) {
+              // Wrong password
+              res.send("wrong name or password, please double check and try again")
+            } else {
+              // Correct password, add to database
+              var remarkStatus = false;
+              if (ensembleStatus == true || remark.length >=1) {
+                remarkStatus = true
+              }
+              if (ensembleStatus == "on") {
+                ensembleStatus = true
+              }
+
+              console.log("[signup-req]adding to database: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remarkStatus + "|" + remark + "|");
+
+              dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark)
+
+              res.send("signup successful!")
+            }
+          }
+        })
+      }
+    })
+  }
 
 });
 
@@ -455,3 +498,13 @@ app.post("/signup-req", function(req, res){
 // console.log(getDateTime().year)
 // console.log(checkOpenStatus())
 // console.log(checkReadStatus())
+
+console.log(SHALL24("Leon Lu" + "2220056")); //1ru5tj
+console.log(SHALL24("Leon Looo" + "182937")); //ufq8a0
+console.log(SHALL24("Leuon Lu" + "31415926")); //iamvjl
+console.log(SHALL24("Mr Bright" + "12345678")); //1fuk5s
+console.log(SHALL24("Mr Caliva" + "13514")); //1qa5m7
+console.log(SHALL24("Susie Schneider" + "345624")); //4sd5cc
+console.log(SHALL24("Wilson Tucker" + "647345")); //1sbkhl
+console.log(SHALL24("Jessie Russell" + "3425")); //kj5qu6
+console.log(SHALL24("Gerardo Herrera" + "45864")); //13910j
