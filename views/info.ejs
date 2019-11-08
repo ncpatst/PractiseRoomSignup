@@ -13,9 +13,20 @@
 
   <div class="container">
     <h1 class="mt-4">Practise Room Signup <sup>beta</sup></h1>
-    <h5 class="mt-4"><%= roomOccupationStatus %></h5>
+    <h3 class="mt-4"><%= roomOccupationStatus %></h3>
 
-    <form action="">
+    <form action="/cancel" method="POST">
+
+      <!-- information for cnacel request -->
+
+      <div class="form-group d-none">
+        <input type="text" id="fullName" name="fullName" value="<%= fullName %>" />
+      </div>
+
+      <div class="form-group d-none">
+        <input type="text" id="studentID" name="studentID" value="<%= studentID %>" />
+      </div>
+
 
       <div class="form-group">
         <input type="text" required="required" placeholder="<%= date %>" readonly disabled/>
@@ -49,7 +60,7 @@
 
       <div class="checkbox">
         <label class="pure-material-checkbox">
-          <input type="checkbox" name="ensembleCheckbox" disabled <% if (ensembleStatus = true) { %> checked <% } %>>
+          <input type="checkbox" name="ensembleCheckbox" disabled <% if (ensembleStatus == true) { %> checked <% } %>>
           <span>Small Ensemble</span>
         </label>
       </div>
@@ -64,12 +75,16 @@
         <label for="textarea" class="control-label">Remark</label><i class="bar"></i>
       </div>
 
+      <a class="btn btn-primary" href="/">Back</a>
+      <a class="btn btn-primary" href="/help">Help</a>
+      <button class="btn btn-primary" type="submit">Cancel Request</button>
+
     </form>
 
 
-    <a class="btn btn-primary mt-4" href="/">Back</a>
-    <a class="btn btn-primary mt-4" href="/help">Help</a>
-    <a class="btn btn-primary mt-4" href="/cancel">Cancel Request</a>
+    <!-- <a class="btn btn-primary mt-4" href="/">Back</a> -->
+    <!-- <a class="btn btn-primary mt-4" href="/help">Help</a> -->
+    <!-- <a class="btn btn-primary mt-4" href="/cancel">Cancel Request</a> -->
 
 
     <h3 class="mt-5">Debug info:</h3>
@@ -92,7 +107,7 @@
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="/js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
   <script src="/js/main.js"></script>
 </body>
 </html>

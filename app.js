@@ -25,9 +25,9 @@ const url = "mongodb://localhost:27017"; //url to MongoDB
 const dbName = "PractiseRoomSignup"; //database name to use
 const mainCollectionName = "StudentRecords" //collection name to use for student signups
 
-const openHour = 6 //the hour when signup opens; 0 <= openHour <= 23
-const openMin = 30 //the minute when signup opens; 0 <= openMin <= 59
-const closeHour = 15 //the hour when signup closes; 0 <= closeHour <= 23
+const openHour = 7 //the hour when signup opens; 0 <= openHour <= 23
+const openMin = 00 //the minute when signup opens; 0 <= openMin <= 59
+const closeHour = 16 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
 const readOnlyHour = 21 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
@@ -446,6 +446,24 @@ app.post("/signup-req", function(req, res){
 
 });
 
+//Cancel POST
+app.post("/cancel", function(req, res){
+  console.log("[signup-req]sugnup post request recieved")
+  //get post info
+  var fullName = req.body.fullName
+  var studentID = req.body.studentID
+  
+  res.render("cancel", {fullName: fullName, studentID: studentID});
+
+});
+
+//Cancel GET
+app.get("/cancel", function(req, res){
+  //respond with a unfilled form
+  res.render("cancel", {fullName: "", studentID: ""});
+
+});
+
 //=================
 //====Test Zone====
 //=================
@@ -499,7 +517,6 @@ app.post("/signup-req", function(req, res){
 // console.log(checkOpenStatus())
 // console.log(checkReadStatus())
 
-console.log(SHALL24("Leon Lu" + "2220056")); //1ru5tj
 console.log(SHALL24("Leon Looo" + "182937")); //ufq8a0
 console.log(SHALL24("Leuon Lu" + "31415926")); //iamvjl
 console.log(SHALL24("Mr Bright" + "12345678")); //1fuk5s

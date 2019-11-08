@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Practise Room Signup</title>
+  <link rel="icon" href="/favicons/Image002.png">
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="mt-4">Practise Room Signup <sup>beta</sup></h1>
+    <h3 class="mt-4">Cancel Request</h3>
+
+    <form method="POST" action="/cancel-req">
+      
+      <div class="form-group">
+        <input type="text" required="required" id="fullName" name="fullName"/>
+        <label for="input" class="control-label">Full Name</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" id="studentID" name="studentID"/>
+        <label for="input" class="control-label">Student ID</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="password" required="required" id="password" name="password"/>
+        <label for="input" class="control-label">Password</label><i class="bar"></i>
+      </div>
+
+      <a class="btn btn-primary" href="/">Back</a>
+      <a class="btn btn-primary" href="/help">Help</a>
+      <input class="btn btn-primary" type="submit"></input>
+
+    </form>
+
+    <h3 class="mt-5">Debug info:</h3>
+    <p><small class="text-muted">from cancel.ejs</small></p>
+    <p><small>Data: <%= fullName %></small></p>
+    <p><small>Data: <%= studentID %></small></p>
+
+
+  <script>
+    document.getElementById("fullName").value = "<%= fullName %>";
+    document.getElementById("studentID").value = "<%= studentID %>"
+  </script>
+
+  </div>
+
+  <!-- JQuery -->
+  <script type="text/javascript" src="/js/jquery-3.4.0.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+  <script src="/js/main.js"></script>
+  <script>
+  
+  </script>
+</body>
+</html>
