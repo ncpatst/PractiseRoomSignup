@@ -1,7 +1,7 @@
 table,
 th,
 td {
-  border: 1px solid rgb(78, 78, 78);
+  border: 2px solid rgb(46, 46, 46);
   /* color: rgb(211, 211, 211); */
   /* background-color: rgba(98, 98, 98, 0.1); */
 }
@@ -10,6 +10,17 @@ input[type="text"],
 input[type="password"] {
   width: 200px;
 } */
+
+.border-light-right {
+  border-right: 1px solid rgb(160, 160, 160) !important;
+}
+.border-light-leftt {
+  border-left: 1px solid rgb(160, 160, 160) !important;
+}
+.border-light-bothh {
+  border-left: 1px solid rgb(160, 160, 160) !important;
+  border-right: 1px solid rgb(160, 160, 160) !important;
+}
 
 td, th {
   padding: 5px;

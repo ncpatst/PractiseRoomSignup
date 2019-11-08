@@ -18,25 +18,25 @@
     <table class="mt-4">
       <thead>
         <tr>
-          <th rowspan="2">Room</th>
-          <th colspan="3">19:00-19:30</th>
-          <th colspan="3">19:30-20:00</th>
-          <th colspan="3">20:00-20:30</th>
-          <th colspan="3">20:30-21:00</th>
+          <th rowspan="2" class="text-center">Room</th>
+          <th colspan="3" class="text-center" style="min-width: 250px;">19:00-19:30</th>
+          <th colspan="3" class="text-center" style="min-width: 250px;">19:30-20:00</th>
+          <th colspan="3" class="text-center" style="min-width: 250px;">20:00-20:30</th>
+          <th colspan="3" class="text-center" style="min-width: 250px;">20:30-21:00</th>
         </tr>
         <tr>
-          <td>Full Name</td>
-          <td>Grade</td>
-          <td>Remark</td>
-          <td>Full Name</td>
-          <td>Grade</td>
-          <td>Remark</td>
-          <td>Full Name</td>
-          <td>Grade</td>
-          <td>Remark</td>
-          <td>Full Name</td>
-          <td>Grade</td>
-          <td>Remark</td>
+          <td class="border-light-right">Full Name</td>
+          <td class="border-light-bothh">Grade</td>
+          <td class="border-light-leftt">Remark</td>
+          <td class="border-light-right">Full Name</td>
+          <td class="border-light-bothh">Grade</td>
+          <td class="border-light-leftt">Remark</td>
+          <td class="border-light-right">Full Name</td>
+          <td class="border-light-bothh">Grade</td>
+          <td class="border-light-leftt">Remark</td>
+          <td class="border-light-right">Full Name</td>
+          <td class="border-light-bothh">Grade</td>
+          <td class="border-light-leftt">Remark</td>
         </tr>
       </thead>
       <tbody>
@@ -44,221 +44,188 @@
         <tr>
           <th>MH102</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T19001930'"><%= organisedData.MH102.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T19001930'"><%= organisedData.MH102.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T19001930'"><%= organisedData.MH102.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T19302000'"><%= organisedData.MH102.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T19302000'"><%= organisedData.MH102.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T19302000'"><%= organisedData.MH102.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T20002030'"><%= organisedData.MH102.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T20002030'"><%= organisedData.MH102.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T20002030'"><%= organisedData.MH102.T20002030.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T20302100'"><%= organisedData.MH102.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T20302100'"><%= organisedData.MH102.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH102/T20302100'"><%= organisedData.MH102.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH102/T19001930'"><%= organisedData.MH102.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH102/T19001930'"><%= organisedData.MH102.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH102/T19001930'"><% if (organisedData.MH102.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH102/T19302000'"><%= organisedData.MH102.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH102/T19302000'"><%= organisedData.MH102.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH102/T19302000'"><% if (organisedData.MH102.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH102/T20002030'"><%= organisedData.MH102.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH102/T20002030'"><%= organisedData.MH102.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH102/T20002030'"><% if (organisedData.MH102.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH102/T20302100'"><%= organisedData.MH102.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH102/T20302100'"><%= organisedData.MH102.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH102/T20302100'"><% if (organisedData.MH102.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH103</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T19001930'"><%= organisedData.MH103.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T19001930'"><%= organisedData.MH103.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T19001930'"><%= organisedData.MH103.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T19302000'"><%= organisedData.MH103.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T19302000'"><%= organisedData.MH103.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T19302000'"><%= organisedData.MH103.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T20002030'"><%= organisedData.MH103.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T20002030'"><%= organisedData.MH103.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T20002030'"><%= organisedData.MH103.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T20302100'"><%= organisedData.MH103.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T20302100'"><%= organisedData.MH103.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH103/T20302100'"><%= organisedData.MH103.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH103/T19001930'"><%= organisedData.MH103.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH103/T19001930'"><%= organisedData.MH103.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH103/T19001930'"><% if (organisedData.MH103.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH103/T19302000'"><%= organisedData.MH103.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH103/T19302000'"><%= organisedData.MH103.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH103/T19302000'"><% if (organisedData.MH103.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH103/T20002030'"><%= organisedData.MH103.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH103/T20002030'"><%= organisedData.MH103.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH103/T20002030'"><% if (organisedData.MH103.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH103/T20302100'"><%= organisedData.MH103.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH103/T20302100'"><%= organisedData.MH103.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH103/T20302100'"><% if (organisedData.MH103.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH104</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T19001930'"><%= organisedData.MH104.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T19001930'"><%= organisedData.MH104.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T19001930'"><%= organisedData.MH104.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T19302000'"><%= organisedData.MH104.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T19302000'"><%= organisedData.MH104.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T19302000'"><%= organisedData.MH104.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T20002030'"><%= organisedData.MH104.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T20002030'"><%= organisedData.MH104.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T20002030'"><%= organisedData.MH104.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T20302100'"><%= organisedData.MH104.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T20302100'"><%= organisedData.MH104.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH104/T20302100'"><%= organisedData.MH104.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH104/T19001930'"><%= organisedData.MH104.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH104/T19001930'"><%= organisedData.MH104.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH104/T19001930'"><% if (organisedData.MH104.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH104/T19302000'"><%= organisedData.MH104.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH104/T19302000'"><%= organisedData.MH104.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH104/T19302000'"><% if (organisedData.MH104.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH104/T20002030'"><%= organisedData.MH104.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH104/T20002030'"><%= organisedData.MH104.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH104/T20002030'"><% if (organisedData.MH104.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH104/T20302100'"><%= organisedData.MH104.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH104/T20302100'"><%= organisedData.MH104.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH104/T20302100'"><% if (organisedData.MH104.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH105</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T19001930'"><%= organisedData.MH105.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T19001930'"><%= organisedData.MH105.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T19001930'"><%= organisedData.MH105.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T19302000'"><%= organisedData.MH105.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T19302000'"><%= organisedData.MH105.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T19302000'"><%= organisedData.MH105.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T20002030'"><%= organisedData.MH105.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T20002030'"><%= organisedData.MH105.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T20002030'"><%= organisedData.MH105.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T20302100'"><%= organisedData.MH105.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T20302100'"><%= organisedData.MH105.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH105/T20302100'"><%= organisedData.MH105.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH105/T19001930'"><%= organisedData.MH105.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH105/T19001930'"><%= organisedData.MH105.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH105/T19001930'"><% if (organisedData.MH105.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH105/T19302000'"><%= organisedData.MH105.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH105/T19302000'"><%= organisedData.MH105.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH105/T19302000'"><% if (organisedData.MH105.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH105/T20002030'"><%= organisedData.MH105.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH105/T20002030'"><%= organisedData.MH105.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH105/T20002030'"><% if (organisedData.MH105.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH105/T20302100'"><%= organisedData.MH105.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH105/T20302100'"><%= organisedData.MH105.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH105/T20302100'"><% if (organisedData.MH105.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH106</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T19001930'"><%= organisedData.MH106.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T19001930'"><%= organisedData.MH106.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T19001930'"><%= organisedData.MH106.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T19302000'"><%= organisedData.MH106.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T19302000'"><%= organisedData.MH106.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T19302000'"><%= organisedData.MH106.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T20002030'"><%= organisedData.MH106.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T20002030'"><%= organisedData.MH106.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T20002030'"><%= organisedData.MH106.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T20302100'"><%= organisedData.MH106.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T20302100'"><%= organisedData.MH106.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH106/T20302100'"><%= organisedData.MH106.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH106/T19001930'"><%= organisedData.MH106.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH106/T19001930'"><%= organisedData.MH106.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH106/T19001930'"><% if (organisedData.MH106.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH106/T19302000'"><%= organisedData.MH106.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH106/T19302000'"><%= organisedData.MH106.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH106/T19302000'"><% if (organisedData.MH106.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH106/T20002030'"><%= organisedData.MH106.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH106/T20002030'"><%= organisedData.MH106.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH106/T20002030'"><% if (organisedData.MH106.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH106/T20302100'"><%= organisedData.MH106.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH106/T20302100'"><%= organisedData.MH106.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH106/T20302100'"><% if (organisedData.MH106.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH107</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T19001930'"><%= organisedData.MH107.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T19001930'"><%= organisedData.MH107.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T19001930'"><%= organisedData.MH107.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T19302000'"><%= organisedData.MH107.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T19302000'"><%= organisedData.MH107.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T19302000'"><%= organisedData.MH107.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T20002030'"><%= organisedData.MH107.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T20002030'"><%= organisedData.MH107.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T20002030'"><%= organisedData.MH107.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T20302100'"><%= organisedData.MH107.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T20302100'"><%= organisedData.MH107.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH107/T20302100'"><%= organisedData.MH107.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH107/T19001930'"><%= organisedData.MH107.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH107/T19001930'"><%= organisedData.MH107.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH107/T19001930'"><% if (organisedData.MH107.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH107/T19302000'"><%= organisedData.MH107.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH107/T19302000'"><%= organisedData.MH107.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH107/T19302000'"><% if (organisedData.MH107.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH107/T20002030'"><%= organisedData.MH107.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH107/T20002030'"><%= organisedData.MH107.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH107/T20002030'"><% if (organisedData.MH107.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH107/T20302100'"><%= organisedData.MH107.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH107/T20302100'"><%= organisedData.MH107.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH107/T20302100'"><% if (organisedData.MH107.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH109</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T19001930'"><%= organisedData.MH109.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T19001930'"><%= organisedData.MH109.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T19001930'"><%= organisedData.MH109.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T19302000'"><%= organisedData.MH109.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T19302000'"><%= organisedData.MH109.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T19302000'"><%= organisedData.MH109.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T20002030'"><%= organisedData.MH109.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T20002030'"><%= organisedData.MH109.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T20002030'"><%= organisedData.MH109.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T20302100'"><%= organisedData.MH109.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T20302100'"><%= organisedData.MH109.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH109/T20302100'"><%= organisedData.MH109.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH109/T19001930'"><%= organisedData.MH109.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH109/T19001930'"><%= organisedData.MH109.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH109/T19001930'"><% if (organisedData.MH109.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH109/T19302000'"><%= organisedData.MH109.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH109/T19302000'"><%= organisedData.MH109.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH109/T19302000'"><% if (organisedData.MH109.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH109/T20002030'"><%= organisedData.MH109.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH109/T20002030'"><%= organisedData.MH109.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH109/T20002030'"><% if (organisedData.MH109.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH109/T20302100'"><%= organisedData.MH109.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH109/T20302100'"><%= organisedData.MH109.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH109/T20302100'"><% if (organisedData.MH109.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH110</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T19001930'"><%= organisedData.MH110.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T19001930'"><%= organisedData.MH110.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T19001930'"><%= organisedData.MH110.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T19302000'"><%= organisedData.MH110.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T19302000'"><%= organisedData.MH110.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T19302000'"><%= organisedData.MH110.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T20002030'"><%= organisedData.MH110.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T20002030'"><%= organisedData.MH110.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T20002030'"><%= organisedData.MH110.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T20302100'"><%= organisedData.MH110.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T20302100'"><%= organisedData.MH110.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH110/T20302100'"><%= organisedData.MH110.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH110/T19001930'"><%= organisedData.MH110.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH110/T19001930'"><%= organisedData.MH110.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH110/T19001930'"><% if (organisedData.MH110.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH110/T19302000'"><%= organisedData.MH110.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH110/T19302000'"><%= organisedData.MH110.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH110/T19302000'"><% if (organisedData.MH110.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH110/T20002030'"><%= organisedData.MH110.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH110/T20002030'"><%= organisedData.MH110.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH110/T20002030'"><% if (organisedData.MH110.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH110/T20302100'"><%= organisedData.MH110.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH110/T20302100'"><%= organisedData.MH110.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH110/T20302100'"><% if (organisedData.MH110.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH117</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T19001930'"><%= organisedData.MH117.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T19001930'"><%= organisedData.MH117.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T19001930'"><%= organisedData.MH117.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T19302000'"><%= organisedData.MH117.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T19302000'"><%= organisedData.MH117.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T19302000'"><%= organisedData.MH117.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T20002030'"><%= organisedData.MH117.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T20002030'"><%= organisedData.MH117.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T20002030'"><%= organisedData.MH117.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T20302100'"><%= organisedData.MH117.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T20302100'"><%= organisedData.MH117.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH117/T20302100'"><%= organisedData.MH117.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH117/T19001930'"><%= organisedData.MH117.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH117/T19001930'"><%= organisedData.MH117.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH117/T19001930'"><% if (organisedData.MH117.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH117/T19302000'"><%= organisedData.MH117.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH117/T19302000'"><%= organisedData.MH117.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH117/T19302000'"><% if (organisedData.MH117.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH117/T20002030'"><%= organisedData.MH117.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH117/T20002030'"><%= organisedData.MH117.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH117/T20002030'"><% if (organisedData.MH117.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH117/T20302100'"><%= organisedData.MH117.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH117/T20302100'"><%= organisedData.MH117.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH117/T20302100'"><% if (organisedData.MH117.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH118</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T19001930'"><%= organisedData.MH118.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T19001930'"><%= organisedData.MH118.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T19001930'"><%= organisedData.MH118.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T19302000'"><%= organisedData.MH118.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T19302000'"><%= organisedData.MH118.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T19302000'"><%= organisedData.MH118.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T20002030'"><%= organisedData.MH118.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T20002030'"><%= organisedData.MH118.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T20002030'"><%= organisedData.MH118.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T20302100'"><%= organisedData.MH118.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T20302100'"><%= organisedData.MH118.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH118/T20302100'"><%= organisedData.MH118.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH118/T19001930'"><%= organisedData.MH118.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH118/T19001930'"><%= organisedData.MH118.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH118/T19001930'"><% if (organisedData.MH118.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH118/T19302000'"><%= organisedData.MH118.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH118/T19302000'"><%= organisedData.MH118.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH118/T19302000'"><% if (organisedData.MH118.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH118/T20002030'"><%= organisedData.MH118.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH118/T20002030'"><%= organisedData.MH118.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH118/T20002030'"><% if (organisedData.MH118.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH118/T20302100'"><%= organisedData.MH118.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH118/T20302100'"><%= organisedData.MH118.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH118/T20302100'"><% if (organisedData.MH118.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH119</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T19001930'"><%= organisedData.MH119.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T19001930'"><%= organisedData.MH119.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T19001930'"><%= organisedData.MH119.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T19302000'"><%= organisedData.MH119.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T19302000'"><%= organisedData.MH119.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T19302000'"><%= organisedData.MH119.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T20002030'"><%= organisedData.MH119.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T20002030'"><%= organisedData.MH119.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T20002030'"><%= organisedData.MH119.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T20302100'"><%= organisedData.MH119.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T20302100'"><%= organisedData.MH119.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH119/T20302100'"><%= organisedData.MH119.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH119/T19001930'"><%= organisedData.MH119.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH119/T19001930'"><%= organisedData.MH119.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH119/T19001930'"><% if (organisedData.MH119.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH119/T19302000'"><%= organisedData.MH119.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH119/T19302000'"><%= organisedData.MH119.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH119/T19302000'"><% if (organisedData.MH119.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH119/T20002030'"><%= organisedData.MH119.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH119/T20002030'"><%= organisedData.MH119.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH119/T20002030'"><% if (organisedData.MH119.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH119/T20302100'"><%= organisedData.MH119.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH119/T20302100'"><%= organisedData.MH119.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH119/T20302100'"><% if (organisedData.MH119.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
@@ -268,41 +235,35 @@
         <tr>
           <th>MH113</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T19001930'"><%= organisedData.MH113.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T19001930'"><%= organisedData.MH113.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T19001930'"><%= organisedData.MH113.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T19302000'"><%= organisedData.MH113.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T19302000'"><%= organisedData.MH113.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T19302000'"><%= organisedData.MH113.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T20002030'"><%= organisedData.MH113.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T20002030'"><%= organisedData.MH113.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T20002030'"><%= organisedData.MH113.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T20302100'"><%= organisedData.MH113.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T20302100'"><%= organisedData.MH113.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH113/T20302100'"><%= organisedData.MH113.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH113/T19001930'"><%= organisedData.MH113.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH113/T19001930'"><%= organisedData.MH113.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH113/T19001930'"><% if (organisedData.MH113.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH113/T19302000'"><%= organisedData.MH113.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH113/T19302000'"><%= organisedData.MH113.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH113/T19302000'"><% if (organisedData.MH113.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH113/T20002030'"><%= organisedData.MH113.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH113/T20002030'"><%= organisedData.MH113.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH113/T20002030'"><% if (organisedData.MH113.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH113/T20302100'"><%= organisedData.MH113.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH113/T20302100'"><%= organisedData.MH113.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH113/T20302100'"><% if (organisedData.MH113.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
           <th>MH115</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T19001930'"><%= organisedData.MH115.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T19001930'"><%= organisedData.MH115.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T19001930'"><%= organisedData.MH115.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T19302000'"><%= organisedData.MH115.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T19302000'"><%= organisedData.MH115.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T19302000'"><%= organisedData.MH115.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T20002030'"><%= organisedData.MH115.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T20002030'"><%= organisedData.MH115.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T20002030'"><%= organisedData.MH115.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T20302100'"><%= organisedData.MH115.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T20302100'"><%= organisedData.MH115.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH115/T20302100'"><%= organisedData.MH115.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH115/T19001930'"><%= organisedData.MH115.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH115/T19001930'"><%= organisedData.MH115.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH115/T19001930'"><% if (organisedData.MH115.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH115/T19302000'"><%= organisedData.MH115.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH115/T19302000'"><%= organisedData.MH115.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH115/T19302000'"><% if (organisedData.MH115.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH115/T20002030'"><%= organisedData.MH115.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH115/T20002030'"><%= organisedData.MH115.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH115/T20002030'"><% if (organisedData.MH115.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH115/T20302100'"><%= organisedData.MH115.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH115/T20302100'"><%= organisedData.MH115.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH115/T20302100'"><% if (organisedData.MH115.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
         
         <tr>
@@ -312,21 +273,18 @@
         <tr>
           <th>MH111</th>
 
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T19001930'"><%= organisedData.MH111.T19001930.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T19001930'"><%= organisedData.MH111.T19001930.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T19001930'"><%= organisedData.MH111.T19001930.remarkStatus %></td>
-          
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T19302000'"><%= organisedData.MH111.T19302000.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T19302000'"><%= organisedData.MH111.T19302000.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T19302000'"><%= organisedData.MH111.T19302000.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T20002030'"><%= organisedData.MH111.T20002030.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T20002030'"><%= organisedData.MH111.T20002030.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T20002030'"><%= organisedData.MH111.T20002030.remarkStatus %></td>
-
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T20302100'"><%= organisedData.MH111.T20302100.fullName %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T20302100'"><%= organisedData.MH111.T20302100.grade %></td>
-          <td class="cursor-pointer" onclick="window.location.href = '/MH111/T20302100'"><%= organisedData.MH111.T20302100.remarkStatus %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH111/T19001930'"><%= organisedData.MH111.T19001930.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH111/T19001930'"><%= organisedData.MH111.T19001930.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH111/T19001930'"><% if (organisedData.MH111.T19001930.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH111/T19302000'"><%= organisedData.MH111.T19302000.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH111/T19302000'"><%= organisedData.MH111.T19302000.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH111/T19302000'"><% if (organisedData.MH111.T19302000.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH111/T20002030'"><%= organisedData.MH111.T20002030.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH111/T20002030'"><%= organisedData.MH111.T20002030.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH111/T20002030'"><% if (organisedData.MH111.T20002030.remarkStatus) { %> Yes <% } %></td>
+          <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH111/T20302100'"><%= organisedData.MH111.T20302100.fullName %></td>
+          <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH111/T20302100'"><%= organisedData.MH111.T20302100.grade %></td>
+          <td class="border-light-leftt cursor-pointer" onclick="window.location.href = '/MH111/T20302100'"><% if (organisedData.MH111.T20302100.remarkStatus) { %> Yes <% } %></td>
         </tr>
 
       </tbody>

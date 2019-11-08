@@ -421,7 +421,7 @@ app.post("/signup-req", function(req, res){
             } else {
               // Correct password, add to database
               var remarkStatus = false;
-              if (ensembleStatus == true || remark.length >=1) {
+              if (ensembleStatus == "on" || remark.length >= 1) {
                 remarkStatus = true
               }
               if (ensembleStatus == "on") {
