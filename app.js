@@ -27,9 +27,9 @@ const mainCollectionName = "StudentRecords" //collection name to use for student
 
 const openHour = 6 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 30 //the minute when signup opens; 0 <= openMin <= 59
-const closeHour = 23 //the hour when signup closes; 0 <= closeHour <= 23
+const closeHour = 15 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
-const readOnlyHour = 23 //the hour when signup read closes; 0 <= closeHour <= 23
+const readOnlyHour = 21 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
 
 const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
@@ -227,13 +227,13 @@ function dbCheckOccupation(room, time, callBack) {
 }
 
 //insert entry function
-function dbInsert(room, time, fullName, grade, studentID, remarkStatus, remark) {
+function dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark) {
   //connect to mongo client
   MongoClient.connect(url, function(err, db) {
     if (err) console.log(err);
     var dbo = db.db(dbName);
     //create object
-    var myobj = {room: room, time: time, fullName: fullName, grade: grade, studentID: studentID, remarkStatus: remarkStatus, remark: remark}
+    var myobj = {room: room, time: time, fullName: fullName, grade: grade, studentID: studentID, ensembleStatus: ensembleStatus, remarkStatus: remarkStatus, remark: remark}
 
     //insert document
 		dbo.collection(mainCollectionName).insertOne(myobj, function(err, res) {
@@ -298,6 +298,7 @@ function organiseData(list) {
     result[list[i].room][list[i].time].grade = list[i].grade
     result[list[i].room][list[i].time].studentID = list[i].studentID
     result[list[i].room][list[i].time].remarkStatus = list[i].remarkStatus
+    result[list[i].room][list[i].time].ensembleStatus = list[i].ensembleStatus
     result[list[i].room][list[i].time].remark = list[i].remark
   }
   return result;
@@ -351,21 +352,28 @@ app.get("/:room/:time", function(req, res){
         var organisedData = organiseData(result);
 
         if (callBackResult == true) {
+          // If occupied
           if (checkReadStatus() == true) {
-            res.render("info", { room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year })
+            // If occupied and readable
+            res.render("info", {roomOccupationStatus: "Room Occupied", room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, fullName: organisedData[room][time].fullName, grade: organisedData[room][time].grade, studentID: organisedData[room][time].studentID, ensembleStatus: organisedData[room][time].ensembleStatus, remark: organisedData[room][time].remark})
           }
           else {
+            // If occupied and closed
             res.redirect("/")
           }
         }
         else {
+          // If not occupied
           if (checkOpenStatus() == true) {
+            // If not occupied and open
             res.render("signup", { room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year })
           }
           else if (checkReadStatus() == true) {
-            res.render("info", { room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year })
+            // If not occupied and read-only
+            res.render("info", {roomOccupationStatus: "Signup Closed", room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, fullName: organisedData[room][time].fullName, grade: organisedData[room][time].grade, studentID: organisedData[room][time].studentID, ensembleStatus: organisedData[room][time].ensembleStatus, remark: organisedData[room][time].remark})
           }
           else {
+            // If not occupied and closed
             res.redirect("/")
           }
         }
@@ -389,9 +397,9 @@ app.post("/signup-req", function(req, res){
   var grade = req.body.grade
   var studentID = req.body.studentID
   var password = req.body.password
-  var ensembleCheckbox = req.body.ensembleCheckbox
+  var ensembleStatus = req.body.ensembleStatus
   var remark = req.body.remark
-  console.log("[signup-req]request info: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleCheckbox + "|" + remark + "|");
+  console.log("[signup-req]request info: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remark + "|");
 
 });
 
@@ -401,10 +409,10 @@ app.post("/signup-req", function(req, res){
 // console.log("password hash: " + crypto.createHmac('sha256', "string").digest('hex'));
 // console.log(dbCheck("124543"))
 
-// dbInsert("MH103", "T19001930", "Leon Loo", "7", "2220056", true, "Some other names");
-// dbInsert("MH104", "T19001930", "Leon Lou", "8", "2220066", true, "Some other names");
-// dbInsert("MH105", "T19001930", "Leon L", "9", "2220076", true, "Some other names");
-// dbInsert("MH106", "T19302000", "Leon Lu", "10", "2220086", true, "Some other names");
+// dbInsert("MH103", "T19001930", "Leon Loo", "7", "2220056", true, true, "Some other names");
+// dbInsert("MH104", "T19001930", "Leon Lou", "8", "2220066", true, true, "Some other names");
+// dbInsert("MH105", "T20002030", "Leon L", "9", "2220076", true, true, "Some other names");
+// dbInsert("MH106", "T19302000", "Leon Lu", "10", "2220086", true, true, "Some other names");
 
 // dbRemove("Leon Lu", "2220056");
 // dbRemoveAll();

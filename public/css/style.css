@@ -23,6 +23,26 @@ td, th {
   cursor: pointer;
 }
 
+.form-group input:placeholder-shown ~ .control-label {
+  font-size: 0.8rem !important;
+  top: -1rem !important;
+  left: 0 !important;
+}
+
+.form-group textarea:placeholder-shown ~ .control-label {
+  font-size: 0.8rem !important;
+  top: -1rem !important;
+  left: 0 !important;
+}
+/* 
+#form-group-not-required textarea:valid:empty:not(:focus) ~ .control-label {
+  font-size: 1rem;
+  color: gray;
+  top: 0rem;
+  left: 0;
+  color: #b3b3b3;
+} */
+
 /* .test {
   color: #ff6557;
   color: #ff8a46;
@@ -407,7 +427,7 @@ html, body {
 .pure-material-checkbox > input:checked:disabled + span::before,
 .pure-material-checkbox > input:indeterminate:disabled + span::before {
   border-color: transparent;
-  background-color: currentColor;
+  background-color: currentColor; /* change disabled checked colour */
 }
 
 .pure-material-checkbox {

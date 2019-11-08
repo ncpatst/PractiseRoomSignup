@@ -13,7 +13,58 @@
 
   <div class="container">
     <h1 class="mt-4">Practise Room Signup <sup>beta</sup></h1>
-    <h5 class="mt-4">Room occupied by</h5>
+    <h5 class="mt-4"><%= roomOccupationStatus %></h5>
+
+    <form action="">
+
+      <div class="form-group">
+        <input type="text" required="required" placeholder="<%= date %>" readonly disabled/>
+        <label for="input" class="control-label">Date</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" placeholder="<%= room %>" readonly disabled/>
+        <label for="input" class="control-label">Room</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" placeholder="<%= time.substr(1, 2) + ":" + time.substr(3, 2) + "-" + time.substr(5, 2) + ":" + time.substr(7, 2) %>" readonly disabled/>
+        <label for="input" class="control-label">Time</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" placeholder="<%= fullName %>" readonly disabled/>
+        <label for="input" class="control-label">Full Name</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" placeholder="<%= grade %>" readonly disabled/>
+        <label for="input" class="control-label">Grade</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" required="required" placeholder="<%= studentID %>" readonly disabled/>
+        <label for="input" class="control-label">Student ID</label><i class="bar"></i>
+      </div>
+
+      <div class="checkbox">
+        <label class="pure-material-checkbox">
+          <input type="checkbox" name="ensembleCheckbox" disabled <% if (ensembleStatus = true) { %> checked <% } %>>
+          <span>Small Ensemble</span>
+        </label>
+      </div>
+
+      <!-- <div class="form-group">
+        <input type="text" required="required" placeholder="<%= remark %>" readonly disabled/>
+        <label for="input" class="control-label">Remark</label><i class="bar"></i>
+      </div> -->
+
+      <div class="form-group">
+        <textarea id="remark" id="remark" name="remark" placeholder="<%= remark %>" readonly disabled></textarea>
+        <label for="textarea" class="control-label">Remark</label><i class="bar"></i>
+      </div>
+
+    </form>
 
 
     <a class="btn btn-primary mt-4" href="/">Back</a>
@@ -23,8 +74,14 @@
 
     <h3 class="mt-5">Debug info:</h3>
     <p><small class="text-muted">from info.ejs</small></p>
-    <p><small>Data: <%= time %></small></p>
+    <p><small>Data: <%= date %></small></p>
     <p><small>Data: <%= room %></small></p>
+    <p><small>Data: <%= time %></small></p>
+    <p><small>Data: <%= fullName %></small></p>
+    <p><small>Data: <%= grade %></small></p>
+    <p><small>Data: <%= studentID %></small></p>
+    <p><small>Data: <%= ensembleStatus %></small></p>
+    <p><small>Data: <%= remark %></small></p>
 
 
   </div>
