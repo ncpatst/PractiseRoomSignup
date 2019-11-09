@@ -1,6 +1,8 @@
 # PractiseRoomSignup
 A manual-management free signup system utilising crytography
 
+**Beta Phase**
+
 - [x] Basic node app setup
 - [x] Programmer art UI
 - [x] Server-key
@@ -17,6 +19,14 @@ A manual-management free signup system utilising crytography
 - [x] help.ejs
 - [x] message.ejs
 - [x] announcement system
+
+**To be implemented in the official release**
+
+- [ ] Background artwork
+- [ ] Table responsiveness
+- [ ] Font size responsiveness
+- [ ] Recolouring
+- [ ] Layout
 
 
 ![Flow](/PractiseRoomSignupAlphaFlow.png)
