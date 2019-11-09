@@ -8,6 +8,7 @@ const MongoClient = require("mongodb").MongoClient;
 const assert = require("assert");
 const crypto = require("crypto");
 const fs = require("fs");
+const CronJob = require('cron').CronJob;
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -36,6 +37,14 @@ const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22
 const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share the file to anywhere
 
 const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH107", "MH108", "MH110", "MH117", "MH118", "MH119", "MH113", "MH115", "MH111"] //Used for rendering, changing rooms requires changing html and app.js!
+
+// Clear database midnight
+const job = new CronJob('00 00 00 * * *', function() {
+  dbRemoveAll();
+	const d = new Date();
+	console.log('Database cleared at: ', d);
+});
+job.start();
 
 //=================
 //====Functions====
@@ -595,11 +604,11 @@ app.post("/password-req", function(req, res){
 // console.log(checkOpenStatus())
 // console.log(checkReadStatus())
 
-console.log(SHALL24("Leon Looo" + "182937")); //ufq8a0
-console.log(SHALL24("Leuon Lu" + "31415926")); //iamvjl
-console.log(SHALL24("Mr Bright" + "12345678")); //1fuk5s
-console.log(SHALL24("Mr Caliva" + "13514")); //1qa5m7
-console.log(SHALL24("Susie Schneider" + "345624")); //4sd5cc
-console.log(SHALL24("Wilson Tucker" + "647345")); //1sbkhl
-console.log(SHALL24("Jessie Russell" + "3425")); //kj5qu6
-console.log(SHALL24("Gerardo Herrera" + "45864")); //13910j
+// console.log(SHALL24("Leon Looo" + "182937")); //ufq8a0
+// console.log(SHALL24("Leuon Lu" + "31415926")); //iamvjl
+// console.log(SHALL24("Mr Bright" + "12345678")); //1fuk5s
+// console.log(SHALL24("Mr Caliva" + "13514")); //1qa5m7
+// console.log(SHALL24("Susie Schneider" + "345624")); //4sd5cc
+// console.log(SHALL24("Wilson Tucker" + "647345")); //1sbkhl
+// console.log(SHALL24("Jessie Russell" + "3425")); //kj5qu6
+// console.log(SHALL24("Gerardo Herrera" + "45864")); //13910j
