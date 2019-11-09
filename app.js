@@ -26,9 +26,9 @@ const url = "mongodb://localhost:27017"; //url to MongoDB
 const dbName = "PractiseRoomSignup"; //database name to use
 const mainCollectionName = "StudentRecords" //collection name to use for student signups
 
-const openHour = 20 //the hour when signup opens; 0 <= openHour <= 23
+const openHour = 07 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 00 //the minute when signup opens; 0 <= openMin <= 59
-const closeHour = 23 //the hour when signup closes; 0 <= closeHour <= 23
+const closeHour = 16 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
 const readOnlyHour = 23 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
