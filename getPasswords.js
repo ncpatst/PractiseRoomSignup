@@ -10,11 +10,14 @@ const crypto = require("crypto");
 const fs = require("fs");
 const CronJob = require('cron').CronJob;
 
-//============================
-//====Programme Parameters====
-//============================
+
 
 // Get the list from http://beautifytools.com/excel-to-json-converter.php by uploading the xlsx file, only take the value of "Sheet1".
+
+//|================================================================|
+//|====Input Data Table Below======================================|
+//|================================================================|
+
 const fromExcel = [
   {
     "fullName": "Leon Luu",
@@ -26,12 +29,16 @@ const fromExcel = [
   }
 ] 
 
-const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share this file
+//|================================================================|
+//|====Input Data Table Above======================================|
+//|================================================================|
 
-//=================
-//====Functions====
-//=================
-//HASH ALGORITHM
+
+
+// Get key from SERVERKEY.txt, DO NOT share this file
+const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); 
+
+// HASH ALGORITHM
 function SHALL24(string) {
   function convertBase(str, fromBase, toBase) {
 
@@ -99,14 +106,12 @@ function SHALL24(string) {
   return convertBase(crypto.createHmac('sha256', crypto.createHmac('sha256', string + SERVERKEY).digest('hex') + SERVERKEY).digest('hex'), 16, 32).substr(0, 6);
 }
 
-//=================
-//====Programme====
-//=================
-
+// Construct password list
 var passwordList = ""
 for (var i = 0; i < fromExcel.length; i++) {
   var password = SHALL24(fromExcel[i].fullName + fromExcel[i].studentID);
   passwordList = passwordList + password + "\n"
 }
+
 // Copy the console output and past it inside a txt file, then import the txt file into excel.
 console.log(passwordList);
