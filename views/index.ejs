@@ -13,9 +13,14 @@
 
   <div class="container">
     <h1 class="mt-4">Practise Room Sign-up <sup>beta</sup></h1>
-    <p>This form opens from <%= openHour %>:<%= openMin %> to <%= closeHour %>:<%= closeMin %>, click on an empty slot to sign-up.</p>
-    <p>Spot a bug? Please report any issue to <a href="https://github.com/leonluleonlu/PractiseRoomSignup/issues">github.com/leonluleonlu/PractiseRoomSignup/issues</a></p>
-    <table class="mt-4">
+    <p>Sign-up forms open every weekday from <%= openHour %>:<%= openMin %> to <%= closeHour %>:<%= closeMin %>, click on an empty slot to sign-up.</p>
+    <p>Spot a bug? Please report any issue to <a href="https://github.com/leonluleonlu/PractiseRoomSignup/issues">github.com/leonluleonlu/PractiseRoomSignup/issues</a> or email 2220056@ncpachina.org</p>
+    <% if (announcement.length > 0) { %>
+      <h4 class="mt-4">Announcement:</h4>
+      <p style="white-space: pre-wrap;"><%= announcement %></p>
+    <% } %>
+
+    <table class="mt-4 table-responsive-xl table-hover" style="min-width: 100%;">
       <thead>
         <tr>
           <th rowspan="2" class="text-center">Room</th>
@@ -42,7 +47,7 @@
       <tbody>
 
         <tr>
-          <th>MH102</th>
+          <th class="text-center">MH102</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH102/T19001930'"><%= organisedData.MH102.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH102/T19001930'"><%= organisedData.MH102.T19001930.grade %></td>
@@ -59,7 +64,7 @@
         </tr>
         
         <tr>
-          <th>MH103</th>
+          <th class="text-center">MH103</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH103/T19001930'"><%= organisedData.MH103.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH103/T19001930'"><%= organisedData.MH103.T19001930.grade %></td>
@@ -76,7 +81,7 @@
         </tr>
         
         <tr>
-          <th>MH104</th>
+          <th class="text-center">MH104</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH104/T19001930'"><%= organisedData.MH104.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH104/T19001930'"><%= organisedData.MH104.T19001930.grade %></td>
@@ -93,7 +98,7 @@
         </tr>
         
         <tr>
-          <th>MH105</th>
+          <th class="text-center">MH105</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH105/T19001930'"><%= organisedData.MH105.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH105/T19001930'"><%= organisedData.MH105.T19001930.grade %></td>
@@ -110,7 +115,7 @@
         </tr>
         
         <tr>
-          <th>MH106</th>
+          <th class="text-center">MH106</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH106/T19001930'"><%= organisedData.MH106.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH106/T19001930'"><%= organisedData.MH106.T19001930.grade %></td>
@@ -127,7 +132,7 @@
         </tr>
         
         <tr>
-          <th>MH107</th>
+          <th class="text-center">MH107</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH107/T19001930'"><%= organisedData.MH107.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH107/T19001930'"><%= organisedData.MH107.T19001930.grade %></td>
@@ -144,7 +149,7 @@
         </tr>
         
         <tr>
-          <th>MH109</th>
+          <th class="text-center">MH109</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH109/T19001930'"><%= organisedData.MH109.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH109/T19001930'"><%= organisedData.MH109.T19001930.grade %></td>
@@ -161,7 +166,7 @@
         </tr>
         
         <tr>
-          <th>MH110</th>
+          <th class="text-center">MH110</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH110/T19001930'"><%= organisedData.MH110.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH110/T19001930'"><%= organisedData.MH110.T19001930.grade %></td>
@@ -178,7 +183,7 @@
         </tr>
         
         <tr>
-          <th>MH117</th>
+          <th class="text-center">MH117</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH117/T19001930'"><%= organisedData.MH117.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH117/T19001930'"><%= organisedData.MH117.T19001930.grade %></td>
@@ -195,7 +200,7 @@
         </tr>
         
         <tr>
-          <th>MH118</th>
+          <th class="text-center">MH118</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH118/T19001930'"><%= organisedData.MH118.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH118/T19001930'"><%= organisedData.MH118.T19001930.grade %></td>
@@ -212,7 +217,7 @@
         </tr>
         
         <tr>
-          <th>MH119</th>
+          <th class="text-center">MH119</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH119/T19001930'"><%= organisedData.MH119.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH119/T19001930'"><%= organisedData.MH119.T19001930.grade %></td>
@@ -233,7 +238,7 @@
         </tr>
         
         <tr>
-          <th>MH113</th>
+          <th class="text-center">MH113</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH113/T19001930'"><%= organisedData.MH113.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH113/T19001930'"><%= organisedData.MH113.T19001930.grade %></td>
@@ -250,7 +255,7 @@
         </tr>
         
         <tr>
-          <th>MH115</th>
+          <th class="text-center">MH115</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH115/T19001930'"><%= organisedData.MH115.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH115/T19001930'"><%= organisedData.MH115.T19001930.grade %></td>
@@ -271,7 +276,7 @@
         </tr>
 
         <tr>
-          <th>MH111</th>
+          <th class="text-center">MH111</th>
 
           <td class="border-light-right cursor-pointer" onclick="window.location.href = '/MH111/T19001930'"><%= organisedData.MH111.T19001930.fullName %></td>
           <td class="border-light-bothh cursor-pointer" onclick="window.location.href = '/MH111/T19001930'"><%= organisedData.MH111.T19001930.grade %></td>
@@ -296,7 +301,6 @@
 
     <h3 class="mt-5">Debug info:</h3>
     <p><small class="text-muted">from index.ejs</small></p>
-    <p><small>Data = <%= JSON.stringify(roomList) %></small></p>
     <p><small>Data = <%= JSON.stringify(organisedData) %></small></p>
     <p><small>Data = <%= openHour %></small></p>
     <p><small>Data = <%= openMin %></small></p>

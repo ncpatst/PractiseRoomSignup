@@ -54,15 +54,10 @@ td, th {
   color: #b3b3b3;
 } */
 
-/* .test {
-  color: #ff6557;
-  color: #ff8a46;
-} */
-
-canvas {
+/* canvas {
   display: block;
   vertical-align: bottom;
-}
+} */
 
 #particles-js, #particles-js2 {
   position: absolute;

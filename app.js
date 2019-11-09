@@ -42,7 +42,7 @@ const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH107", "MH108",
 const job = new CronJob('00 00 00 * * *', function() {
   dbRemoveAll();
 	const d = new Date();
-	console.log('Database cleared at: ', d);
+	console.log('Database cleared at:', d);
 });
 job.start();
 
@@ -331,7 +331,9 @@ app.get("/", function(req, res){
         if (err) throw err
 
         var organisedData = organiseData(result);
-        res.render("index", {organisedData: organisedData, roomList: roomList, openHour: (openHour < 10 ? "0" : "") + openHour, openMin: (openMin < 10 ? "0" : "") + openMin, closeHour: (closeHour < 10 ? "0" : "") + closeHour, closeMin: (closeMin < 10 ? "0" : "") + closeMin});
+        var announcement = fs.readFileSync("announcement.txt", "utf8")
+
+        res.render("index", {organisedData: organisedData, roomList: roomList, openHour: (openHour < 10 ? "0" : "") + openHour, openMin: (openMin < 10 ? "0" : "") + openMin, closeHour: (closeHour < 10 ? "0" : "") + closeHour, closeMin: (closeMin < 10 ? "0" : "") + closeMin, announcement: announcement });
 
         db.close()
       })
@@ -551,6 +553,77 @@ app.post("/password-req", function(req, res){
 
 });
 
+//Announcement POST
+app.post("/announcement-req", function(req, res){
+  console.log("[announcement-req]announcement post request recieved")
+  //get post info
+  var announcement = req.body.announcement
+  var password = req.body.password
+
+  if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+    res.send("Wrong admin password, don't even try to break the system")
+  } else {
+    fs.writeFile("announcement.txt", announcement, function (err) {
+      console.log("Announcement modified!");
+    });
+    res.send("Announcement midified successfully!")
+  }
+
+});
+
+//Debug POST
+app.post("/debug-req", function(req, res){
+  console.log("[debug-req]debug post request recieved")
+  //get post info
+  var type = req.body.type
+  var room = req.body.room
+  var time = req.body.time
+  var fullName = req.body.fullName
+  var grade = req.body.grade
+  var studentID = req.body.studentID
+  var password = req.body.password
+  var ensembleStatus = req.body.ensembleStatus
+  var remark = req.body.remark
+  var remarkStatus = false;
+  if (ensembleStatus == "on" || remark.length >= 1) {
+    remarkStatus = true
+  }
+  if (ensembleStatus == "on") {
+    ensembleStatus = true
+  }
+
+  if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+    res.send("Wrong admin password, don't even try to break the system")
+  } else {
+    if (type == "lookup") {
+      var lookupPassword = SHALL24(fullName + studentID);
+      res.send("The student's password is " + lookupPassword)
+    }
+    else if (type == "add") {
+      dbCheckOccupation(room, time, function (callBackResult) {
+        if (callBackResult == true) {
+          // If room occupied
+          res.send("The room is occupied")
+        }
+        else {
+          dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark)
+
+          res.send("Emtry added")
+        }
+      })
+    }
+    else if (type == "remove") {
+      dbRemove(fullName, studentID);
+      res.send("Removed " + fullName + " " + studentID)
+    }
+    else if (type == "removeAll") {
+      dbRemoveAll();
+      res.send("Removed everything")
+    }
+
+  }
+});
+
 //=================
 //====Test Zone====
 //=================
@@ -612,3 +685,7 @@ app.post("/password-req", function(req, res){
 // console.log(SHALL24("Wilson Tucker" + "647345")); //1sbkhl
 // console.log(SHALL24("Jessie Russell" + "3425")); //kj5qu6
 // console.log(SHALL24("Gerardo Herrera" + "45864")); //13910j
+
+// fs.writeFile("announcement.txt", "(announcement)", function(err) {
+//   console.log("Announcement modified!");
+// }); 

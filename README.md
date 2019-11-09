@@ -6,16 +6,18 @@ A manual-management free signup system utilising crytography
 - [x] Server-key
 - [x] Custom hash function
 - [x] Database insert and remove function
-- [ ] Scheduled tasks
+- [x] Scheduled tasks
 - [x] Check open status function
-- [ ] requests
+- [x] requests
 - [x] index.ejs
 - [x] signup.ejs
 - [x] info.ejs
-- [ ] admin.ejs
+- [x] admin.ejs
 - [x] cancel.ejs
 - [x] help.ejs
-- [ ] announcement system
+- [ ] message.ejs
+- [ ] closed.ejs
+- [x] announcement system
 
 
 ![Flow](/PractiseRoomSignupAlphaFlow.png)

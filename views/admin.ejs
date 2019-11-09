@@ -40,6 +40,26 @@
 
     </form>
 
+    <h4 class="mt-5">New announcement</h4>
+    <p>Type the announcement here, this will replace the old announcement on the home page.</p>
+
+    <form method="POST" action="/announcement-req">
+
+      <div class="form-group">
+        <textarea id="announcement" id="announcement" name="announcement" required style="height: 150px;"></textarea>
+        <label for="textarea" class="control-label">New Announcement</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="password" required="required" id="password" name="password"/>
+        <label for="input" class="control-label">Admin Password</label><i class="bar"></i>
+      </div>
+
+      <a class="btn btn-primary" href="/">Back</a>
+      <input class="btn btn-primary" type="submit"></input>
+
+    </form>
+
     <h3 class="mt-5">Debug info:</h3>
     <p><small class="text-muted">from admin.ejs</small></p>
 
