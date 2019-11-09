@@ -26,7 +26,7 @@ const url = "mongodb://localhost:27017"; //url to MongoDB
 const dbName = "PractiseRoomSignup"; //database name to use
 const mainCollectionName = "StudentRecords" //collection name to use for student signups
 
-const openHour = 07 //the hour when signup opens; 0 <= openHour <= 23
+const openHour = 20 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 00 //the minute when signup opens; 0 <= openMin <= 59
 const closeHour = 23 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
@@ -321,7 +321,7 @@ app.listen(port, function(){
 app.get("/", function(req, res){
 
   if (checkReadStatus() == false) {
-    res.send("signup closed page")
+    res.render("response", {responseTitle: "Not Yet", responseMessage: "Sign-up opens between " + (openHour < 10 ? "0" : "") + openHour + ":" + (openMin < 10 ? "0" : "") + openMin + " to " + (closeHour < 10 ? "0" : "") + closeHour + ":" + (closeMin < 10 ? "0" : "") + closeMin + ", please come back later.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
   else {
     MongoClient.connect(url, function (err, db) {
@@ -409,26 +409,26 @@ app.post("/signup-req", function(req, res){
 
   if (checkOpenStatus() == false) {
     // if signup is open
-    res.send("sorry, signup closed")
+    res.render("response", {responseTitle: "Not Yet", responseMessage: "Sign-up opens between " + (openHour < 10 ? "0" : "") + openHour + ":" + (openMin < 10 ? "0" : "") + openMin + " to " + (closeHour < 10 ? "0" : "") + closeHour + ":" + (closeMin < 10 ? "0" : "") + closeMin + ", please come back later.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
   else {
     dbCheckStudent(fullName, studentID, function(callBackResult){
       if (callBackResult == true){
         // If student exists
-        res.send("you already signed up")
+        res.render("response", {responseTitle: "ERROR", responseMessage: "You have already signed up, please do not sign-up more than once in the same day.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true,})
       }
       else {
         // If student does not exist, check occupation
         dbCheckOccupation(room, time, function (callBackResult) {
           if (callBackResult == true) {
             // If room occupied
-            res.send("Ooooops, someone signed up for this very room at this very time when you were filling in the form")
+            res.render("response", {responseTitle: "Ooooops", responseMessage: "Someone, somewhere signed up for this very room at this very time when you were filling in the form, please sign-up for another room or another time.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
           }
           else {
             // If room available, check password
             if (SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
               // Wrong password
-              res.send("wrong name or password, please double check and try again")
+              res.render("response", {responseTitle: "Wrong Information", responseMessage: "Your name, student ID and your password do not match, please double check and try again.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
             } else {
               // Correct password, add to database
               var remarkStatus = false;
@@ -443,7 +443,7 @@ app.post("/signup-req", function(req, res){
 
               dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark)
 
-              res.send("signup successful!")
+              res.render("response", {responseTitle: "Signup Successful!", responseMessage: "You will now be able to see your name on the sign-up table, please remember to come to your practise session. \n\nRedirecting in 3 seconds.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 3000, debugStatus: false})
             }
           }
         })
@@ -461,7 +461,7 @@ app.get("/cancel", function(req, res){
     res.render("cancel", {fullName: "", studentID: ""});
   } else {
     //respond with error
-    res.send("you can only submit cancel requests when signup is open")
+    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
 
 });
@@ -479,7 +479,7 @@ app.post("/cancel", function(req, res){
     res.render("cancel", {fullName: fullName, studentID: studentID});
   } else {
     //respond with error
-    res.send("you can only submit cancel requests when signup is open")
+    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
 
 });
@@ -494,7 +494,7 @@ app.post("/cancel-req", function(req, res){
 
   if (checkOpenStatus() == false) {
     // if signup is closed
-    res.send("you can only submit cancel requests when signup is open")
+    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
   else {
     dbCheckStudent(fullName, studentID, function (callBackResult) {
@@ -502,7 +502,7 @@ app.post("/cancel-req", function(req, res){
         // If student exists, check password
         if (SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
           // Wrong password
-          res.send("wrong name, student ID or password, please double check and try again")
+          res.render("response", {responseTitle: "Wrong Information", responseMessage: "The name, student ID and your password do not match, please double check and try again.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
         } else {
           // Correct password, remove entry
 
@@ -510,12 +510,12 @@ app.post("/cancel-req", function(req, res){
 
           dbRemove(fullName, studentID);
 
-          res.send("Cancel successful!")
+          res.render("response", {responseTitle: "Cancel Successful!", responseMessage: "Removing your name from the sign-up table.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: false})
         }
       }
       else {
         // If student does not exists
-        res.send("this student have not signed up, check the name and password you entered")
+        res.render("response", {responseTitle: "ERROR", responseMessage: "This student has not signed up, please check the information you entered.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
       }
     })
 
@@ -545,10 +545,10 @@ app.post("/password-req", function(req, res){
   var password = req.body.password
 
   if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
-    res.send("Wrong admin password, don't even try to break the system")
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
   } else {
     var lookupPassword = SHALL24(fullName + studentID);
-    res.send("The student's password is " + lookupPassword + ", please stop using forgetting password as an excuse to not practise!")
+    res.render("response", {responseTitle: "Password Lookup", responseMessage: "The student's password is " + lookupPassword + ", please stop using FORGETTING PASSWORD as an excuse of NOT PRACTISING!", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: false})
   }
 
 });
@@ -561,12 +561,12 @@ app.post("/announcement-req", function(req, res){
   var password = req.body.password
 
   if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
-    res.send("Wrong admin password, don't even try to break the system")
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
   } else {
     fs.writeFile("announcement.txt", announcement, function (err) {
       console.log("Announcement modified!");
     });
-    res.send("Announcement midified successfully!")
+    res.render("response", {responseTitle: "Success", responseMessage: "The announcement has been modified successfully!", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: false})
   }
 
 });
@@ -689,3 +689,9 @@ app.post("/debug-req", function(req, res){
 // fs.writeFile("announcement.txt", "(announcement)", function(err) {
 //   console.log("Announcement modified!");
 // }); 
+
+
+//Response page test
+// app.get("/response-test", function(req, res){
+//   res.render("response", {responseTitle: "title", responseMessage: "message \n2nd paragraph", linkStatus: true, linkLocation: "/help", linkText: "haha", backStatus: true, redirectDuration: 0})
+// });
