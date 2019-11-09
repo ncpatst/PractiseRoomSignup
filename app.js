@@ -34,7 +34,7 @@ const readOnlyHour = 23 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
 
 const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
-const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share the file to anywhere
+const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share this file
 
 const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH107", "MH108", "MH110", "MH117", "MH118", "MH119", "MH113", "MH115", "MH111"] //Used for rendering, changing rooms requires changing html and app.js!
 
