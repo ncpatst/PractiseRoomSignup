@@ -69,7 +69,7 @@ td, th {
 }
 
 body {
-  background-image: url(../Halloween-BG.jpg);
+  /* background-image: url(../Halloween-BG.jpg); */
   background-size: cover !important;
 	background-repeat: no-repeat !important;
   background-position: center !important;
