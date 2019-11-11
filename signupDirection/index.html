@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>NCPA Sign-up Centre</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:400|Raleway:300);
+    html {
+      font-family: 'Open Sans', Helvetica, arial, sans-serif;
+      text-align: center;
+      background-color: #eeeeee;
+      text-align: center;
+      margin: 0;
+    }
+    html *,
+    html *:before,
+    html *:after {
+      box-sizing: border-box;
+      /* transition: 0.5s ease-in-out; */
+    }
+    .conterer *,
+    .centerer *:before,
+    .centerer *:after, a {
+      box-sizing: border-box;
+      transition: 0.5s ease-in-out;
+    }
+    html i, html em,
+    html b, html strong,
+    html span {
+      transition: none;
+    }
+    body {
+      margin: 0;
+    }
+
+    *:before,
+    *:after {
+      z-index: -1;
+    }
+
+    a {
+      text-decoration: none;
+      line-height: 80px;
+      color: black;
+    }
+
+    .centerer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height:100vh;
+    }
+
+    [class^="btn-"] {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      width: 100%;
+      height: 80px;
+      max-width: 350px;
+      margin: 1rem auto;
+      text-transform: uppercase;
+      border: 1px solid currentColor;
+    }
+
+
+
+
+    .btn-nightstudio {
+      color: #5e35cf;
+    }
+    .btn-nightstudio:before {
+      right: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
+      border-bottom: 80px solid #26469e85;
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+
+    }
+    .btn-nightstudio:after {
+      left: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-120%);
+              transform: translateX(-120%);
+      border-bottom: 80px solid #1e2591;
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .btn-nightstudio:hover {
+      color: #cbccc5;
+    }
+    .btn-nightstudio:hover:before {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+    .btn-nightstudio:hover:after {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+
+
+    .btn-practiseroom {
+      color: #9b8d12;
+    }
+    .btn-practiseroom:before {
+      right: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
+      border-bottom: 80px solid #adab2d86;
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+
+    }
+    .btn-practiseroom:after {
+      left: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-120%);
+              transform: translateX(-120%);
+      border-bottom: 80px solid #a78107;
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .btn-practiseroom:hover {
+      color: #cbccc5;
+    }
+    .btn-practiseroom:hover:before {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+    .btn-practiseroom:hover:after {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+
+
+    .btn-writinglab {
+      color: #7c0f0f;
+    }
+    .btn-writinglab:before {
+      right: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
+      border-bottom: 80px solid #ad3c2d91;
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+
+    }
+    .btn-writinglab:after {
+      left: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-120%);
+              transform: translateX(-120%);
+      border-bottom: 80px solid #941a0a;
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .btn-writinglab:hover {
+      color: #cbccc5;
+    }
+    .btn-writinglab:hover:before {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+    .btn-writinglab:hover:after {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+
+  </style>
+</head>
+<body>
+<div class="centerer">
+  <a class="btn-nightstudio" href="http://192.168.123.27:1769/">Night Studio</a>
+  <a class="btn-practiseroom" href="http://192.168.123.27:1770/">Practise Room</a>
+  <a class="btn-writinglab" href="#">Writing Lab (comming soon)</a>
+</div>
+</body>
+</html>

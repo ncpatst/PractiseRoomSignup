@@ -20,14 +20,16 @@ const CronJob = require('cron').CronJob;
 
 const fromExcel = [
   {
-    "fullName": "Leon Luu",
-    "studentID": "2973824"
+      "Name": "Leon LUU",
+      "fullName": "Leon Luu",
+      "studentID": "981273"
   },
   {
-    "fullName": "Caliva",
-    "studentID": "834921392130942531282138"
+      "Name": "Leoon Lu",
+      "fullName": "Leoon Lu",
+      "studentID": "212394"
   }
-] 
+]
 
 //|================================================================|
 //|====Input Data Table Above======================================|
