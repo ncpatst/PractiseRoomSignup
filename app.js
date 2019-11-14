@@ -321,7 +321,7 @@ app.listen(port, function(){
 app.get("/", function(req, res){
 
   if (checkReadStatus() == false) {
-    res.render("response", {responseTitle: "Not Yet", responseMessage: "Sign-up opens between " + (openHour < 10 ? "0" : "") + openHour + ":" + (openMin < 10 ? "0" : "") + openMin + " to " + (closeHour < 10 ? "0" : "") + closeHour + ":" + (closeMin < 10 ? "0" : "") + closeMin + ", please come back later.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "Not Yet", responseMessage: "Sign-up opens between " + (openHour < 10 ? "0" : "") + openHour + ":" + (openMin < 10 ? "0" : "") + openMin + " to " + (closeHour < 10 ? "0" : "") + closeHour + ":" + (closeMin < 10 ? "0" : "") + closeMin + ", please come back later.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
   else {
     MongoClient.connect(url, function (err, db) {
@@ -409,26 +409,26 @@ app.post("/signup-req", function(req, res){
 
   if (checkOpenStatus() == false) {
     // if signup is open
-    res.render("response", {responseTitle: "Not Yet", responseMessage: "Sign-up opens between " + (openHour < 10 ? "0" : "") + openHour + ":" + (openMin < 10 ? "0" : "") + openMin + " to " + (closeHour < 10 ? "0" : "") + closeHour + ":" + (closeMin < 10 ? "0" : "") + closeMin + ", please come back later.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "Not Yet", responseMessage: "Sign-up opens between " + (openHour < 10 ? "0" : "") + openHour + ":" + (openMin < 10 ? "0" : "") + openMin + " to " + (closeHour < 10 ? "0" : "") + closeHour + ":" + (closeMin < 10 ? "0" : "") + closeMin + ", please come back later.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
   else {
     dbCheckStudent(fullName, studentID, function(callBackResult){
       if (callBackResult == true){
         // If student exists
-        res.render("response", {responseTitle: "ERROR", responseMessage: "You have already signed up, please do not sign-up more than once in the same day.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true,})
+        res.render("response", {responseTitle: "ERROR", responseMessage: "You have already signed up, please do not sign-up more than once in the same day.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true,})
       }
       else {
         // If student does not exist, check occupation
         dbCheckOccupation(room, time, function (callBackResult) {
           if (callBackResult == true) {
             // If room occupied
-            res.render("response", {responseTitle: "Ooooops", responseMessage: "Someone, somewhere signed up for this very room at this very time when you were filling in the form, please sign-up for another room or another time.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+            res.render("response", {responseTitle: "Ooooops", responseMessage: "Someone, somewhere signed up for this very room at this very time when you were filling in the form, please sign-up for another room or another time.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
           }
           else {
             // If room available, check password
             if (SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
               // Wrong password
-              res.render("response", {responseTitle: "Wrong Information", responseMessage: "Your name, student ID and your password do not match, please double check and try again.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+              res.render("response", {responseTitle: "Wrong Information", responseMessage: "Your name, student ID and your password do not match, please double check and try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
             } else {
               // Correct password, add to database
               var remarkStatus = false;
@@ -443,7 +443,7 @@ app.post("/signup-req", function(req, res){
 
               dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark)
 
-              res.render("response", {responseTitle: "Signup Successful!", responseMessage: "You will now be able to see your name on the sign-up table, please remember to come to your practise session. \n\nRedirecting in 3 seconds.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 3000, debugStatus: false})
+              res.render("response", {responseTitle: "Signup Successful!", responseMessage: "You will now be able to see your name on the sign-up table, please remember to come to your practise session. \n\nRedirecting in 3 seconds.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 3000, debugStatus: false})
             }
           }
         })
@@ -461,7 +461,7 @@ app.get("/cancel", function(req, res){
     res.render("cancel", {fullName: "", studentID: ""});
   } else {
     //respond with error
-    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
 
 });
@@ -479,7 +479,7 @@ app.post("/cancel", function(req, res){
     res.render("cancel", {fullName: fullName, studentID: studentID});
   } else {
     //respond with error
-    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
 
 });
@@ -494,7 +494,7 @@ app.post("/cancel-req", function(req, res){
 
   if (checkOpenStatus() == false) {
     // if signup is closed
-    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
   else {
     dbCheckStudent(fullName, studentID, function (callBackResult) {
@@ -502,7 +502,7 @@ app.post("/cancel-req", function(req, res){
         // If student exists, check password
         if (SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
           // Wrong password
-          res.render("response", {responseTitle: "Wrong Information", responseMessage: "The name, student ID and your password do not match, please double check and try again.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+          res.render("response", {responseTitle: "Wrong Information", responseMessage: "The name, student ID and your password do not match, please double check and try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
         } else {
           // Correct password, remove entry
 
@@ -510,12 +510,12 @@ app.post("/cancel-req", function(req, res){
 
           dbRemove(fullName, studentID);
 
-          res.render("response", {responseTitle: "Cancel Successful!", responseMessage: "Removing your name from the sign-up table.", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: false})
+          res.render("response", {responseTitle: "Cancel Successful!", responseMessage: "Removing your name from the sign-up table.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: false})
         }
       }
       else {
         // If student does not exists
-        res.render("response", {responseTitle: "ERROR", responseMessage: "This student has not signed up, please check the information you entered.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+        res.render("response", {responseTitle: "ERROR", responseMessage: "This student has not signed up, please check the information you entered.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
       }
     })
 
@@ -545,10 +545,10 @@ app.post("/password-req", function(req, res){
   var password = req.body.password
 
   if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
-    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
   } else {
     var lookupPassword = SHALL24(fullName + studentID);
-    res.render("response", {responseTitle: "Password Lookup", responseMessage: "The student's password is " + lookupPassword + ", please stop using FORGETTING PASSWORD as an excuse of NOT PRACTISING!", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: false})
+    res.render("response", {responseTitle: "Password Lookup", responseMessage: "The student's password is " + lookupPassword + ", please stop using FORGETTING PASSWORD as an excuse of NOT PRACTISING!", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: false})
   }
 
 });
@@ -561,12 +561,12 @@ app.post("/announcement-req", function(req, res){
   var password = req.body.password
 
   if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
-    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: "/", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
   } else {
     fs.writeFile("announcement.txt", announcement, function (err) {
       console.log("Announcement modified!");
     });
-    res.render("response", {responseTitle: "Success", responseMessage: "The announcement has been modified successfully!", linkStatus: true, linkLocation: "/", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: false})
+    res.render("response", {responseTitle: "Success", responseMessage: "The announcement has been modified successfully!", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: false})
   }
 
 });
