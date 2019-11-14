@@ -12,11 +12,16 @@ const CronJob = require('cron').CronJob;
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-//disable caching
-app.use((req, res, next) => {
-  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
-  next()
-})
+//caching method
+
+// app.use((req, res, next) => {
+//   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
+//   next()
+// })
+
+app.set('etag', false)
+app.disable('view cache');
+
 
 //============================
 //====Programme Parameters====
