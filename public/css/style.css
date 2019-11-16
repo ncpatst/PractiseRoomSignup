@@ -34,6 +34,11 @@ td, th {
   cursor: pointer;
 }
 
+.text-muted{
+  color: #b3b3b3 !important;
+}
+
+
 .form-group input:placeholder-shown ~ .control-label {
   font-size: 0.8rem !important;
   top: -1rem !important;

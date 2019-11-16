@@ -14,7 +14,7 @@
 
   <div class="container">
     <h1 class="mt-4">Practise Room Sign-up <sup>beta</sup></h1>
-    <p>Sign-up forms open every weekday from <%= openHour %>:<%= openMin %> to <%= closeHour %>:<%= closeMin %>, click on an empty slot to sign-up.</p>
+    <p>Sign-up forms open every weekday from <%= openHour %>:<%= openMin %> to <%= closeHour %>:<%= closeMin %>, click on an empty slot to sign-up. For further instruction, visit the <a href="help">help</a> page.</p>
     <p>Spot a bug? Please report any issue to <a href="https://github.com/leonluleonlu/PractiseRoomSignup/issues">github.com/leonluleonlu/PractiseRoomSignup/issues</a> or email 2220056@ncpachina.org</p>
     <% if (announcement.length > 0) { %>
       <h4 class="mt-4">Announcement:</h4>
@@ -300,13 +300,13 @@
     <a class="btn btn-primary mt-5" href="help">Help</a>
     <a class="btn btn-primary mt-5" href="admin">Admin</a>
 
-    <h3 class="mt-5">Debug info:</h3>
+    <h3 class="mt-5 text-muted">Debug info:</h3>
     <p><small class="text-muted">from index.ejs</small></p>
-    <p><small>Data = <%= JSON.stringify(organisedData) %></small></p>
-    <p><small>Data = <%= openHour %></small></p>
-    <p><small>Data = <%= openMin %></small></p>
-    <p><small>Data = <%= closeHour %></small></p>
-    <p><small>Data = <%= closeMin %></small></p>
+    <p><small class="text-muted">Data = <%= JSON.stringify(organisedData) %></small></p>
+    <p><small class="text-muted">Data = <%= openHour %></small></p>
+    <p><small class="text-muted">Data = <%= openMin %></small></p>
+    <p><small class="text-muted">Data = <%= closeHour %></small></p>
+    <p><small class="text-muted">Data = <%= closeMin %></small></p>
 
 
   </div>
