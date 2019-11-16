@@ -13,14 +13,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 //caching method
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
+  next()
+})
 
-// app.use((req, res, next) => {
-//   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
-//   next()
-// })
-
-app.set('etag', false)
-app.disable('view cache');
+// app.set('etag', false)
+// app.disable('view cache');
 
 
 //============================
@@ -427,7 +426,7 @@ app.post("/signup-req", function(req, res){
         dbCheckOccupation(room, time, function (callBackResult) {
           if (callBackResult == true) {
             // If room occupied
-            res.render("response", {responseTitle: "Ooooops", responseMessage: "Someone, somewhere signed up for this very room at this very time when you were filling in the form, please sign-up for another room or another time.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+            res.render("response", {responseTitle: "Ooooops", responseMessage: "Someone, somewhere signed up for this very room at this very time when you were filling in the form, please select another room or another time and try again.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
           }
           else {
             // If room available, check password
@@ -448,7 +447,7 @@ app.post("/signup-req", function(req, res){
 
               dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark)
 
-              res.render("response", {responseTitle: "Signup Successful!", responseMessage: "You will now be able to see your name on the sign-up table, please remember to come to your practise session. \n\nRedirecting in 3 seconds.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 3000, debugStatus: false})
+              res.render("response", {responseTitle: "Sign-up Successful!", responseMessage: "You will now be able to see your name on the sign-up table, please remember to come to your practise session. \n\nRedirecting in 3 seconds.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 3000, debugStatus: false})
             }
           }
         })
