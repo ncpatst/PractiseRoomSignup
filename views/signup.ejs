@@ -83,7 +83,7 @@
 
       <div class="checkbox">
         <label class="pure-material-checkbox">
-          <input type="checkbox" name="ensembleStatus">
+          <input type="checkbox" name="ensembleStatus" id="ensembleStatus">
           <span>Small Ensemble (If checked, please type the names of all the people coming to this practise session in the remark text area)</span>
         </label>
       </div>
@@ -93,7 +93,7 @@
         <label for="input" class="control-label">Remark (Optional)</label><i class="bar"></i>
       </div>
 
-      <div class="g-recaptcha mb-3" data-sitekey="6LeUPMMUAAAAAIzhwCcDw5Tqfw0cvpVyp66TCCW8"></div>
+      <!-- <div class="g-recaptcha mb-3" data-sitekey="6LeUPMMUAAAAAIzhwCcDw5Tqfw0cvpVyp66TCCW8"></div> -->
 
       <!-- <div class="form-group" id="form-group-not-required">
         <textarea id="remark" id="remark" name="remark"></textarea>
@@ -102,7 +102,7 @@
 
       <a class="btn btn-primary" href="..">Back</a>
       <a class="btn btn-primary" href="../help">Help</a>
-      <input class="btn btn-primary" onclick="document.getElementById('remark').required = false" type="submit"></input>
+      <input class="btn btn-primary" onclick="if(document.getElementById('ensembleStatus').checked == false) {document.getElementById('remark').required = false} " type="submit"></input>
 
     </form>
 
