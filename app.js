@@ -469,7 +469,7 @@ app.post("/signup-req", function(req, res){
                 ensembleStatus = true
               }
 
-              console.log(("[Signup-req] Adding to database: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remarkStatus + "|" + remark + "|").bold.brightBlue);
+              console.log(("[Signup-req] Adding to database: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remarkStatus + "|" + remark + "|").magenta);
 
               dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark)
 
@@ -539,7 +539,7 @@ app.post("/cancel-req", function(req, res){
         } else {
           // Correct password, remove entry
 
-          console.log(("[Cancel-req] Removing from database: " + "|" + fullName + "|" + studentID + "|" + password + "|").bold.brightBlue);
+          console.log(("[Cancel-req] Removing from database: " + "|" + fullName + "|" + studentID + "|" + password + "|").magenta);
 
           dbRemove(fullName, studentID);
 
@@ -586,7 +586,7 @@ app.post("/password-req", function(req, res){
   } else {
     var lookupPassword = SHALL24(fullName + studentID);
     res.render("response", {responseTitle: "Password Lookup", responseMessage: "The student's password is " + lookupPassword + ", please stop using FORGETTING PASSWORD as an excuse of NOT PRACTISING!", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: false})
-    console.log(("[Password-lookup] Password sent").bold.brightBlue)
+    console.log(("[Password-lookup] Password sent").magenta)
   }
 
 });
@@ -605,7 +605,7 @@ app.post("/announcement-req", function(req, res){
     fs.writeFile("announcement.txt", announcement, function (err) {
     });
     res.render("response", {responseTitle: "Success", responseMessage: "The announcement has been modified successfully!", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: false})
-    console.log(("[Announcement] Ammouncement added").bold.brightBlue)
+    console.log(("[Announcement] Ammouncement added").magenta)
   }
 
 });
