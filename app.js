@@ -424,14 +424,14 @@ app.post('/reCaptchaTest',function(req,res){
 //Signup POST
 app.post("/signup-req", function(req, res){
   //get post info
-  var room = req.body.room
-  var time = req.body.time
-  var fullName = req.body.fullName
-  var grade = req.body.grade
-  var studentID = req.body.studentID
-  var password = req.body.password
-  var ensembleStatus = req.body.ensembleStatus
-  var remark = req.body.remark
+  var room = "" + req.body.room
+  var time = "" + req.body.time
+  var fullName = "" + req.body.fullName
+  var grade = "" + req.body.grade
+  var studentID = "" + req.body.studentID
+  var password = "" + req.body.password
+  var ensembleStatus = "" + req.body.ensembleStatus
+  var remark = "" + req.body.remark
   console.log(("[POST] Requesting sign-up with information: |" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remark + "|").green)
 
   if (checkOpenStatus() == false) {
@@ -487,7 +487,7 @@ app.post("/signup-req", function(req, res){
 app.get("/cancel", function(req, res){
   console.log(("[GET] Getting cancel page directly").yellow)
   //check if open
-  if (checkOpenStatus() == true) {
+  if (checkReadStatus() == true) {
     //respond with a unfilled form
     res.render("cancel", {fullName: "", studentID: ""});
   } else {
@@ -505,7 +505,7 @@ app.post("/cancel", function(req, res){
   console.log(("[POST] Requesting cancel page with information: |" + fullName + "|" + studentID + "|").green)
   
   //check if open
-  if (checkOpenStatus() == true) {
+  if (checkReadStatus() == true) {
     //respond with a unfilled form
     res.render("cancel", {fullName: fullName, studentID: studentID});
   } else {
@@ -526,7 +526,35 @@ app.post("/cancel-req", function(req, res){
 
   if (checkOpenStatus() == false) {
     // if signup is closed
-    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+    if (checkReadStatus() == true) {
+      // if signup is read-only, only teachers can cancel
+      dbCheckStudent(fullName, studentID, function (callBackResult) {
+        if (callBackResult == true) {
+          // If student exists, check password
+          if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+            // Wrong password
+            res.render("response", {responseTitle: "Wrong Information", responseMessage: "The name, student ID or admin password is incorrect, please double check and try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+            console.log(("[ERR] Wrong password").bold.red)
+          } else {
+            // Correct password, remove entry
+  
+            console.log(("[Cancel-req] Removing from database: " + "|" + fullName + "|" + studentID + "|" + password + "|").magenta);
+  
+            dbRemove(fullName, studentID);
+  
+            res.render("response", {responseTitle: "Cancel Successful!", responseMessage: "Removing your name from the sign-up table.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: false})
+          }
+        }
+        else {
+          // If student does not exists
+          res.render("response", {responseTitle: "ERROR", responseMessage: "This student has not signed up, please check the information you entered.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+          console.log(("[ERR] Student does not exist").bold.red)
+        }
+      })
+    }
+    else {
+      res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+    }
   }
   else {
     dbCheckStudent(fullName, studentID, function (callBackResult) {
