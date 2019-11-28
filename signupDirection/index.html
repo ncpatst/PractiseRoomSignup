@@ -22,7 +22,7 @@
     .centerer *:before,
     .centerer *:after, a {
       box-sizing: border-box;
-      transition: 0.5s ease-in-out;
+      transition: 0.55s ease-in-out;
     }
     html i, html em,
     html b, html strong,
@@ -56,7 +56,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      min-height:100vh;
+      min-height: 100vh;
     }
 
     [class^="btn-"] {
@@ -65,16 +65,16 @@
       overflow: hidden;
       width: 100%;
       height: 80px;
-      max-width: 350px;
-      margin: 1rem auto;
+      max-width: 400px;
+      margin: 1.2rem auto;
       text-transform: uppercase;
       border: 1px solid currentColor;
     }
 
-    p {
+    #copyright {
       font-family: "Raleway";
       margin-top: 35px;
-      margin-bottom: 15px;
+      margin-bottom: 0px;
       color: rgb(56, 56, 56);
     }
 
@@ -100,8 +100,8 @@
     .btn-nightstudio:after {
       left: -50px;
       border-right: 50px solid transparent;
-      -webkit-transform: translateX(-120%);
-              transform: translateX(-120%);
+      -webkit-transform: translateX(-110%);
+              transform: translateX(-110%);
       border-bottom: 80px solid #1e2591;
       content: '';
       position: absolute;
@@ -117,6 +117,47 @@
               transform: translateX(50px);
     }
     .btn-nightstudio:hover:after {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+
+
+    .btn-apnightstudio {
+      color: #27881e;
+    }
+    .btn-apnightstudio:before {
+      right: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
+      border-bottom: 80px solid #20864285;
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+
+    }
+    .btn-apnightstudio:after {
+      left: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-110%);
+              transform: translateX(-110%);
+      border-bottom: 80px solid #176614;
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .btn-apnightstudio:hover {
+      color: #cbccc5;
+    }
+    .btn-apnightstudio:hover:before {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+    .btn-apnightstudio:hover:after {
       -webkit-transform: translateX(50px);
               transform: translateX(50px);
     }
@@ -141,8 +182,8 @@
     .btn-practiseroom:after {
       left: -50px;
       border-right: 50px solid transparent;
-      -webkit-transform: translateX(-120%);
-              transform: translateX(-120%);
+      -webkit-transform: translateX(-110%);
+              transform: translateX(-110%);
       border-bottom: 80px solid #a78107;
       content: '';
       position: absolute;
@@ -182,8 +223,8 @@
     .btn-writinglab:after {
       left: -50px;
       border-right: 50px solid transparent;
-      -webkit-transform: translateX(-120%);
-              transform: translateX(-120%);
+      -webkit-transform: translateX(-110%);
+              transform: translateX(-110%);
       border-bottom: 80px solid #941a0a;
       content: '';
       position: absolute;
@@ -202,16 +243,92 @@
       -webkit-transform: translateX(50px);
               transform: translateX(50px);
     }
+    
+
+
+    .inner {
+      /* background: rgba(130, 157, 218, 0.678); */
+      height: auto;
+      overflow-y: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .left {
+      /* background: rgba(94, 94, 228, 0.39); */
+      width: 400px;
+      height: auto;
+      float: left;
+      margin-right: 2.5em;
+    }
+
+    @media(max-width: 900px) {
+      .right {
+        display: none;
+      }
+    }
+
+    .right {
+      /* background: rgba(110, 110, 209, 0.363); */
+      width: 400px;
+      height: auto;
+      float: left;
+    }
+
+    .image-div {
+      height: 479px;
+      padding: 1px;
+      border: rgb(155, 155, 155) solid 1px;
+      transition: 0.55s ease-in-out;
+      margin-top: 4px;
+    }
+
+    .image-div:hover {
+      border: #cbccc5 solid 1px;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    #from {
+      font-size: 0.8rem;
+      font-family: "Raleway";
+      margin-top: 2px;
+      margin-bottom: 0px;
+      color: rgb(160, 160, 160);
+      text-align: left;
+    }
 
   </style>
 </head>
 <body>
 <div class="centerer">
-  <h1>NCPA Sign-up Centre</h1>
-  <a class="btn-nightstudio" href="nightstudio">Night Studio</a>
-  <a class="btn-practiseroom" href="http://192.168.123.27:1770/">Practice Room</a>
-  <a class="btn-writinglab" href="writinglab">Writing Lab (comming soon)</a>
-  <p>© 2019 TST</p>
+  <div class="inner">
+
+    <div class="left">
+      <h1>NCPA Sign-up Centre</h1>
+      <a class="btn-nightstudio" href="nightstudio">Night Studio</a>
+      <a class="btn-apnightstudio" href="ap">AP Night Studio</a>
+      <a class="btn-practiseroom" href="practiceroom">Practice Room</a>
+      <a class="btn-writinglab" href="writinglab">Writing Centre</a>
+      <p id="copyright">© 2019 Tech Solution Team</p>
+    </div>
+
+    <div class="right" style="display: none_;">
+      <div class="image-div">
+        <img src="http://placehold.jp/500x600.png" alt="">
+      </div>
+      <p id="from">*Announcement from the Student Government</p>
+    </div>
+
+  </div>
+
+
+
 </div>
 </body>
 </html>
