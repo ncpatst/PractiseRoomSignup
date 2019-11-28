@@ -307,6 +307,7 @@
 </head>
 <body>
 <div class="centerer">
+
   <div class="inner">
 
     <div class="left">
@@ -320,15 +321,31 @@
 
     <div class="right" style="display: none_;">
       <div class="image-div">
-        <img src="http://placehold.jp/500x600.png" alt="">
+        <img id="poster-image" src="" alt="">
       </div>
-      <p id="from">*Announcement from the Student Government</p>
+      <p id="from">*Announcement authorised by the Student Government</p>
     </div>
 
   </div>
 
-
-
 </div>
+
+
+<script>
+  var maxPoster = 3;
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
+  var image = document.getElementById("poster-image");
+  console.log(image);
+
+  image.src = ((getRandomInt(maxPoster) + 1) + ".png")
+
+
+</script>
+
+
 </body>
 </html>
