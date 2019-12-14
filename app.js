@@ -403,22 +403,7 @@ app.get("/:room/:time", function(req, res){
 })
 
 app.post('/reCaptchaTest',function(req,res){
-  // g-recaptcha-response is the key that browser will generate upon form submit.
-  // if its blank or null means user has not selected the captcha, so return the error.
-  if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
-    return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
-  }
-  // req.connection.remoteAddress will provide IP address of connected user.
-  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + reCaptchaSecretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
-  // Hitting GET request to the URL, Google will respond with success or error scenario.
-  request(verificationUrl,function(error,response,body) {
-    body = JSON.parse(body);
-    // Success will be true or false depending upon captcha validation.
-    if(body.success !== undefined && !body.success) {
-      return res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"});
-    }
-    res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
-  });
+
 });
 
 //Signup POST
@@ -434,52 +419,81 @@ app.post("/signup-req", function(req, res){
   var remark = "" + req.body.remark
   console.log(("[POST] Requesting sign-up with information: |" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remark + "|").green)
 
-  if (checkOpenStatus() == false) {
-    // if signup is open
-    res.render("response", {responseTitle: "Not Yet", responseMessage: "Sign-up opens between " + (openHour < 10 ? "0" : "") + openHour + ":" + (openMin < 10 ? "0" : "") + openMin + " to " + (closeHour < 10 ? "0" : "") + closeHour + ":" + (closeMin < 10 ? "0" : "") + closeMin + ", please come back later.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+  // g-recaptcha-response is the key that browser will generate upon form submit.
+  // if its blank or null means user has not selected the captcha, so return the error.
+  if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+    // response on missing captcha
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Please complete the captcha to proceed.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    console.log(("[ERR] Missing Captcha").bold.red);
+    return
   }
-  else {
-    dbCheckStudent(fullName, studentID, function(callBackResult){
-      if (callBackResult == true){
-        // If student exists
-        res.render("response", {responseTitle: "ERROR", responseMessage: "You have already signed up, please do not sign-up more than once in the same day.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true,})
-        console.log(("[ERR] Student already signed up").bold.red)
-      }
-      else {
-        // If student does not exist, check occupation
-        dbCheckOccupation(room, time, function (callBackResult) {
-          if (callBackResult == true) {
-            // If room occupied
-            res.render("response", {responseTitle: "Ooooops", responseMessage: "Someone, somewhere signed up for this very room at this very time when you were filling in the form, please select another room or another time and try again.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
-            console.log(("[ERR] Room crash").bold.red)
-          }
-          else {
-            // If room available, check password
-            if (SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
-              // Wrong password
-              res.render("response", {responseTitle: "Wrong Information", responseMessage: "Your name, student ID and your password do not match, please double check and try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
-              console.log(("[ERR] Wrong password").bold.red)
-            } else {
-              // Correct password, add to database
-              var remarkStatus = false;
-              if (ensembleStatus == "on" || remark.length >= 1) {
-                remarkStatus = true
-              }
-              if (ensembleStatus == "on") {
-                ensembleStatus = true
-              }
 
-              console.log(("[Signup-req] Adding to database: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remarkStatus + "|" + remark + "|").magenta);
+  // req.connection.remoteAddress will provide IP address of connected user.
+  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + reCaptchaSecretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+  // Hitting GET request to the URL, Google will respond with success or error scenario.
+  request(verificationUrl,function(error,response,body) {
+    body = JSON.parse(body);
+    // Success will be true or false depending upon captcha validation.
+    if(body.success !== undefined && !body.success) {
+      //Upon false validation
+      res.render("response", {responseTitle: "ERROR", responseMessage: "Suspecious traffic, please try again later.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+      console.log(("[ERR] Wrong Captcha").bold.red)
+      return
+    }
+    //Upon true validation
 
-              dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark)
 
-              res.render("response", {responseTitle: "Sign-up Successful!", responseMessage: "You will now be able to see your name on the sign-up table, please remember to come to your practise session. \n\nRedirecting in 3 seconds.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 3000, debugStatus: false})
+    if (checkOpenStatus() == false) {
+      // if signup is open
+      res.render("response", {responseTitle: "Not Yet", responseMessage: "Sign-up opens between " + (openHour < 10 ? "0" : "") + openHour + ":" + (openMin < 10 ? "0" : "") + openMin + " to " + (closeHour < 10 ? "0" : "") + closeHour + ":" + (closeMin < 10 ? "0" : "") + closeMin + ", please come back later.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+    }
+    else {
+      dbCheckStudent(fullName, studentID, function(callBackResult){
+        if (callBackResult == true){
+          // If student exists
+          res.render("response", {responseTitle: "ERROR", responseMessage: "You have already signed up, please do not sign-up more than once in the same day.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true,})
+          console.log(("[ERR] Student already signed up").bold.red)
+        }
+        else {
+          // If student does not exist, check occupation
+          dbCheckOccupation(room, time, function (callBackResult) {
+            if (callBackResult == true) {
+              // If room occupied
+              res.render("response", {responseTitle: "Ooooops", responseMessage: "Someone, somewhere signed up for this very room at this very time when you were filling in the form, please select another room or another time and try again.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+              console.log(("[ERR] Room crash").bold.red)
             }
-          }
-        })
-      }
-    })
-  }
+            else {
+              // If room available, check password
+              if (SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+                // Wrong password
+                res.render("response", {responseTitle: "Wrong Information", responseMessage: "Your name, student ID and your password do not match, please double check and try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+                console.log(("[ERR] Wrong password").bold.red)
+              } else {
+                // Correct password, add to database
+                var remarkStatus = false;
+                if (ensembleStatus == "on" || remark.length >= 1) {
+                  remarkStatus = true
+                }
+                if (ensembleStatus == "on") {
+                  ensembleStatus = true
+                }
+
+                console.log(("[Signup-req] Adding to database: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remarkStatus + "|" + remark + "|").magenta);
+
+                dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark)
+
+                res.render("response", {responseTitle: "Sign-up Successful!", responseMessage: "You will now be able to see your name on the sign-up table, please remember to come to your practise session. \n\nRedirecting in 3 seconds.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 3000, debugStatus: false})
+              }
+            }
+          })
+        }
+      })
+    }
+
+  });
+
+
+
 
 });
 
