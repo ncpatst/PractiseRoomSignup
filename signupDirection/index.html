@@ -323,7 +323,7 @@
       <div class="image-div">
         <img id="poster-image" src="" alt="">
       </div>
-      <p id="from">*Announcement authorised by the Student Government</p>
+      <p id="from">*Promotion authorised by the Student Government</p>
     </div>
 
   </div>
@@ -338,10 +338,15 @@
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  var image = document.getElementById("poster-image");
-  console.log(image);
+  function changeImage() {
+    var image = document.getElementById("poster-image");
+    console.log(image);
+    image.src = ((getRandomInt(maxPoster) + 1) + ".png")  
+  }
 
-  image.src = ((getRandomInt(maxPoster) + 1) + ".png")
+changeImage()
+
+setInterval(function() {console.log("interval"); changeImage()}, 6000);
 
 
 </script>

@@ -592,6 +592,14 @@ app.get("/help", function(req, res){
 
 });
 
+//Help page
+app.get("/issues", function(req, res){
+  console.log(("[GET] Getting issues page").yellow)
+
+  res.render("issues")
+
+});
+
 //Admin page
 app.get("/admin", function(req, res){
   console.log(("[GET] Getting admin page").yellow)
