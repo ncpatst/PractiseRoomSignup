@@ -34,7 +34,7 @@ const mainCollectionName = "StudentRecords" //collection name to use for student
 
 const openHour = 07 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 00 //the minute when signup opens; 0 <= openMin <= 59
-const closeHour = 20 //the hour when signup closes; 0 <= closeHour <= 23
+const closeHour = 22 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
 const readOnlyHour = 22 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
@@ -51,12 +51,17 @@ total: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 signup: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
 cancel: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 };
+var percentageFullData = {
+percentage: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+};
+var percentageCountDay = 1;
 
 // Clear database midnight
 const job = new CronJob('00 00 00 * * *', function() {
   dbRemoveAll();
 	const d = new Date();
-	console.log('Database cleared at:', d);
+  console.log('Database cleared at:', d);
+  percentageCountDay ++;
 });
 job.start();
 
@@ -326,14 +331,24 @@ function organiseData(list) {
 //Log traffic
 function logTraffic(type) {
   var hour = getDateTime().hour;
-  console.log("logging " + type + " traffic for time " + hour);
+  // console.log("logging " + type + " traffic for time " + hour);
   trafficData[type][hour] ++;
   trafficData[type][24] = trafficData[type][0];
   if (type ==! "total") {
     trafficData["total"][hour] ++;
     trafficData["total"][24] = trafficData["total"][0];
   }
-  console.log(trafficData);
+  // console.log(trafficData);
+}
+
+//Log percentage full
+function logPercentageFull(count) {
+  var hour = getDateTime().hour;
+  // console.log("logging percentage full for time " + hour);
+
+  percentageFullData["percentage"][hour] = (percentageFullData["percentage"][hour] + (count / 56)) / 2;
+
+  // console.log(percentageFullData);
 }
 
 //========================
@@ -358,6 +373,7 @@ app.get("/", function(req, res){
       var dbo = db.db(dbName)
       dbo.collection(mainCollectionName).find({}).toArray(function (err, result) {
         if (err) throw err
+        logPercentageFull(result.length);
 
         var organisedData = organiseData(result);
         var announcement = fs.readFileSync("announcement.txt", "utf8")
@@ -435,7 +451,8 @@ app.post("/signup-req", function(req, res){
   var password = "" + req.body.password
   var ensembleStatus = "" + req.body.ensembleStatus
   var remark = "" + req.body.remark
-  console.log(("[POST] Requesting sign-up with information: |" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remark + "|").green)
+  var ip = req.connection.remoteAddress
+  console.log(("[POST] Requesting sign-up with information: |" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remark + "|<" + ip + ">|").green)
   logTraffic("signup")
 
   // g-recaptcha-response is the key that browser will generate upon form submit.
@@ -632,7 +649,7 @@ app.get("/help", function(req, res){
 app.get("/analytics", function(req, res){
   console.log(("[GET] Getting analytics page").yellow)
   logTraffic("total")
-  res.render("analytics", {trafficData: trafficData})
+  res.render("analytics", {trafficData: trafficData, percentageFullData: percentageFullData})
 });
 
 //Issues page
@@ -821,3 +838,5 @@ app.post("/debug-req", function(req, res){
 
 //Analytics test
 // logTraffic("signup")
+// logPercentageFull(24)
+
