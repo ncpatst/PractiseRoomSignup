@@ -279,7 +279,7 @@
     }
 
     .image-div {
-      height: 479px;
+      height: 492px;
       padding: 1px;
       border: rgb(155, 155, 155) solid 1px;
       transition: 0.55s ease-in-out;
@@ -291,7 +291,8 @@
     }
 
     img {
-      width: 100%;
+      height: 100%;
+      max-width: 100%;
     }
 
     #from {
@@ -323,7 +324,7 @@
       <div class="image-div">
         <img id="poster-image" src="" alt="">
       </div>
-      <p id="from">*Promotion authorised by the Student Government</p>
+      <!-- <p id="from">*Promotion authorised by the Student Government</p> -->
     </div>
 
   </div>
@@ -332,7 +333,7 @@
 
 
 <script>
-  var maxPoster = 3;
+  var maxPoster = 2;
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));

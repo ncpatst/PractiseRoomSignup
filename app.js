@@ -34,7 +34,7 @@ const mainCollectionName = "StudentRecords" //collection name to use for student
 
 const openHour = 07 //the hour when signup opens; 0 <= openHour <= 23
 const openMin = 00 //the minute when signup opens; 0 <= openMin <= 59
-const closeHour = 16 //the hour when signup closes; 0 <= closeHour <= 23
+const closeHour = 20 //the hour when signup closes; 0 <= closeHour <= 23
 const closeMin = 05 //the minute when signup closes; 0 <= closeMin <= 59
 const readOnlyHour = 22 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
@@ -44,6 +44,13 @@ const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "
 const reCaptchaSecretKey = fs.readFileSync("reCaptchaKey.txt", "utf8"); //get google reCaptcha secret key from reCaptchaKey.txt, DO NOT share this file
 
 const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH107", "MH108", "MH110", "MH117", "MH118", "MH119", "MH113", "MH115", "MH111"] //Used for rendering, changing rooms requires changing html and app.js!
+
+//Initialise Analytics
+var trafficData = {
+total: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+signup: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+cancel: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+};
 
 // Clear database midnight
 const job = new CronJob('00 00 00 * * *', function() {
@@ -316,6 +323,19 @@ function organiseData(list) {
   return result;
 }
 
+//Log traffic
+function logTraffic(type) {
+  var hour = getDateTime().hour;
+  console.log("logging " + type + " traffic for time " + hour);
+  trafficData[type][hour] ++;
+  trafficData[type][24] = trafficData[type][0];
+  if (type ==! "total") {
+    trafficData["total"][hour] ++;
+    trafficData["total"][24] = trafficData["total"][0];
+  }
+  console.log(trafficData);
+}
+
 //========================
 //====Request Handling====
 //========================
@@ -327,6 +347,7 @@ app.listen(port, function(){
 //Home page
 app.get("/", function(req, res){
   console.log(("[GET] Getting home page").yellow)
+  logTraffic("total")
 
   if (checkReadStatus() == false) {
     res.render("response", {responseTitle: "Not Yet", responseMessage: "Sign-up opens between " + (openHour < 10 ? "0" : "") + openHour + ":" + (openMin < 10 ? "0" : "") + openMin + " to " + (closeHour < 10 ? "0" : "") + closeHour + ":" + (closeMin < 10 ? "0" : "") + closeMin + ", please come back later.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
@@ -355,6 +376,7 @@ app.get("/:room/:time", function(req, res){
   var room = req.params.room;
   var time = req.params.time;
   console.log(("[GET] Getting room page for " + room + " at " + time).yellow)
+  logTraffic("total")
 
   dbCheckOccupation(room, time, function(callBackResult){
 
@@ -402,10 +424,6 @@ app.get("/:room/:time", function(req, res){
   })
 })
 
-app.post('/reCaptchaTest',function(req,res){
-
-});
-
 //Signup POST
 app.post("/signup-req", function(req, res){
   //get post info
@@ -418,6 +436,7 @@ app.post("/signup-req", function(req, res){
   var ensembleStatus = "" + req.body.ensembleStatus
   var remark = "" + req.body.remark
   console.log(("[POST] Requesting sign-up with information: |" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remark + "|").green)
+  logTraffic("signup")
 
   // g-recaptcha-response is the key that browser will generate upon form submit.
   // if its blank or null means user has not selected the captcha, so return the error.
@@ -500,6 +519,8 @@ app.post("/signup-req", function(req, res){
 //Cancel direct GET
 app.get("/cancel", function(req, res){
   console.log(("[GET] Getting cancel page directly").yellow)
+  logTraffic("total")
+
   //check if open
   if (checkReadStatus() == true) {
     //respond with a unfilled form
@@ -517,6 +538,7 @@ app.post("/cancel", function(req, res){
   var fullName = req.body.fullName
   var studentID = req.body.studentID
   console.log(("[POST] Requesting cancel page with information: |" + fullName + "|" + studentID + "|").green)
+  logTraffic("total")
   
   //check if open
   if (checkReadStatus() == true) {
@@ -536,6 +558,7 @@ app.post("/cancel-req", function(req, res){
   var studentID = req.body.studentID
   var password = req.body.password
   console.log(("[POST] Requesting cancel post with information: |" + fullName + "|" + studentID + "|" + password + "|").green)
+  logTraffic("cancel")
 
 
   if (checkOpenStatus() == false) {
@@ -601,14 +624,21 @@ app.post("/cancel-req", function(req, res){
 //Help page
 app.get("/help", function(req, res){
   console.log(("[GET] Getting help page").yellow)
-
+  logTraffic("total")
   res.render("help")
-
 });
 
-//Help page
+//Analytics page
+app.get("/analytics", function(req, res){
+  console.log(("[GET] Getting analytics page").yellow)
+  logTraffic("total")
+  res.render("analytics", {trafficData: trafficData})
+});
+
+//Issues page
 app.get("/issues", function(req, res){
   console.log(("[GET] Getting issues page").yellow)
+  logTraffic("total")
 
   res.render("issues")
 
@@ -617,6 +647,7 @@ app.get("/issues", function(req, res){
 //Admin page
 app.get("/admin", function(req, res){
   console.log(("[GET] Getting admin page").yellow)
+  logTraffic("total")
 
   res.render("admin")
 
@@ -629,6 +660,7 @@ app.post("/password-req", function(req, res){
   var studentID = req.body.studentID
   var password = req.body.password
   console.log(("[POST] Requesting password lookup with information: |" + fullName + "|" + studentID + "|" + password + "|").green)
+  logTraffic("total")
 
   if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
     res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
@@ -647,6 +679,7 @@ app.post("/announcement-req", function(req, res){
   var announcement = req.body.announcement
   var password = req.body.password
   console.log(("[POST] Requesting announcement with information: |" + announcement + "|" + password + "|").green)
+  logTraffic("total")
 
   if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
     res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
@@ -663,6 +696,7 @@ app.post("/announcement-req", function(req, res){
 //Debug POST
 app.post("/debug-req", function(req, res){
   console.log(("DEBUG REQUEST RECIEVED").black.bgWhite)
+  logTraffic("total")
   //get post info
   var type = req.body.type
   var room = req.body.room
@@ -784,3 +818,6 @@ app.post("/debug-req", function(req, res){
 // app.get("/response-test", function(req, res){
 //   res.render("response", {responseTitle: "title", responseMessage: "message \n2nd paragraph", linkStatus: true, linkLocation: "/help", linkText: "haha", backStatus: true, redirectDuration: 0})
 // });
+
+//Analytics test
+// logTraffic("signup")
