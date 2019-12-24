@@ -20,17 +20,20 @@
     <h3 class="mt-4">Analytics</h3>
     <p class="text-note">*Data since last node restart</p>
 
-    <div class="row d-none d-sm-block">
-      <div class="col-12 col-xl-6">
+    <div class="d-xl-flex flex-xl-row"> 
+      <div class="analytics-chart" >
         <canvas id="trafficChart" width="100%" height=""></canvas>
       </div>
-
-      <div class="col-12 col-xl-6">
+      
+      <div class="analytics-chart" >
         <canvas id="percentageFullChart" width="100%" height=""></canvas>
       </div>
     </div>
 
     <button class="btn btn-primary mt-4" onclick="window.history.back()">Back</button>
+
+    <hr class="mt-5 mb-4">
+
 
     <h3 class="mt-4">History (In reverse chronological order starting from yesterday)</h3>
     <p class="text-note">*Data since last node restart</p>
