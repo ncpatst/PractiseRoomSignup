@@ -12,8 +12,9 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1 class="mt-4">Practise Room Sign-up <sup>beta</sup></h1>
+  <div class="container smaller-container">
+    <h1 class="">Practise Room Sign-up <sup></sup></h1>
+    <hr>
     <h3 class="mt-4"><%= roomOccupationStatus %></h3>
 
     <form action="../cancel" method="POST">
@@ -71,14 +72,14 @@
         <label for="input" class="control-label">Remark</label><i class="bar"></i>
       </div> -->
 
-      <div class="form-group">
+      <div class="form-group mt-3">
         <textarea id="remark" id="remark" name="remark" placeholder="<%= remark %>" readonly disabled></textarea>
         <label for="textarea" class="control-label">Remark</label><i class="bar"></i>
       </div>
 
-      <a class="btn btn-primary" href="..">Back</a>
-      <a class="btn btn-primary" href="../help">Help</a>
-      <button class="btn btn-primary" type="submit">Cancel Request</button>
+      <a class="btn btn-primary mr-2" href="..">Back</a>
+      <a class="btn btn-primary mr-2" href="../help">Help</a>
+      <button class="btn btn-primary mr-2" type="submit">Cancel Request</button>
 
     </form>
 

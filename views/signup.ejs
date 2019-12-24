@@ -13,9 +13,10 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1 class="mt-4">Practise Room Sign-up <sup>beta</sup></h1>
-    <h3 class="mt-4">Signup form</h3>
+  <div class="container smaller-container">
+    <h1 class="">Practise Room Sign-up <sup></sup></h1>
+    <hr>
+    <h3 class="mt-4 mb-5">Signup form</h3>
 
     <form method="POST" action="../signup-req">
     <!-- <form method="POST" action="../reCaptchaTest"> -->
@@ -88,21 +89,23 @@
         </label>
       </div>
 
-      <div class="form-group mb-3">
+      <div class="form-group mb-3 mt-3">
         <input type="text" id="remark" name="remark" required/>
         <label for="input" class="control-label">Remark (Optional)</label><i class="bar"></i>
       </div>
 
-      <div class="g-recaptcha mb-3 mt-0" data-sitekey="6LeUPMMUAAAAAIzhwCcDw5Tqfw0cvpVyp66TCCW8"></div>
+      <p class="mt-4 mb-2">The checkbox below is required for human verification</p>
+
+      <div class="g-recaptcha mb-3 mt-1" data-sitekey="6LeUPMMUAAAAAIzhwCcDw5Tqfw0cvpVyp66TCCW8"></div>
 
       <!-- <div class="form-group" id="form-group-not-required">
         <textarea id="remark" id="remark" name="remark"></textarea>
         <label for="textarea" class="control-label">Remark</label><i class="bar"></i>
       </div> -->
 
-      <a class="btn btn-primary" href="..">Back</a>
-      <a class="btn btn-primary" href="../help">Help</a>
-      <input class="btn btn-primary" onclick="if(document.getElementById('ensembleStatus').checked == false) {document.getElementById('remark').required = false} " type="submit"></input>
+      <a class="btn btn-primary mt-3 mr-2" href="..">Back</a>
+      <a class="btn btn-primary mt-3 mr-2" href="../help">Help</a>
+      <input class="btn btn-primary mt-3 mr-2" onclick="if(document.getElementById('ensembleStatus').checked == false) {document.getElementById('remark').required = false} " type="submit"></input>
 
     </form>
 

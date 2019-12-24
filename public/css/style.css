@@ -1,20 +1,6 @@
-table,
-th,
-td {
-  border: 2px solid rgb(46, 46, 46);
-  /* color: rgb(211, 211, 211); */
-  /* background-color: rgba(98, 98, 98, 0.1); */
-}
-/* 
-input[type="text"],
-input[type="password"] {
-  width: 200px;
-} */
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
-.container {
-  margin-bottom: 30px;
-}
-
+/* Table Styling */
 .border-light-right {
   border-right: 1px solid rgb(160, 160, 160) !important;
 }
@@ -25,24 +11,148 @@ input[type="password"] {
   border-left: 1px solid rgb(160, 160, 160) !important;
   border-right: 1px solid rgb(160, 160, 160) !important;
 }
-
-td, th {
-  padding: 5px;
+table,
+th,
+td {
+  border: 2px solid rgb(46, 46, 46);
 }
 
 .disabled-link {
   cursor: not-allowed;
 }
-
 .cursor-pointer {
   cursor: pointer;
 }
 
+/* Debug text styling */
 .text-muted{
   color: #b3b3b3 !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word
+}
+
+.text-note {
+  color: grey;
 }
 
 
+/* Overall styling */
+/* #particles-js, #particles-js2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+} */
+
+body {
+  /* background-image: url(../Halloween-BG.jpg); */
+  background-size: cover !important;
+	background-repeat: no-repeat !important;
+  background-position: center !important;
+	background-color: rgb(240, 240, 240)!important;
+	background-position: center;
+  background-size: all;
+  background-attachment: fixed;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+
+
+/* Anything smaller */
+@media (min-width: 1px) {
+  table {
+    font-size: 0.5rem;
+    max-width: 100%;
+  }
+  td, th {
+    padding: 2px;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  table {
+    font-size: 0.6rem;
+    max-width: 100%;
+
+  }
+  td, th {
+    padding: 4px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .container {
+    max-width: 760px;
+  }
+  table {
+    font-size: 0.7rem;
+  }
+  td, th {
+    padding: 4px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .container {
+    max-width: 1000px;
+  }
+  table {
+    font-size: 0.8rem;
+  }
+  td, th {
+    padding: 5px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1180px;
+  }
+  table {
+    font-size: 1rem;
+  }
+  .time-colomn {
+    min-width: 250px;
+  }
+  td, th {
+    padding: 5px;
+  }
+}
+
+.container {
+  background-color: white;
+  padding: 40px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.smaller-container {
+  max-width: 800px;
+}
+
+html {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.btn {
+  border-radius: 3px;
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.2), 0px 3px 15px 1px rgba(0, 0, 0, 0.19);
+}
+
+
+
+
+
+/* Form Styling */
 .form-group input:placeholder-shown ~ .control-label {
   font-size: 0.8rem !important;
   top: -1rem !important;
@@ -68,31 +178,9 @@ td, th {
   vertical-align: bottom;
 } */
 
-#particles-js, #particles-js2 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50% 50%;
-}
 
-body {
-  /* background-image: url(../Halloween-BG.jpg); */
-  background-size: cover !important;
-	background-repeat: no-repeat !important;
-  background-position: center !important;
-	background-color: rgb(228, 228, 228)!important;
-	background-position: center;
-  background-size: all;
-  background-attachment: fixed;
-}
 
-html, body {
-  margin: 0;
-  width: 100%;
-  height: 100vh;
-}
+
 
 
 .form-radio,
