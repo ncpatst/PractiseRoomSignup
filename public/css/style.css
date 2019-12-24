@@ -2,19 +2,19 @@
 
 /* Table Styling */
 .border-light-right {
-  border-right: 1px solid rgb(190, 190, 190) !important;
+  border-right: 1px dotted rgb(160, 160, 160) !important;
 }
 .border-light-leftt {
-  border-left: 1px solid rgb(190, 190, 190) !important;
+  border-left: 1px dotted rgb(160, 160, 160) !important;
 }
 .border-light-bothh {
-  border-left: 1px solid rgb(190, 190, 190) !important;
-  border-right: 1px solid rgb(190, 190, 190) !important;
+  border-left: 1px dotted rgb(160, 160, 160) !important;
+  border-right: 1px dotted rgb(160, 160, 160) !important;
 }
 table,
 th,
 td {
-  border: 2px solid rgb(46, 46, 46);
+  border: 2px solid rgb(114, 114, 114);
 }
 
 .disabled-link {
@@ -67,6 +67,11 @@ body {
     font-size: 0.5rem;
     max-width: 100%;
   }
+  .credit-div {
+    max-width: 620px;
+    font-size: 0.6rem;
+
+  }
   td, th {
     padding: 2px;
   }
@@ -74,6 +79,11 @@ body {
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
+  .credit-div {
+    max-width: 540px;
+    font-size: 0.6rem;
+
+  }
   table {
     font-size: 0.6rem;
     max-width: 100%;
@@ -89,6 +99,10 @@ body {
   .container {
     max-width: 760px;
   }
+  .credit-div {
+    max-width: 760px;
+    font-size: 0.65rem;
+  }
   table {
     font-size: 0.7rem;
   }
@@ -100,6 +114,9 @@ body {
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .container {
+    max-width: 1000px;
+  }
+  .credit-div {
     max-width: 1000px;
   }
   table {
@@ -120,6 +137,9 @@ body {
   .container {
     max-width: 1180px;
   }
+  .credit-div {
+    max-width: 1180px;
+  }
   table {
     font-size: 1rem;
   }
@@ -138,6 +158,17 @@ body {
   background-color: white;
   padding: 40px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.credit-div {
+  margin-left: auto;
+  margin-right: auto;
+  color: rgb(175, 175, 175);
+}
+
+.credit-text {
+  margin-top: 5px;
+  margin-bottom: -18px;
 }
 
 .smaller-container {
