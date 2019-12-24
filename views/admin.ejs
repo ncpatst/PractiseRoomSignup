@@ -16,6 +16,7 @@
     <h1 class="">Practise Room Sign-up <sup></sup></h1>
     <hr>
     <h3 class="mt-4">Admin Control Panel</h3>
+    
     <h4 class="mt-4">Password lookup</h4>
     <p class="font-weight-bold mt-3">Forgetting password is NOT AN EXCUSE for not practising!!!</p>
     <p>Please enter the information of the student and your admin password to lookup the student's password.</p>
@@ -42,7 +43,9 @@
 
     </form>
 
-    <h4 class="mt-5">New announcement</h4>
+    <hr class="mt-5 mb-4">
+
+    <h4 class="">New announcement</h4>
     <p>Type the announcement here, this will replace the old announcement on the home page. To remove existing announcement, leave the "New Announcement" box blank.</p>
 
     <form method="POST" action="announcement-req">
@@ -53,6 +56,47 @@
       </div>
 
       <div class="form-group">
+        <input type="password" required="required" id="password" name="password"/>
+        <label for="input" class="control-label">Admin Password</label><i class="bar"></i>
+      </div>
+
+      <a class="btn btn-primary mr-2" href=".">Back</a>
+      <input class="btn btn-primary mr-2" onclick="document.getElementById('announcement').required = false" type="submit"></input>
+
+    </form>
+
+    <hr class="mt-5 mb-4">
+
+    <h4 class="">Disable Sign-up by Time <sup>beta</sup></h4>
+    <p>Type the announcement here, this will replace the old announcement on the home page. To remove existing announcement, leave the "New Announcement" box blank.</p>
+
+    <form method="POST" action="disable-req">
+
+      <div class="checkbox mt-4">
+
+        <label class="pure-material-checkbox mr-3">
+          <input type="checkbox" name="T19001930" id="T19001930">
+          <span>19:00-19:30</span>
+        </label>
+
+        <label class="pure-material-checkbox mr-3">
+          <input type="checkbox" name="T19302000" id="T19302000">
+          <span>19:30-20:00</span>
+        </label>
+
+        <label class="pure-material-checkbox mr-3">
+          <input type="checkbox" name="T20002030" id="T20002030">
+          <span>20:00-20:30</span>
+        </label>
+
+        <label class="pure-material-checkbox mr-3">
+          <input type="checkbox" name="T20302100" id="T20302100">
+          <span>20:30-21:00</span>
+        </label>
+
+      </div>
+
+      <div class="form-group mt-3">
         <input type="password" required="required" id="password" name="password"/>
         <label for="input" class="control-label">Admin Password</label><i class="bar"></i>
       </div>

@@ -2,14 +2,14 @@
 
 /* Table Styling */
 .border-light-right {
-  border-right: 1px solid rgb(160, 160, 160) !important;
+  border-right: 1px solid rgb(190, 190, 190) !important;
 }
 .border-light-leftt {
-  border-left: 1px solid rgb(160, 160, 160) !important;
+  border-left: 1px solid rgb(190, 190, 190) !important;
 }
 .border-light-bothh {
-  border-left: 1px solid rgb(160, 160, 160) !important;
-  border-right: 1px solid rgb(160, 160, 160) !important;
+  border-left: 1px solid rgb(190, 190, 190) !important;
+  border-right: 1px solid rgb(190, 190, 190) !important;
 }
 table,
 th,
@@ -51,7 +51,7 @@ body {
   background-size: cover !important;
 	background-repeat: no-repeat !important;
   background-position: center !important;
-	background-color: rgb(240, 240, 240)!important;
+	background-color: rgb(235, 235, 235)!important;
 	background-position: center;
   background-size: all;
   background-attachment: fixed;
@@ -145,10 +145,15 @@ html {
 
 .btn {
   border-radius: 3px;
-  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.2), 0px 3px 15px 1px rgba(0, 0, 0, 0.19);
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12), 0px 3px 15px 1px rgba(0, 0, 0, 0.14);
 }
 
 
+.btn-primary {
+  color: #fff;
+  background-color: #4285F4;
+  border-color: #4285F4;
+}
 
 
 
@@ -255,7 +260,7 @@ html {
   left: 50%;
   bottom: -0.0625rem;
   position: absolute;
-  background: #337ab7;
+  background: #4285F4;
   -webkit-transition: left 0.28s ease, width 0.28s ease;
   transition: left 0.28s ease, width 0.28s ease;
   z-index: 2;
@@ -314,7 +319,7 @@ html {
 .form-group select:focus ~ .control-label,
 .form-group input:focus ~ .control-label,
 .form-group textarea:focus ~ .control-label {
-  color: #337ab7;
+  color: #4285F4;
 }
 .form-group select:focus ~ .bar::before,
 .form-group input:focus ~ .bar::before,
@@ -339,57 +344,6 @@ html {
   width: 100%;
 }
 
-.button {
-  position: relative;
-  background: currentColor;
-  border: 1px solid currentColor;
-  font-size: 1.1rem;
-  color: #4f93ce;
-  margin: 3rem 0;
-  padding: 0.75rem 3rem;
-  cursor: pointer;
-  -webkit-transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
-  transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
-  overflow: hidden;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-}
-.button span {
-  color: #fff;
-  position: relative;
-  z-index: 1;
-}
-.button::before {
-  content: '';
-  position: absolute;
-  background: #071017;
-  border: 50vh solid #1d4567;
-  width: 30vh;
-  height: 30vh;
-  border-radius: 50%;
-  display: block;
-  top: 50%;
-  left: 50%;
-  z-index: 0;
-  opacity: 1;
-  -webkit-transform: translate(-50%, -50%) scale(0);
-          transform: translate(-50%, -50%) scale(0);
-}
-.button:hover {
-  color: #337ab7;
-  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
-}
-.button:active::before, .button:focus::before {
-  -webkit-transition: opacity 0.28s ease 0.364s, -webkit-transform 1.12s ease;
-  transition: opacity 0.28s ease 0.364s, -webkit-transform 1.12s ease;
-  transition: transform 1.12s ease, opacity 0.28s ease 0.364s;
-  transition: transform 1.12s ease, opacity 0.28s ease 0.364s, -webkit-transform 1.12s ease;
-  -webkit-transform: translate(-50%, -50%) scale(1);
-          transform: translate(-50%, -50%) scale(1);
-  opacity: 0;
-}
-.button:focus {
-  outline: none;
-}
 
 
 .pure-material-checkbox {
@@ -465,13 +419,13 @@ html {
 /* Checked, Indeterminate */
 .pure-material-checkbox > input:checked,
 .pure-material-checkbox > input:indeterminate {
-  background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+  background-color: rgb(var(--pure-material-primary-rgb, 66, 134, 244));
 }
 
 .pure-material-checkbox > input:checked + span::before,
 .pure-material-checkbox > input:indeterminate + span::before {
-  border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
-  background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+  border-color: rgb(var(--pure-material-primary-rgb, 66, 134, 244));
+  background-color: rgb(var(--pure-material-primary-rgb, 66, 134, 244));
 }
 
 .pure-material-checkbox > input:checked + span::after,
@@ -505,7 +459,7 @@ html {
 }
 
 .pure-material-checkbox > input:active + span::before {
-  border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+  border-color: rgb(var(--pure-material-primary-rgb, 66, 134, 244));
 }
 
 .pure-material-checkbox > input:checked:active + span::before {
@@ -602,18 +556,18 @@ html {
   border-radius: 50%;
   width: 19px;
   height: 19px;
-  background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+  background-color: rgb(var(--pure-material-primary-rgb, 66, 134, 244));
   transform: translate(3.9px, 3.95px) scale(0);
   transition: transform 0.1s;
 }
 
 /* Checked */
 .pure-material-radio > input:checked {
-  background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+  background-color: rgb(var(--pure-material-primary-rgb, 66, 134, 244));
 }
 
 .pure-material-radio > input:checked + span::before {
-  border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+  border-color: rgb(var(--pure-material-primary-rgb, 66, 134, 244));
 }
 
 .pure-material-radio > input:checked + span::after {
@@ -641,7 +595,7 @@ html {
 }
 
 .pure-material-radio > input:active + span::before {
-  border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+  border-color: rgb(var(--pure-material-primary-rgb, 66, 134, 244));
 }
 
 /* Disabled */

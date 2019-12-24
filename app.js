@@ -43,7 +43,7 @@ const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22
 const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share this file
 const reCaptchaSecretKey = fs.readFileSync("reCaptchaKey.txt", "utf8"); //get google reCaptcha secret key from reCaptchaKey.txt, DO NOT share this file
 
-const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH107", "MH108", "MH110", "MH117", "MH118", "MH119", "MH113", "MH115", "MH111"] //Used for rendering, changing rooms requires changing html and app.js!
+const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH107", "MH109", "MH110", "MH117", "MH118", "MH119", "MH113", "MH115", "MH111"] //Used for rendering, changing rooms requires changing html and app.js!
 
 //Initialise Analytics and History
 var trafficData = {
@@ -378,7 +378,7 @@ function dbRemove(fullName, studentID) {
     //remove document
 		dbo.collection(mainCollectionName).deleteOne({fullName: fullName, studentID: studentID}, function(err, obj) {
 			if (err) console.log(err);
-			console.log(("[DB] One occurance of " + JSON.stringify(obj) + " removed").cyan);
+			console.log(("[DB] One occurance of " + obj + " removed").cyan);
 			db.close();
 		});
 	});
@@ -393,7 +393,7 @@ function dbForceRemove(room, time) {
     //remove document
 		dbo.collection(mainCollectionName).deleteOne({room: room, time: time}, function(err, obj) {
 			if (err) console.log(err);
-			console.log(("[DB] One occurance of " + obJSON.stringify(obj) + " removed").cyan);
+			console.log(("[DB] One occurance of " + obj + " removed").cyan);
 			db.close();
 		});
 	});
@@ -441,6 +441,20 @@ function organiseData(list) {
     result[list[i].room][list[i].time].remark = list[i].remark
   }
   return result;
+}
+
+function clearTime(time) {
+  for (var i = 0; i < roomList.length; i++) {
+    console.log("trying to remove " + roomList[i] + ", " + time)
+    dbForceRemove(roomList[i], time)
+  }
+}
+
+function fillTime(time) {
+  for (var i = 0; i < roomList.length; i++) {
+    console.log("trying to fill " + roomList[i] + ", " + time)
+    dbInsert(roomList[i], time, "-", "-", "-", false, false, "Sign-ups are disabled for this time period");
+  }
 }
 
 //Log traffic
@@ -843,6 +857,47 @@ app.post("/announcement-req", function(req, res){
 
 });
 
+//Disable POST
+app.post("/disable-req", function(req, res){
+  //get post info
+  var T19001930 = req.body.T19001930
+  var T19302000 = req.body.T19302000
+  var T20002030 = req.body.T20002030
+  var T20302100 = req.body.T20302100
+  var password = req.body.password
+  console.log(("[POST] Requesting disabling with information: |" + T19001930 + "|" + T19302000 + "|" + T20002030 + "|" + T20302100 + "|" + password + "|").green)
+  logTraffic("total")
+
+  if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    console.log(("[ERR] Wrong admin password").bold.red)
+  } else {
+    if (T19001930 == "on") {
+      clearTime("T19001930");
+      fillTime("T19001930");
+      console.log(("[Disable] Disabled for time " + "T19001930").magenta)
+    }
+    if (T19302000 == "on") {
+      clearTime("T19302000");
+      fillTime("T19302000");
+      console.log(("[Disable] Disabled for time " + "T19302000").magenta)
+    }
+    if (T20002030 == "on") {
+      clearTime("T20002030");
+      fillTime("T20002030");
+      console.log(("[Disable] Disabled for time " + "T20002030").magenta)
+    }
+    if (T20302100 == "on") {
+      clearTime("T20302100");
+      fillTime("T20302100");
+      console.log(("[Disable] Disabled for time " + "T20302100").magenta)
+    }
+
+    res.render("response", {responseTitle: "Success", responseMessage: "Sign-ups for the specified time period(s) have been disabled!", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: false})
+  }
+
+});
+
 //Debug POST
 app.post("/debug-req", function(req, res){
   console.log(("DEBUG REQUEST RECIEVED").black.bgWhite)
@@ -972,3 +1027,8 @@ app.post("/debug-req", function(req, res){
 //Analytics test
 // logTraffic("signup")
 // logPercentageFull(24)
+
+//Disable test
+// dbForceRemove("MH106", "T19001930")
+// clearTime("T19001930")
+// fillTime("T19001930")
