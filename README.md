@@ -22,11 +22,11 @@ A manual-management free signup system utilising crytography
 
 **To be implemented in the official release**
 
-- [ ] Background artwork
-- [ ] Table responsiveness
-- [ ] Font size responsiveness
-- [ ] Recolouring
-- [ ] Layout
+- [x] Background artwork
+- [x] Table responsiveness
+- [x] Font size responsiveness
+- [x] Recolouring
+- [x] Layout
 
 
 ![Flow](/PractiseRoomSignupAlphaFlow.png)
