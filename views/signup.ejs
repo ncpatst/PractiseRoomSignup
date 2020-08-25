@@ -14,7 +14,7 @@
 <body>
 
   <div class="container smaller-container">
-    <h1 class="">Practise Room Sign-up <sup></sup></h1>
+    <h1 class="text-uppercase mb-4 font-weight-bold">Practice Room Sign-up <sup><small></small></sup></h1>
     <hr>
     <h3 class="mt-4 mb-5">Signup form</h3>
 
@@ -49,7 +49,7 @@
 
       <div class="form-group">
         <input type="text" required="required" id="fullName" name="fullName"/>
-        <label for="input" class="control-label">Full Name</label><i class="bar"></i>
+        <label for="input" class="control-label">Full Name (Case-sensitive)</label><i class="bar"></i>
       </div>
 
       <div class="form-group">
@@ -85,13 +85,13 @@
       <div class="checkbox">
         <label class="pure-material-checkbox">
           <input type="checkbox" name="ensembleStatus" id="ensembleStatus">
-          <span>Small Ensemble (If checked, please type the names of all the people coming to this practise session in the remark text area)</span>
+          <span>Small Ensemble (If checked, please type the names of all the people coming to this practise session in the note text area)</span>
         </label>
       </div>
 
       <div class="form-group mb-3 mt-3">
-        <input type="text" id="remark" name="remark" required/>
-        <label for="input" class="control-label">Remark (Optional)</label><i class="bar"></i>
+        <input type="text" id="note" name="note" required/>
+        <label for="input" class="control-label">Note (Optional)</label><i class="bar"></i>
       </div>
 
       <p class="mt-4 mb-2">The checkbox below is required for human verification. If the checkbox is not loaded, check to make sure that you have access to Google.</p>
@@ -99,13 +99,13 @@
       <div class="g-recaptcha mb-3 mt-1" data-sitekey="6LeUPMMUAAAAAIzhwCcDw5Tqfw0cvpVyp66TCCW8"></div>
 
       <!-- <div class="form-group" id="form-group-not-required">
-        <textarea id="remark" id="remark" name="remark"></textarea>
-        <label for="textarea" class="control-label">Remark</label><i class="bar"></i>
+        <textarea id="note" id="note" name="note"></textarea>
+        <label for="textarea" class="control-label">Note</label><i class="bar"></i>
       </div> -->
 
       <a class="btn btn-primary mt-3 mr-2" href="..">Back</a>
       <a class="btn btn-primary mt-3 mr-2" href="../help">Help</a>
-      <input class="btn btn-primary mt-3 mr-2" onclick="if(document.getElementById('ensembleStatus').checked == false) {document.getElementById('remark').required = false} " type="submit"></input>
+      <input class="btn btn-primary mt-3 mr-2" onclick="if(document.getElementById('ensembleStatus').checked == false) {document.getElementById('note').required = false} " type="submit"></input>
 
     </form>
 

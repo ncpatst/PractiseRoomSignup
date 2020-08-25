@@ -157,7 +157,8 @@ body {
 .container {
   background-color: white;
   padding: 40px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%), 0 6px 20px 0 rgb(0 0 0 / 5%);
 }
 
 .credit-div {
@@ -184,7 +185,7 @@ html {
 
 .btn {
   border-radius: 3px;
-  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12), 0px 3px 15px 1px rgba(0, 0, 0, 0.14);
+  /* box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12), 0px 3px 15px 1px rgba(0, 0, 0, 0.14); */
 }
 
 

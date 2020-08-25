@@ -15,10 +15,10 @@
 <body>
 
   <div class="container">
-    <h1 class="">Practise Room Sign-up <sup></sup></h1>
+    <h1 class="text-uppercase mb-4 font-weight-bold">Practice Room Sign-up <sup><small></small></sup></h1>
     <hr>
     <h3 class="mt-4">Analytics</h3>
-    <p class="text-note">*Data since last node restart</p>
+    <p class="text-note">Data since last Node.js restart</p>
 
     <div class="d-xl-flex flex-xl-row"> 
       <div class="analytics-chart" >
@@ -36,7 +36,7 @@
 
 
     <h3 class="mt-4">History (In reverse chronological order starting from yesterday)</h3>
-    <p class="text-note">*Data since last node restart</p>
+    <p class="text-note">Data since last Node.js restart</p>
 
     <% for (let index = 0; index < 7; index++) { %>
 
@@ -52,16 +52,16 @@
           <tr>
             <td class="border-light-right">Full Name</td>
             <td class="border-light-bothh">Grade</td>
-            <td class="border-light-leftt">Remark</td>
+            <td class="border-light-leftt">Note</td>
             <td class="border-light-right">Full Name</td>
             <td class="border-light-bothh">Grade</td>
-            <td class="border-light-leftt">Remark</td>
+            <td class="border-light-leftt">Note</td>
             <td class="border-light-right">Full Name</td>
             <td class="border-light-bothh">Grade</td>
-            <td class="border-light-leftt">Remark</td>
+            <td class="border-light-leftt">Note</td>
             <td class="border-light-right">Full Name</td>
             <td class="border-light-bothh">Grade</td>
-            <td class="border-light-leftt">Remark</td>
+            <td class="border-light-leftt">Note</td>
           </tr>
         </thead>
         <tbody>
@@ -71,16 +71,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH102.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH102.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH102.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH102.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH102.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH102.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH102.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH102.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH102.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH102.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH102.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH102.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH102.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH102.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH102.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH102.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -88,16 +88,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH103.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH103.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH103.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH103.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH103.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH103.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH103.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH103.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH103.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH103.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH103.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH103.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH103.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH103.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH103.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH103.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -105,16 +105,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH104.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH104.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH104.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH104.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH104.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH104.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH104.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH104.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH104.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH104.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH104.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH104.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH104.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH104.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH104.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH104.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -122,16 +122,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH105.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH105.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH105.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH105.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH105.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH105.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH105.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH105.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH105.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH105.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH105.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH105.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH105.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH105.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH105.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH105.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -139,16 +139,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH106.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH106.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH106.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH106.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH106.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH106.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH106.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH106.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH106.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH106.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH106.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH106.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH106.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH106.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH106.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH106.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -156,16 +156,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH107.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH107.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH107.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH107.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH107.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH107.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH107.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH107.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH107.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH107.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH107.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH107.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH107.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH107.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH107.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH107.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -173,16 +173,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH109.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH109.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH109.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH109.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH109.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH109.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH109.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH109.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH109.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH109.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH109.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH109.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH109.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH109.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH109.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH109.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -190,16 +190,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH110.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH110.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH110.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH110.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH110.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH110.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH110.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH110.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH110.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH110.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH110.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH110.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH110.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH110.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH110.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH110.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -207,16 +207,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH117.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH117.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH117.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH117.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH117.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH117.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH117.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH117.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH117.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH117.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH117.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH117.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH117.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH117.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH117.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH117.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -224,16 +224,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH120.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH120.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH120.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH120.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH120.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH120.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH120.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH120.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH120.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH120.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH120.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH120.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH120.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH120.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH120.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH120.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -241,16 +241,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH121.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH121.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH121.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH121.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH121.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH121.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH121.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH121.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH121.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH121.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH121.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH121.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH121.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH121.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH121.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH121.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -262,16 +262,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH113.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH113.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH113.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH113.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH113.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH113.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH113.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH113.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH113.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH113.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH113.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH113.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH113.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH113.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH113.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH113.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -279,16 +279,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH115.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH115.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH115.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH115.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH115.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH115.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH115.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH115.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH115.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH115.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH115.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH115.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH115.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH115.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH115.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH115.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
           
           <tr>
@@ -300,16 +300,16 @@
 
             <td class="border-light-right"><%= historicalData[index].MH111.T19001930.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH111.T19001930.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH111.T19001930.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH111.T19001930.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH111.T19302000.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH111.T19302000.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH111.T19302000.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH111.T19302000.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH111.T20002030.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH111.T20002030.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH111.T20002030.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH111.T20002030.noteStatus) { %> Yes <% } %></td>
             <td class="border-light-right"><%= historicalData[index].MH111.T20302100.fullName %></td>
             <td class="border-light-bothh"><%= historicalData[index].MH111.T20302100.grade %></td>
-            <td class="border-light-leftt"><% if (historicalData[index].MH111.T20302100.remarkStatus) { %> Yes <% } %></td>
+            <td class="border-light-leftt"><% if (historicalData[index].MH111.T20302100.noteStatus) { %> Yes <% } %></td>
           </tr>
 
         </tbody>
@@ -319,7 +319,7 @@
 
 
     <button class="btn btn-primary mt-0 mb-0" onclick="window.history.back()">Back</button>
-
+<!-- 
     <hr class="mt-5 mb-4">
 
 
@@ -327,7 +327,7 @@
     <p><small class="text-muted">Data = <%= JSON.stringify(trafficData) %></small></p>
     <p><small class="text-muted">Data = <%= JSON.stringify(percentageFullData) %></small></p>
     <p><small class="text-muted">Data = <%= JSON.stringify(historicalData) %></small></p>
-    <p><small class="text-muted">from analytics.ejs</small></p>
+    <p><small class="text-muted">from analytics.ejs</small></p> -->
 
 
   </div>

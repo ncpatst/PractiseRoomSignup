@@ -369,13 +369,13 @@ function dbCheckOccupation(room, time, callBack) {
 }
 
 //insert entry function
-function dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark) {
+function dbInsert(room, time, fullName, grade, studentID, ensembleStatus, noteStatus, note) {
   //connect to mongo client
   MongoClient.connect(url, function(err, db) {
     if (err) console.log(err);
     var dbo = db.db(dbName);
     //create object
-    var myobj = {room: room, time: time, fullName: fullName, grade: grade, studentID: studentID, ensembleStatus: ensembleStatus, remarkStatus: remarkStatus, remark: remark}
+    var myobj = {room: room, time: time, fullName: fullName, grade: grade, studentID: studentID, ensembleStatus: ensembleStatus, noteStatus: noteStatus, note: note}
 
     //insert document
 		dbo.collection(mainCollectionName).insertOne(myobj, function(err, res) {
@@ -454,9 +454,9 @@ function organiseData(list) {
     result[list[i].room][list[i].time].fullName = list[i].fullName
     result[list[i].room][list[i].time].grade = list[i].grade
     result[list[i].room][list[i].time].studentID = list[i].studentID
-    result[list[i].room][list[i].time].remarkStatus = list[i].remarkStatus
+    result[list[i].room][list[i].time].noteStatus = list[i].noteStatus
     result[list[i].room][list[i].time].ensembleStatus = list[i].ensembleStatus
-    result[list[i].room][list[i].time].remark = list[i].remark
+    result[list[i].room][list[i].time].note = list[i].note
   }
   return result;
 }
@@ -477,7 +477,7 @@ function fillTime(time) {
 
 //Log traffic
 function logTraffic(type) {
-  var hour = getDateTime().hour;
+  var hour = Number(getDateTime().hour);
   // console.log("logging " + type + " traffic for time " + hour);
   trafficData[type][hour] ++;
   trafficData[type][24] = trafficData[type][0];
@@ -573,7 +573,7 @@ app.get("/:room/:time", function(req, res){
           // If occupied
           if (checkReadStatus() == true) {
             // If occupied and readable
-            res.render("info", {roomOccupationStatus: "Room Occupied", room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, fullName: organisedData[room][time].fullName, grade: organisedData[room][time].grade, studentID: organisedData[room][time].studentID, ensembleStatus: organisedData[room][time].ensembleStatus, remark: organisedData[room][time].remark, organisedData: organisedData})
+            res.render("info", {roomOccupationStatus: "Room Occupied", room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, fullName: organisedData[room][time].fullName, grade: organisedData[room][time].grade, studentID: organisedData[room][time].studentID, ensembleStatus: organisedData[room][time].ensembleStatus, note: organisedData[room][time].note, organisedData: organisedData})
           }
           else {
             // If occupied and closed
@@ -588,7 +588,7 @@ app.get("/:room/:time", function(req, res){
           }
           else if (checkReadStatus() == true) {
             // If not occupied and read-only
-            res.render("info", {roomOccupationStatus: "Signup Closed", room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, fullName: organisedData[room][time].fullName, grade: organisedData[room][time].grade, studentID: organisedData[room][time].studentID, ensembleStatus: organisedData[room][time].ensembleStatus, remark: organisedData[room][time].remark, organisedData: organisedData})
+            res.render("info", {roomOccupationStatus: "Signup Closed", room: room, time: time, date: getDateTime().day + "/" + getDateTime().month + "/" + getDateTime().year, fullName: organisedData[room][time].fullName, grade: organisedData[room][time].grade, studentID: organisedData[room][time].studentID, ensembleStatus: organisedData[room][time].ensembleStatus, note: organisedData[room][time].note, organisedData: organisedData})
           }
           else {
             // If not occupied and closed
@@ -615,9 +615,9 @@ app.post("/signup-req", function(req, res){
   var studentID = "" + req.body.studentID
   var password = "" + req.body.password
   var ensembleStatus = "" + req.body.ensembleStatus
-  var remark = "" + req.body.remark
+  var note = "" + req.body.note
   var ip = req.connection.remoteAddress
-  console.log(("[POST] Requesting sign-up with information: |" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remark + "|<" + ip + ">|").green)
+  console.log(("[POST] Requesting sign-up with information: |" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + note + "|<" + ip + ">|").green)
   logTraffic("signup")
 
   // g-recaptcha-response is the key that browser will generate upon form submit.
@@ -660,7 +660,7 @@ app.post("/signup-req", function(req, res){
           dbCheckOccupation(room, time, function (callBackResult) {
             if (callBackResult == true) {
               // If room occupied
-              res.render("response", {responseTitle: "Ooooops", responseMessage: "Someone, somewhere signed up for this very room at this very time when you were filling in the form, please select another room or another time and try again.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+              res.render("response", {responseTitle: "Ooooops", responseMessage: "It seems like that someone just signed up for this particular room at this particular time when you were filling out the form, please select another room or another time and try again.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
               console.log(("[ERR] Room crash").bold.red)
             }
             else {
@@ -671,17 +671,17 @@ app.post("/signup-req", function(req, res){
                 console.log(("[ERR] Wrong password").bold.red)
               } else {
                 // Correct password, add to database
-                var remarkStatus = false;
-                if (ensembleStatus == "on" || remark.length >= 1) {
-                  remarkStatus = true
+                var noteStatus = false;
+                if (ensembleStatus == "on" || note.length >= 1) {
+                  noteStatus = true
                 }
                 if (ensembleStatus == "on") {
                   ensembleStatus = true
                 }
 
-                console.log(("[Signup-req] Adding to database: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + remarkStatus + "|" + remark + "|").magenta);
+                console.log(("[Signup-req] Adding to database: " + "|" + room + "|" + time + "|" + fullName + "|" + grade + "|" + studentID + "|" + password + "|" + ensembleStatus + "|" + noteStatus + "|" + note + "|").magenta);
 
-                dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark)
+                dbInsert(room, time, fullName, grade, studentID, ensembleStatus, noteStatus, note)
 
                 res.render("response", {responseTitle: "Sign-up Successful!", responseMessage: "You will now be able to see your name on the sign-up table, please remember to come to your practise session. \n\nRedirecting in 3 seconds.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 3000, debugStatus: false})
               }
@@ -709,7 +709,7 @@ app.get("/cancel", function(req, res){
     res.render("cancel", {fullName: "", studentID: ""});
   } else {
     //respond with error
-    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when the sign-up form is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
 
 });
@@ -728,7 +728,7 @@ app.post("/cancel", function(req, res){
     res.render("cancel", {fullName: fullName, studentID: studentID});
   } else {
     //respond with error
-    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when the sign-up form is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
   }
 
 });
@@ -772,7 +772,7 @@ app.post("/cancel-req", function(req, res){
       })
     }
     else {
-      res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when sign-up is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
+      res.render("response", {responseTitle: "Not Now", responseMessage: "You can only submit cancel requests when the sign-up form is open.", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: true})
     }
   }
   else {
@@ -845,11 +845,11 @@ app.post("/password-req", function(req, res){
   logTraffic("total")
 
   if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
-    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, please try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
     console.log(("[ERR] Wrong admin password").bold.red)
   } else {
     var lookupPassword = SHALL24(fullName + studentID);
-    res.render("response", {responseTitle: "Password Lookup", responseMessage: "The student's password is " + lookupPassword + ", please stop using FORGETTING PASSWORD as an excuse of NOT PRACTISING!", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: false})
+    res.render("response", {responseTitle: "Password Lookup", responseMessage: "The student's password is:", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: false, lookupPassword: lookupPassword})
     console.log(("[Password-lookup] Password sent").magenta)
   }
 
@@ -864,7 +864,7 @@ app.post("/announcement-req", function(req, res){
   logTraffic("total")
 
   if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
-    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, please try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
     console.log(("[ERR] Wrong admin password").bold.red)
   } else {
     fs.writeFile("announcement.txt", announcement, function (err) {
@@ -887,7 +887,7 @@ app.post("/disable-req", function(req, res){
   logTraffic("total")
 
   if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
-    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, don't try to break into the system.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, please try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
     console.log(("[ERR] Wrong admin password").bold.red)
   } else {
     if (T19001930 == "on") {
@@ -929,10 +929,10 @@ app.post("/debug-req", function(req, res){
   var studentID = req.body.studentID
   var password = req.body.password
   var ensembleStatus = req.body.ensembleStatus
-  var remark = req.body.remark
-  var remarkStatus = false;
-  if (ensembleStatus == "on" || remark.length >= 1) {
-    remarkStatus = true
+  var note = req.body.note
+  var noteStatus = false;
+  if (ensembleStatus == "on" || note.length >= 1) {
+    noteStatus = true
   }
   if (ensembleStatus == "on") {
     ensembleStatus = true
@@ -952,7 +952,7 @@ app.post("/debug-req", function(req, res){
           res.send("The room is occupied")
         }
         else {
-          dbInsert(room, time, fullName, grade, studentID, ensembleStatus, remarkStatus, remark)
+          dbInsert(room, time, fullName, grade, studentID, ensembleStatus, noteStatus, note)
 
           res.send("Emtry added")
         }

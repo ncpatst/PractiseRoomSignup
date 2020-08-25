@@ -13,7 +13,7 @@
 <body>
 
   <div class="container smaller-container">
-    <h1 class="">Practise Room Sign-up <sup></sup></h1>
+    <h1 class="text-uppercase mb-4 font-weight-bold">Practice Room Sign-up <sup><small></small></sup></h1>
     <hr>
     <h3 class="mt-4"><%= roomOccupationStatus %></h3>
 
@@ -68,13 +68,13 @@
       </div>
 
       <!-- <div class="form-group">
-        <input type="text" required="required" placeholder="<%= remark %>" readonly disabled/>
-        <label for="input" class="control-label">Remark</label><i class="bar"></i>
+        <input type="text" required="required" placeholder="<%= note %>" readonly disabled/>
+        <label for="input" class="control-label">Note</label><i class="bar"></i>
       </div> -->
 
       <div class="form-group mt-3">
-        <textarea id="remark" id="remark" name="remark" placeholder="<%= remark %>" readonly disabled></textarea>
-        <label for="textarea" class="control-label">Remark</label><i class="bar"></i>
+        <textarea id="note" id="note" name="note" placeholder="<%= note %>" readonly disabled></textarea>
+        <label for="textarea" class="control-label">Note</label><i class="bar"></i>
       </div>
 
       <a class="btn btn-primary mr-2" href="..">Back</a>
@@ -98,7 +98,7 @@
     <p><small class="text-muted">Data = <%= grade %></small></p>
     <p><small class="text-muted">Data = <%= studentID %></small></p>
     <p><small class="text-muted">Data = <%= ensembleStatus %></small></p>
-    <p><small class="text-muted">Data = <%= remark %></small></p>
+    <p><small class="text-muted">Data = <%= note %></small></p>
     <p><small class="text-muted">Data = <%= JSON.stringify(organisedData) %></small></p> -->
 
 

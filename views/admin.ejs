@@ -13,13 +13,12 @@
 <body>
 
   <div class="container smaller-container">
-    <h1 class="">Practise Room Sign-up <sup></sup></h1>
+    <h1 class="text-uppercase mb-4 font-weight-bold">Practice Room Sign-up <sup><small></small></sup></h1>
     <hr>
     <h3 class="mt-4">Admin Control Panel</h3>
     
-    <h4 class="mt-4">Password lookup</h4>
-    <p class="font-weight-bold mt-3">Forgetting password is NOT AN EXCUSE for not practising!!!</p>
-    <p>Please enter the information of the student and your admin password to lookup the student's password.</p>
+    <h4 class="mt-4 font-weight-bold">Password lookup</h4>
+    <p>Please enter the information of the student and your admin password to lookup a student's password.</p>
 
     <form method="POST" action="password-req">
       
@@ -45,13 +44,13 @@
 
     <hr class="mt-5 mb-4">
 
-    <h4 class="">New announcement</h4>
-    <p>Type the announcement here, this will replace the old announcement on the home page. To remove existing announcement, leave the "New Announcement" box blank.</p>
+    <h4 class="font-weight-bold">New announcement</h4>
+    <p>Type the announcement in the following text box, this will replace the old announcement on the home page. To remove the existing announcement, leave the "New Announcement" box blank.</p>
 
     <form method="POST" action="announcement-req">
 
       <div class="form-group">
-        <textarea id="announcement" id="announcement" name="announcement" style="height: 150px;" required></textarea>
+        <textarea id="announcement" id="announcement" name="announcement" style="height: 100px;" required></textarea>
         <label for="textarea" class="control-label">New Announcement</label><i class="bar"></i>
       </div>
 
@@ -67,7 +66,7 @@
 
     <hr class="mt-5 mb-4">
 
-    <h4 class="">Disable Sign-up by Time <sup>beta</sup></h4>
+    <h4 class="font-weight-bold">Disable Sign-up by Time</h4>
     <p>You can disable sign-ups for one or more specific time period(s) by checking the boxes below. This will remove all existing sign-ups during the specified time period and replace them with placeholders until the next day. You CANNOT undo this action.</p>
 
     <form method="POST" action="disable-req">
