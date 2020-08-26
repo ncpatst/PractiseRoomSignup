@@ -301,7 +301,7 @@ function checkOpenStatus() {
 	min = (min < 10 ? "0" : "") + min;
   var sec  = date.getSeconds();
   sec = (sec < 10 ? "0" : "") + sec;
-  console.log(("[Time-check] Check open time: " + hour + ":" + min + ":" + sec).grey)
+  // console.log(("[Time-check] Check open time: " + hour + ":" + min + ":" + sec).grey)
 
   if ((hour > openHour || hour == openHour && min >= openMin) && (hour < closeHour || hour == closeHour && min < closeMin)) {
     return true
@@ -320,7 +320,7 @@ function checkReadStatus() {
 	min = (min < 10 ? "0" : "") + min;
   var sec  = date.getSeconds();
   sec = (sec < 10 ? "0" : "") + sec;
-  console.log(("[Time-check] Check read-only time: " + hour + ":" + min + ":" + sec).grey)
+  // console.log(("[Time-check] Check read-only time: " + hour + ":" + min + ":" + sec).grey)
 
   if ((hour > openHour || hour == openHour && min >= openMin) && (hour < readOnlyHour || hour == readOnlyHour && min < readOnlyMin)) {
     return true
@@ -556,7 +556,7 @@ app.get("/", function(req, res){
 app.get("/:room/:time", function(req, res){
   var room = req.params.room;
   var time = req.params.time;
-  // console.log(("[GET] Getting room page for " + room + " at " + time).yellow)
+  console.log(("[GET] Getting room page for " + room + " at " + time).yellow)
   logTraffic("total")
 
   dbCheckOccupation(room, time, function(callBackResult){
