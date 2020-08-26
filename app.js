@@ -610,7 +610,7 @@ app.post("/signup-req", function(req, res){
   //get post info
   var room = "" + req.body.room
   var time = "" + req.body.time
-  var fullName = "" + req.body.fullName
+  var fullName = "" + req.body.fullName.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
   var grade = "" + req.body.grade
   var studentID = "" + req.body.studentID
   var password = "" + req.body.password
@@ -717,7 +717,7 @@ app.get("/cancel", function(req, res){
 //Cancel page POST
 app.post("/cancel", function(req, res){
   //get post info
-  var fullName = req.body.fullName
+  var fullName = req.body.fullName.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
   var studentID = req.body.studentID
   console.log(("[POST] Requesting cancel page with information: |" + fullName + "|" + studentID + "|").green)
   logTraffic("total")
@@ -736,7 +736,7 @@ app.post("/cancel", function(req, res){
 //Cancel POST
 app.post("/cancel-req", function(req, res){
   //get post info
-  var fullName = req.body.fullName
+  var fullName = req.body.fullName.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
   var studentID = req.body.studentID
   var password = req.body.password
   console.log(("[POST] Requesting cancel post with information: |" + fullName + "|" + studentID + "|" + password + "|").green)
@@ -838,7 +838,7 @@ app.get("/admin", function(req, res){
 //Password lookup POST
 app.post("/password-req", function(req, res){
   //get post info
-  var fullName = req.body.fullName
+  var fullName = req.body.fullName.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
   var studentID = req.body.studentID
   var password = req.body.password
   console.log(("[POST] Requesting password lookup with information: |" + fullName + "|" + studentID + "|" + password + "|").green)
@@ -924,7 +924,7 @@ app.post("/debug-req", function(req, res){
   var type = req.body.type
   var room = req.body.room
   var time = req.body.time
-  var fullName = req.body.fullName
+  var fullName = req.body.fullName.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
   var grade = req.body.grade
   var studentID = req.body.studentID
   var password = req.body.password
