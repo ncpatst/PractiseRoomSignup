@@ -28,5 +28,3 @@ A manual-management free signup system utilising crytography
 - [x] Recolouring
 - [x] Layout
 
-
-![Flow](/PractiseRoomSignupAlphaFlow.png)
