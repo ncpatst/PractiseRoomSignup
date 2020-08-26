@@ -357,10 +357,10 @@ function dbCheckOccupation(room, time, callBack) {
 		dbo.collection(mainCollectionName).find({room: room, time: time}).toArray(function(err, result) {
       if (err) throw err
       if (result.length > 0) {
-        console.log(("[DB] Room " + room + " at " + time + " is occupied").cyan)
+        // console.log(("[DB] Room " + room + " at " + time + " is occupied").cyan)
       } 
       else {
-        console.log(("[DB] Room " + room + " at " + time + " is not occupied").cyan)
+        // console.log(("[DB] Room " + room + " at " + time + " is not occupied").cyan)
       }
       callBack((result.length > 0)? true : false)
 			db.close()
@@ -556,7 +556,7 @@ app.get("/", function(req, res){
 app.get("/:room/:time", function(req, res){
   var room = req.params.room;
   var time = req.params.time;
-  console.log(("[GET] Getting room page for " + room + " at " + time).yellow)
+  // console.log(("[GET] Getting room page for " + room + " at " + time).yellow)
   logTraffic("total")
 
   dbCheckOccupation(room, time, function(callBackResult){
