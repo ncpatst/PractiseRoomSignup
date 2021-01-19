@@ -1,5 +1,5 @@
 # PractiseRoomSignup
-A manual-management free signup system utilising crytography
+A signup system without password database utilising crytography
 
 **Beta Phase**
 
