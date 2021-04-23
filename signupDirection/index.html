@@ -245,7 +245,47 @@
       -webkit-transform: translateX(50px);
               transform: translateX(50px);
     }
-    
+
+
+    .btn-audiohive {
+      color: #474747;
+    }
+    .btn-audiohive:before {
+      right: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
+      border-bottom: 80px solid #47474791;
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+
+    }
+    .btn-audiohive:after {
+      left: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-110%);
+              transform: translateX(-110%);
+      border-bottom: 80px solid #474747;
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .btn-audiohive:hover {
+      color: #cbccc5;
+    }
+    .btn-audiohive:hover:before {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+    .btn-audiohive:hover:after {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
 
 
     .inner {
