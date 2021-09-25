@@ -42,6 +42,7 @@ const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
 const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
 const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share this file
 const reCaptchaSecretKey = fs.readFileSync("reCaptchaKey.txt", "utf8"); //get google reCaptcha secret key from reCaptchaKey.txt, DO NOT share this file
+var blackListArray = fs.readFileSync('blacklist.txt').toString().split("\n");
 
 const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH107", "MH109", "MH110", "MH117", "MH120", "MH121", "MH113", "MH115", "MH111"] //Used for rendering, changing rooms requires changing html and app.js!
 
@@ -368,6 +369,11 @@ function dbCheckOccupation(room, time, callBack) {
 	})
 }
 
+//Check if student blacklisted
+function checkBlacklisted(studentID) {
+  return blackListArray.includes(studentID)
+}
+
 //insert entry function
 function dbInsert(room, time, fullName, grade, studentID, ensembleStatus, noteStatus, note) {
   //connect to mongo client
@@ -626,6 +632,14 @@ app.post("/signup-req", function(req, res){
     // response on missing captcha
     res.render("response", {responseTitle: "ERROR", responseMessage: "Please complete the captcha to proceed.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
     console.log(("[ERR] Missing Captcha").bold.red);
+    return
+  }
+
+  // check if student banned from sign up. If so, return error.
+  if(checkBlacklisted(studentID)) {
+    // response on blacklisted student
+    res.render("response", {responseTitle: "ERROR", responseMessage: "This student has been blacklisted. Please contact a music teacher for help.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    console.log(("[ERR] Blacklisted Student").bold.red);
     return
   }
 
