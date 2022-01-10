@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
+/* textbox line height */
+textarea {
+  line-height: 1;
+}
+
 /* Table Styling */
 .border-light-right {
   border-right: 1px dotted rgb(160, 160, 160) !important;
@@ -313,7 +318,7 @@ html {
   font-size: 1rem;
   border-width: 0;
   border-color: transparent;
-  line-height: 1.9;
+  /* line-height: 1.9; */
   width: 100%;
   color: transparent;
   -webkit-transition: all 0.28s ease;

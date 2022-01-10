@@ -105,6 +105,29 @@
 
     </form>
 
+    <hr class="mt-5 mb-4">
+
+    <h4 class="font-weight-bold">Blacklist Editor</h4>
+    <p>You can edit the list of students who are banned from signing up by adding their student IDs here. Student IDs need to be separated by a comma. Example: "3141, 5926, 5358". You can look up a student's ID number by searching for their email address in Teams.</p>
+
+    <form method="POST" action="blacklist-req">
+
+      <div class="form-group">
+        <textarea id="blacklist" id="blacklist" name="blacklist" style="height: 100px" required><%= blacklist %></textarea>
+        <label for="textarea" class="control-label">New Blacklist</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="password" required="required" id="password" name="password"/>
+        <label for="input" class="control-label">Admin Password</label><i class="bar"></i>
+      </div>
+
+      <a class="btn btn-primary mr-2" href=".">Back</a>
+      <input class="btn btn-primary mr-2" onclick="document.getElementById('blacklist').required = false" type="submit"></input>
+
+    </form>
+
+
     <!-- <h3 class="mt-5 text-muted">Debug info:</h3>
     <p><small class="text-muted">from admin.ejs</small></p> -->
 

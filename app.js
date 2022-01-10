@@ -42,7 +42,6 @@ const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
 const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
 const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share this file
 const reCaptchaSecretKey = fs.readFileSync("reCaptchaKey.txt", "utf8"); //get google reCaptcha secret key from reCaptchaKey.txt, DO NOT share this file
-var blackListArray = fs.readFileSync('blacklist.txt').toString().split("\n");
 
 const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH107", "MH109", "MH110", "MH117", "MH120", "MH121", "MH113", "MH115", "MH111"] //Used for rendering, changing rooms requires changing html and app.js!
 
@@ -371,7 +370,9 @@ function dbCheckOccupation(room, time, callBack) {
 
 //Check if student blacklisted
 function checkBlacklisted(studentID) {
-  return blackListArray.includes(studentID)
+  var blacklist = fs.readFileSync('blacklist.txt').toString().split(",")
+  console.log(blacklist)
+  return blacklist.includes(studentID)
 }
 
 //insert entry function
@@ -845,8 +846,9 @@ app.get("/admin", function(req, res){
   console.log(("[GET] Getting admin page").yellow)
   logTraffic("total")
 
-  res.render("admin")
+  var blacklist = fs.readFileSync("blacklist.txt", "utf8")
 
+  res.render("admin", {blacklist: blacklist})
 });
 
 //Password lookup POST
@@ -887,6 +889,24 @@ app.post("/announcement-req", function(req, res){
     console.log(("[Announcement] Ammouncement added").magenta)
   }
 
+});
+
+app.post("/blacklist-req", function(req, res){
+  //get post info
+  var blacklist = req.body.blacklist
+  var password = req.body.password
+  console.log(("[POST] Requesting blacklist with information: |" + blacklist + "|" + password + "|").green)
+  logTraffic("total")
+
+  if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, please try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    console.log(("[ERR] Wrong admin password").bold.red)
+  } else {
+    fs.writeFile("blacklist.txt", blacklist, function (err) {
+    });
+    res.render("response", {responseTitle: "Success", responseMessage: "The blacklist has been modified successfully!", linkStatus: true, linkLocation: ".", linkText: "Home", backStatus: false, redirectDuration: 0, debugStatus: false})
+    console.log(("[Blacklist] Blacklist added").magenta)
+  }
 });
 
 //Disable POST
@@ -983,3 +1003,9 @@ app.post("/debug-req", function(req, res){
 
   }
 });
+
+
+
+
+// test
+console.log(checkBlacklisted('007'))
