@@ -549,7 +549,7 @@ app.get("/", function(req, res){
         var organisedData = organiseData(result);
         var announcement = fs.readFileSync("announcement.txt", "utf8")
 
-        res.render("index", {organisedData: organisedData, roomList: roomList, openHour: (openHour < 10 ? "0" : "") + openHour, openMin: (openMin < 10 ? "0" : "") + openMin, closeHour: (closeHour < 10 ? "0" : "") + closeHour, closeMin: (closeMin < 10 ? "0" : "") + closeMin, announcement: announcement });
+        res.render("index", {organisedData: organisedData, roomList: roomList, openHour: (openHour < 10 ? "0" : "") + openHour, openMin: (openMin < 10 ? "0" : "") + openMin, closeHour: (closeHour < 10 ? "0" : "") + closeHour, closeMin: (closeMin < 10 ? "0" : "") + closeMin, announcement: announcement, date: getDateTime().month + "/" + getDateTime().day + "/" + getDateTime().year});
 
         db.close()
       })
