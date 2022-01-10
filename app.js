@@ -871,6 +871,54 @@ app.post("/password-req", function(req, res){
 
 });
 
+//Batch Password lookup POST
+app.post("/batch-password-req", function(req, res){
+  //get post info
+  var fullNames = req.body.fullNames
+  var studentIDs = req.body.studentIDs
+  var password = req.body.password
+
+  fullNames = fullNames.split("\n")
+  studentIDs = studentIDs.split("\n")
+
+  // length check
+  if (fullNames.length !== studentIDs.length) {
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Student name data and student ID data has different length. Please make sure you entered the same number of items for Full Names and Student IDs", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    console.log(("[ERR] Wrong admin password").bold.red)
+  }
+  
+  for (let i = 0; i < fullNames.length; i++) {
+    fullNames[i] = fullNames[i].trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));  
+    studentIDs[i] = studentIDs[i].trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));  
+  }
+
+  console.log(fullNames)
+  console.log(studentIDs)
+  
+  console.log(("[POST] Requesting batch password lookup with information: |" + fullNames + "|" + studentIDs + "|" + password + "|").green)
+  logTraffic("total")
+
+  if (crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+    res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, please try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
+    console.log(("[ERR] Wrong admin password").bold.red)
+  } else {
+    var passwordTable = []
+    for (let i = 0; i < fullNames.length; i++) {
+      passwordTable.push({
+        fullName: fullNames[i],
+        studentID: studentIDs[i],
+        password: SHALL24(fullNames[i] + studentIDs[i]),
+      })
+    } 
+    console.log(passwordTable)
+
+    res.render("batchPasswordTable", {responseTitle: "Batch Password", responseMessage: "Here's the list of new credentials:", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: false, passwordTable: passwordTable})
+
+    console.log(("[Batch Password Lookup] Batch sent").magenta)
+  }
+
+});
+
 //Announcement POST
 app.post("/announcement-req", function(req, res){
   //get post info
@@ -1004,8 +1052,3 @@ app.post("/debug-req", function(req, res){
   }
 });
 
-
-
-
-// test
-console.log(checkBlacklisted('007'))

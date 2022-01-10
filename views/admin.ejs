@@ -108,7 +108,7 @@
     <hr class="mt-5 mb-4">
 
     <h4 class="font-weight-bold">Blacklist Editor</h4>
-    <p>You can edit the list of students who are banned from signing up by adding their student IDs here. Student IDs need to be separated by a comma. Example: "3141, 5926, 5358". You can look up a student's ID number by searching for their email address in Teams.</p>
+    <p>You can edit the list of students who are banned from signing up by adding their student IDs here. Student IDs need to be separated by a comma. Example: "3141, 5926, 5358". You can look up a student's ID number by searching for their email address in Teams. The new blacklist will overwrite the existing blacklist (previously added IDs appear here automatically).</p>
 
     <form method="POST" action="blacklist-req">
 
@@ -127,6 +127,54 @@
 
     </form>
 
+    <hr class="mt-5 mb-4">
+
+    <h4 class="font-weight-bold">Batch Password Generation</h4>
+    <p>You can look up passwords for a bunch of students at the same time. Paste all students' full names in the first text box so that each line contains one and only one student. In the second text box, paste the corresponding student IDs in an order that matches the students' names exactly. (You should be able to copy and paste the whole row from Excel or Numbers) If done correctly, the algorithm will generate a table with all the students' sign up credentials.</p>
+
+    <p>An example of properly formatted input looks like this:</p>
+
+    <p>Full Names</p>
+
+    <pre>
+      Jackson Finley
+      Rhiann Odom
+      Ayisha Neale
+      Louise Alvarado
+      Arlene Reeve
+      Alison Orozco</pre>
+
+    <p>Student IDs</p>
+
+    <pre>
+      2210999
+      2210929
+      2210839
+      2210529
+      2210733
+      2210792</pre>
+
+    <form method="POST" action="batch-password-req">
+
+      <div class="form-group">
+        <textarea id="fullNames" name="fullNames" style="height: 200px" required></textarea>
+        <label for="textarea" class="control-label">Full Names</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <textarea id="studentIDs" name="studentIDs" style="height: 200px" required></textarea>
+        <label for="textarea" class="control-label">Student IDs</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="password" required="required" id="password" name="password"/>
+        <label for="input" class="control-label">Admin Password</label><i class="bar"></i>
+      </div>
+
+      <a class="btn btn-primary mr-2" href=".">Back</a>
+      <input class="btn btn-primary mr-2" onclick="document.getElementById('blacklist').required = false" type="submit"></input>
+
+    </form>
 
     <!-- <h3 class="mt-5 text-muted">Debug info:</h3>
     <p><small class="text-muted">from admin.ejs</small></p> -->
