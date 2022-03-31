@@ -10,8 +10,6 @@ const crypto = require("crypto");
 const fs = require("fs");
 const CronJob = require('cron').CronJob;
 
-
-
 // Get the list from http://beautifytools.com/excel-to-json-converter.php by uploading the xlsx file, only take the value of "Sheet1".
 
 //|================================================================|

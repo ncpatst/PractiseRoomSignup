@@ -14,15 +14,11 @@ const CronJob = require('cron').CronJob;
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-//caching method
+//caching method. This makes sure that browsers don't store unnecessary cash
 app.use((req, res, next) => {
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
   next()
 })
-
-// app.set('etag', false)
-// app.disable('view cache');
-
 
 //============================
 //====Programme Parameters====
@@ -1051,4 +1047,3 @@ app.post("/debug-req", function(req, res){
 
   }
 });
-
