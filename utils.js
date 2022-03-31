@@ -1,16 +1,14 @@
-/*
-The main hash algorithm used for the sign up system.
-SHALL24() takes any string input and returns a 6-characters, base 36 digest like "1kil6b"
-*/
-
-// Import JS stuff
+// Import NodeJS modules
 const crypto = require("crypto");
 const fs = require("fs");
+
+// Export the function for import elsewhere
+module.exports = { SHALL24 };
 
 // Get key from SERVERKEY.txt, DO NOT share this file. Saves a 64-characters digest string to SERVERKEY
 const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); 
 
-// The algorithm
+// The main hash algorithm used for the sign up system. SHALL24() takes any string input and returns a 6-characters, base 36 digest like "1kil6b"
 function SHALL24(string) {
 	function convertBase(str, fromBase, toBase) {
 
@@ -77,6 +75,3 @@ function SHALL24(string) {
 	}
 	return convertBase(crypto.createHmac('sha256', crypto.createHmac('sha256', string + SERVERKEY).digest('hex') + SERVERKEY).digest('hex'), 16, 32).substr(0, 6);
 }
-
-// Export the function for import elsewhere
-module.exports = { SHALL24 };

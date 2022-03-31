@@ -1,11 +1,11 @@
-//===================
-//====NodeJS Head====
-//===================
+// ===================
+// ====NodeJS head====
+// ===================
+//#region
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
-const assert = require("assert");
 const crypto = require("crypto");
 const request = require('request');
 const fs = require("fs");
@@ -16,15 +16,18 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 //caching method. This makes sure that browsers don't store unnecessary cash
 app.use((req, res, next) => {
-  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
-  next()
+	res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private')
+	next()
 })
+const utils = require('./utils') // import from `utils.js`
+//#endregion
 
-//============================
-//====Programme Parameters====
-//============================
+// ============================
+// ====Programme Parameters====
+// ============================
+//#region
 const port = 1770; //port that the app listen on
-const url = "mongodb://localhost:27017"; //url to MongoDB
+const url = "mongodb://localhost:27017"; //url to MongoDB. This should be the default port
 const dbName = "PractiseRoomSignup"; //database name to use
 const mainCollectionName = "StudentRecords" //collection name to use for student signups
 
@@ -36,21 +39,24 @@ const readOnlyHour = 22 //the hour when signup read closes; 0 <= closeHour <= 23
 const readOnlyMin = 30 //the minute when signup read closes; 0 <= closeMin <= 59
 
 const operationPasswordHash = "7c9646c6385ff8a32ece75e0b3ff778d007a26ca19a6d5d22bd5394d63e6ebd9"; //set password using this, only put the hash in the source code, DO NOT put anything related to the password
-const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); //get key from SERVERKEY.txt, DO NOT share this file
 const reCaptchaSecretKey = fs.readFileSync("reCaptchaKey.txt", "utf8"); //get google reCaptcha secret key from reCaptchaKey.txt, DO NOT share this file
 
-const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH107", "MH109", "MH110", "MH117", "MH120", "MH121", "MH113", "MH115", "MH111"] //Used for rendering, changing rooms requires changing html and app.js!
+const roomList = ["MH102", "MH103", "MH104", "MH105", "MH106", "MH109", "MH110", "MH117", "MH120", "MH121", "MH113", "MH115", "MH111"] //Used for rendering, changing rooms requires changing html and app.js!
+//#endregion
 
-//Initialise Analytics and History
-var trafficData = {
-total: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-signup: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-cancel: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+// ========================================
+// ====Initialise Analytics and History====
+// ========================================
+var trafficData = { // count data for every hour
+	total: Array(25).fill(0),
+	signup: Array(25).fill(0),
+	cancel: Array(25).fill(0)
 };
-var percentageFullData = {
-percentage: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+var percentageFullData = { // percentage data for every hour
+	percentage: Array(25).fill(0)
 };
-var percentageCountDay = 1;
+var percentageCountDay = 1; // this gets incremented every day
+
 var historicalData = [
   {
     MH102: {T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {},},
@@ -197,73 +203,6 @@ job2.start();
 //=================
 //====Functions====
 //=================
-//HASH ALGORITHM
-function SHALL24(string) {
-  function convertBase(str, fromBase, toBase) {
-
-    const DIGITS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/";
-
-    const add = (x, y, base) => {
-        let z = [];
-        const n = Math.max(x.length, y.length);
-        let carry = 0;
-        let i = 0;
-        while (i < n || carry) {
-            const xi = i < x.length ? x[i] : 0;
-            const yi = i < y.length ? y[i] : 0;
-            const zi = carry + xi + yi;
-            z.push(zi % base);
-            carry = Math.floor(zi / base);
-            i++;
-        }
-        return z;
-    }
-  
-    const multiplyByNumber = (num, x, base) => {
-        if (num < 0) return null;
-        if (num == 0) return [];
-  
-        let result = [];
-        let power = x;
-        while (true) {
-            num & 1 && (result = add(result, power, base));
-            num = num >> 1;
-            if (num === 0) break;
-            power = add(power, power, base);
-        }
-  
-        return result;
-    }
-  
-    const parseToDigitsArray = (str, base) => {
-        const digits = str.split('');
-        let arr = [];
-        for (let i = digits.length - 1; i >= 0; i--) {
-            const n = DIGITS.indexOf(digits[i])
-            if (n == -1) return null;
-            arr.push(n);
-        }
-        return arr;
-    }
-  
-    const digits = parseToDigitsArray(str, fromBase);
-    if (digits === null) return null;
-  
-    let outArray = [];
-    let power = [1];
-    for (let i = 0; i < digits.length; i++) {
-        digits[i] && (outArray = add(outArray, multiplyByNumber(digits[i], power, toBase), toBase));
-        power = multiplyByNumber(fromBase, power, toBase);
-    }
-  
-    let out = '';
-    for (let i = outArray.length - 1; i >= 0; i--)
-        out += DIGITS[outArray[i]];
-  
-    return out;
-  }
-  return convertBase(crypto.createHmac('sha256', crypto.createHmac('sha256', string + SERVERKEY).digest('hex') + SERVERKEY).digest('hex'), 16, 32).substr(0, 6);
-}
 
 //Get time
 function getDateTime() {
@@ -676,7 +615,7 @@ app.post("/signup-req", function(req, res){
             }
             else {
               // If room available, check password
-              if (SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+              if (utils.SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
                 // Wrong password
                 res.render("response", {responseTitle: "Wrong Information", responseMessage: "Your name, student ID and your password do not match, please double check and try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
                 console.log(("[ERR] Wrong password").bold.red)
@@ -790,7 +729,7 @@ app.post("/cancel-req", function(req, res){
     dbCheckStudent(fullName, studentID, function (callBackResult) {
       if (callBackResult == true) {
         // If student exists, check password
-        if (SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
+        if (utils.SHALL24(fullName + studentID) !== password.toLowerCase() && crypto.createHmac('sha256', password).digest('hex') !== operationPasswordHash) {
           // Wrong password
           res.render("response", {responseTitle: "Wrong Information", responseMessage: "The name, student ID and your password do not match, please double check and try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
           console.log(("[ERR] Wrong password").bold.red)
@@ -860,7 +799,7 @@ app.post("/password-req", function(req, res){
     res.render("response", {responseTitle: "ERROR", responseMessage: "Wrong admin password, please try again.", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: true})
     console.log(("[ERR] Wrong admin password").bold.red)
   } else {
-    var lookupPassword = SHALL24(fullName + studentID);
+    var lookupPassword = utils.SHALL24(fullName + studentID);
     res.render("response", {responseTitle: "Password Lookup", responseMessage: "The student's password is:", linkStatus: false, linkLocation: ".", linkText: "Home", backStatus: true, redirectDuration: 0, debugStatus: false, lookupPassword: lookupPassword})
     console.log(("[Password-lookup] Password sent").magenta)
   }
@@ -903,7 +842,7 @@ app.post("/batch-password-req", function(req, res){
       passwordTable.push({
         fullName: fullNames[i],
         studentID: studentIDs[i],
-        password: SHALL24(fullNames[i] + studentIDs[i]),
+        password: utils.SHALL24(fullNames[i] + studentIDs[i]),
       })
     } 
     console.log(passwordTable)
@@ -1020,7 +959,7 @@ app.post("/debug-req", function(req, res){
     res.send("Wrong admin password, don't even try to break the system")
   } else {
     if (type == "lookup") {
-      var lookupPassword = SHALL24(fullName + studentID);
+      var lookupPassword = utils.SHALL24(fullName + studentID);
       res.send("The student's password is " + lookupPassword)
     }
     else if (type == "add") {
