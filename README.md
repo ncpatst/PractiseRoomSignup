@@ -7,6 +7,7 @@ A signup system without password database utilising crytography
 Files: 
 
 - `app.js` is the one that handels all the requests and serve information accordingly by connecting to the MongoDB database
+- `utils.js` contains helper functions for the app
 - `getPasswords.js` is used for batch password generation; a newer web interface is also available in the app's admin panel
 - `announcement.txt` is where an announcement message is temporarily stored
 - `blacklist.txt` stores the blacklisted student IDs
