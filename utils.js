@@ -1,16 +1,18 @@
-/*
-The main hash algorithm used for the sign up system.
-SHALL24() takes any string input and returns a 6-characters, base 36 digest like "1kil6b"
-*/
-
-// Import JS stuff
+// Import NodeJS modules
 const crypto = require("crypto");
 const fs = require("fs");
+
+// Export the function for import elsewhere
+module.exports = { SHALL24, getDateTime };
 
 // Get key from SERVERKEY.txt, DO NOT share this file. Saves a 64-characters digest string to SERVERKEY
 const SERVERKEY = crypto.createHmac('sha256', fs.readFileSync("SERVERKEY.txt", "utf8")).digest('hex'); 
 
-// The algorithm
+// ===============
+// ====SHALL24====
+// ===============
+
+// The main hash algorithm used for the sign up system. SHALL24() takes any string input and returns a 6-characters, base 36 digest like "1kil6b"
 function SHALL24(string) {
 	function convertBase(str, fromBase, toBase) {
 
@@ -78,5 +80,68 @@ function SHALL24(string) {
 	return convertBase(crypto.createHmac('sha256', crypto.createHmac('sha256', string + SERVERKEY).digest('hex') + SERVERKEY).digest('hex'), 16, 32).substr(0, 6);
 }
 
-// Export the function for import elsewhere
-module.exports = { SHALL24 };
+// =====================
+// ====Time and Date====
+// =====================
+
+/* Function to return date and time. Returns something like:
+{
+	year: 2022,
+	month: '03',
+	day: '31',
+	hour: '15',
+	min: '02',
+	sec: '06',
+	milisec: '790'
+}
+*/
+function getDateTime() {
+	var date = new Date();
+
+	var hour = date.getHours();
+	hour = (hour < 10 ? "0" : "") + hour;
+	var min = date.getMinutes();
+	min = (min < 10 ? "0" : "") + min;
+	var sec = date.getSeconds();
+	sec = (sec < 10 ? "0" : "") + sec;
+	var milisec = date.getMilliseconds();
+	milisec = ((milisec < 100) ? ((milisec < 10) ? "00" : "0") : "") + milisec;
+
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	month = (month < 10 ? "0" : "") + month;
+	var day = date.getDate();
+	day = (day < 10 ? "0" : "") + day;
+
+	var timeArray = { year: year, month: month, day: day, hour: hour, min: min, sec: sec, milisec: milisec }
+	return timeArray;
+}
+
+/* 
+create history list data structure, which looks something like this:
+[
+	{
+		MH102: { T19001930: {}, T19302000: {}, T20002030: {}, T20302100: {} },
+		MH103: { ... },
+		...
+	},
+	{...},
+	...
+]
+*/
+function createHistoricalDataStructure(roomList, timeslotList) {
+	historicalData = []
+
+	for (let day = 0; day < 7; day++) {
+		dayDict = {}
+		for (room of roomList) {
+			dayDict[room] = {}
+			for (timeslot of timeslotList) {
+				dayDict[room][timeslot] = {}
+			}
+		}
+		historicalData.push(dayDict)
+	}
+
+	return historicalData
+}

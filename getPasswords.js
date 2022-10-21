@@ -28,8 +28,8 @@ const fromExcel = [
 // Construct password list
 var passwordList = ""
 for (var i = 0; i < fromExcel.length; i++) {
-  var password = utils.SHALL24(fromExcel[i].fullName + fromExcel[i].studentID);
-  passwordList = passwordList + password + "\n"
+	var password = utils.SHALL24(fromExcel[i].fullName + fromExcel[i].studentID);
+	passwordList = passwordList + password + "\n"
 }
 
 // print the passwords
