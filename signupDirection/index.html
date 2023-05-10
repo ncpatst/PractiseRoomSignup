@@ -79,10 +79,7 @@
       margin-bottom: 0px;
       color: rgb(56, 56, 56);
     }
-
-
-
-
+    
     .btn-nightstudio {
       color: #5e35cf;
     }
@@ -288,6 +285,89 @@
     }
 
 
+    .btn-speakingcenter {
+      color: rgb(0, 101, 89);
+    }
+    .btn-speakingcenter:before {
+      right: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
+      border-bottom: 80px solid rgba(0, 101, 89, 0.569);
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+
+    }
+    .btn-speakingcenter:after {
+      left: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-110%);
+              transform: translateX(-110%);
+      border-bottom: 80px solid rgb(3, 74, 65);
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .btn-speakingcenter:hover {
+      color: #cbccc5;
+    }
+    .btn-speakingcenter:hover:before {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+    .btn-speakingcenter:hover:after {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+
+
+
+
+    .btn-mathcenter {
+      color: rgb(0, 130, 190);
+    }
+    .btn-mathcenter:before {
+      right: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
+      border-bottom: 80px solid  rgb(4, 106, 153);;
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+
+    }
+    .btn-mathcenter:after {
+      left: -50px;
+      border-right: 50px solid transparent;
+      -webkit-transform: translateX(-110%);
+              transform: translateX(-110%);
+      border-bottom: 80px solid  rgb(0, 130, 190);;
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .btn-mathcenter:hover {
+      color: #cbccc5;
+    }
+    .btn-mathcenter:hover:before {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+    .btn-mathcenter:hover:after {
+      -webkit-transform: translateX(50px);
+              transform: translateX(50px);
+    }
+
     .inner {
       /* background: rgba(130, 157, 218, 0.678); */
       height: auto;
@@ -360,13 +440,15 @@
       <a class="btn-practiseroom" href="practiceroom">Practice Room</a>
       <a class="btn-writinglab" href="https://outlook.office365.com/owa/calendar/NCPAWritingCenter@ncpachina.org/bookings/">Writing Centre</a>
       <a class="btn-audiohive" href="https://calendly.com/audiohive">AudioHive</a>
+      <a class="btn-speakingcenter" href="https://outlook.office365.com/owa/calendar/NCPASpeakingCenter@ncpachina.org/bookings/">Speaking Center</a>
+      <a class="btn-mathcenter" href="https://outlook.office365.com/owa/calendar/MathPeerTutoringCenter@ncpachina.org/bookings/">Math Center</a>
       <p id="copyright">© 2019 Tech Solution Team</p>
     </div>
 
     <div class="right" style="display: none;">
       <div class="image-div">
         <img id="poster-image" src="" alt="">
-      </div>
+      </div>c
       <!-- <p id="from">*Promotion authorised by the Student Government</p> -->
     </div>
 
